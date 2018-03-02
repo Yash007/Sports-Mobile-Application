@@ -18,4 +18,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
     }
+
+    public void openForgetPasswordActivity(View v)  {
+        Intent intent = new Intent(this, ForgetPasswordActivity.class);
+        startActivity(intent);
+    }
 }
