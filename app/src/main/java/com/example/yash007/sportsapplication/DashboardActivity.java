@@ -36,6 +36,7 @@ public class DashboardActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
+
         });
     }
 }
