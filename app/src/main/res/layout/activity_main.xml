@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:paddingBottom="15dp"
+                android:padding="15dp"
                 android:text="Email"
                 android:textColor="@color/colorText"/>
         </TableRow>
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:paddingBottom="15dp"
+                android:padding="15dp"
                 android:text="Password"
                 android:textColor="@color/colorText"/>
         </TableRow>
