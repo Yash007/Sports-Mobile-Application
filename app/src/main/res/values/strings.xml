@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">Sporties</string>
     <string name="signUpButton">Not Registered? Sign Up</string>
+    <string name="forgetPasswordDescription">Please enter your email id below to \n receive password reset link.</string>
+
+    <!-- Activity Labels -->
     <string name="signUpActivity">Sign up</string>
+    <string name="forgetPasswordActivity">Forget Password</string>
+
 
     <!-- All Edit text hints -->
     <string name="email">Email</string>
