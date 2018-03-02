@@ -2,4 +2,12 @@
     <string name="app_name">Sporties</string>
     <string name="signUpButton">Not Registered? Sign Up</string>
     <string name="signUpActivity">Sign up</string>
+
+    <!-- All Edit text hints -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="confirmPassword">Confirm Password</string>
 </resources>

@@ -31,8 +31,9 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:padding="15dp"
-                android:text="Email"
-                android:textColor="@color/colorText"/>
+                android:hint="@string/email"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
         </TableRow>
 
         <TableRow
@@ -48,8 +49,9 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:padding="15dp"
-                android:text="Password"
-                android:textColor="@color/colorText"/>
+                android:hint="@string/password"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
         </TableRow>
 
         <TableRow

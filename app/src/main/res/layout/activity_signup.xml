@@ -27,10 +27,11 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:layout_weight="10"
-                android:text="First Name"
+                android:hint="@string/firstName"
                 android:padding="10dp"
                 android:layout_margin="10dp"
-                android:textColor="@color/colorText"/>
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
 
 
         </TableRow>
@@ -49,8 +50,9 @@
                 android:layout_weight="10"
                 android:padding="10dp"
                 android:layout_margin="10dp"
-                android:text="Last Name"
-                android:textColor="@color/colorText"/>
+                android:hint="@string/lastName"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
 
         </TableRow>
 
@@ -68,8 +70,9 @@
                 android:layout_weight="10"
                 android:padding="10dp"
                 android:layout_margin="10dp"
-                android:text="Enter Email"
-                android:textColor="@color/colorText"/>
+                android:hint="@string/email"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
 
         </TableRow>
 
@@ -87,8 +90,9 @@
                 android:layout_weight="10"
                 android:padding="10dp"
                 android:layout_margin="10dp"
-                android:text="Phone Number"
-                android:textColor="@color/colorText"/>
+                android:hint="@string/phoneNumber"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
 
         </TableRow>
 
@@ -106,8 +110,9 @@
                 android:layout_weight="10"
                 android:padding="10dp"
                 android:layout_margin="10dp"
-                android:text="Password"
-                android:textColor="@color/colorText"/>
+                android:hint="@string/password"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
 
         </TableRow>
 
@@ -124,8 +129,9 @@
                 android:layout_weight="10"
                 android:padding="10dp"
                 android:layout_margin="10dp"
-                android:text="Confirm Password"
-                android:textColor="@color/colorText"/>
+                android:hint="@string/confirmPassword"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
 
         </TableRow>
 
