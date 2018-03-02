@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Sporties</string>
+    <string name="signUpButton">Not Registered? Sign Up</string>
+    <string name="signUpActivity">Sign up</string>
 </resources>
