@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     tools:context="com.example.yash007.sportsapplication.MainActivity"
     android:orientation="vertical"
+    android:weightSum="10"
     android:background="@color/colorBackground">
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_weight="9"
         android:paddingTop="0dp">
 
         <TableRow
@@ -83,25 +85,29 @@
                 android:textColor="@color/colorText"/>
         </TableRow>
 
+    </TableLayout>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_weight="1"
+        >
         <TableRow
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="160dp"
-            android:gravity="center"
-            android:weightSum="10">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center_vertical"
+            >
 
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="Not Registered? Sign Up"
                 android:textColor="@color/colorText"/>
         </TableRow>
-
     </TableLayout>
-
 
 
 
