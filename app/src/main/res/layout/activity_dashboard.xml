@@ -23,6 +23,7 @@
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
+        android:background="@color/colorBackground"
         android:layout_below="@id/tab_layout"/>
 
 </RelativeLayout>
