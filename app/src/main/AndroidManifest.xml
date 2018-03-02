@@ -22,11 +22,11 @@
             android:name=".SignupActivity"
             android:label="@string/signUpActivity"
             android:parentActivityName=".MainActivity" />
-
-        <activity android:name=".ForgetPasswordActivity"
+        <activity
+            android:name=".ForgetPasswordActivity"
             android:label="@string/forgetPasswordActivity"
-            android:parentActivityName=".MainActivity"
-            ></activity>
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".DashboardActivity"></activity>
     </application>
 
 </manifest>
