@@ -2,10 +2,8 @@ package com.example.yash007.sportsapplication;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -15,8 +13,8 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Teams"));
-        tabLayout.addTab(tabLayout.newTab().setText("Health Stats"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.team).setText("Teams"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.heartbeat).setText("Health Stats"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
