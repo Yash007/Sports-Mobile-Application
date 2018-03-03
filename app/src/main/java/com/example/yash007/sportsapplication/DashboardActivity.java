@@ -26,6 +26,7 @@ public class DashboardActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+
             case R.id.healthRecords:
                 Intent intent = new Intent(this,HealthActivity.class);
                 startActivity(intent);

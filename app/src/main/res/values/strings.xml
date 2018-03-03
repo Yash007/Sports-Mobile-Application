@@ -2,6 +2,8 @@
     <string name="app_name">Sporties</string>
     <string name="signUpButton">Not Registered? Sign Up</string>
     <string name="forgetPasswordDescription">Please enter your email id below to \n receive password reset link.</string>
+    <string name="samsungHealth">Health Records</string>
+    <string name="dashboard">Dashboard</string>
 
     <!-- Activity Labels -->
     <string name="signUpActivity">Sign up</string>
@@ -23,4 +25,6 @@
     <string name="profileSettings">Profile Settings</string>
     <string name="healthData">Health Records</string>
     <string name="signout">Sign out</string>
+
+
 </resources>
