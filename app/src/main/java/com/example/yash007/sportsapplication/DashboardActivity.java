@@ -1,9 +1,11 @@
 package com.example.yash007.sportsapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -11,32 +13,32 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+    }
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.team).setText("Teams"));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.heartbeat).setText("Health Stats"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu,menu);
+        return true;
+    }
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final HomeAdapter adapter = new HomeAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+        switch (item.getItemId()) {
+            case R.id.healthRecords:
+                Intent intent = new Intent(this,HealthActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.profile:
 
-            }
+                break;
+            case R.id.signOut:
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-
-        });
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }

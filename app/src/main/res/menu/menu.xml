@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/healthRecords"
+        android:icon="@drawable/heartbeat"
+        android:title="@string/healthData"
+        app:showAsAction="always"
+        android:orderInCategory="1">
+    </item>
+    <item android:id="@+id/profile"
+        android:icon="@drawable/settings"
+        android:title="@string/profileSettings"
+        android:orderInCategory="2">
+    </item>
+
+    <item android:id="@+id/signOut"
+        android:icon="@drawable/sign_out"
+        android:title="@string/signout"
+        android:orderInCategory="3">
+    </item>
+</menu>
