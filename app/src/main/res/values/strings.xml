@@ -18,6 +18,10 @@
     <string name="lastName">Last Name</string>
     <string name="phoneNumber">Phone Number</string>
     <string name="confirmPassword">Confirm Password</string>
+    <string name="teamName">Team Name</string>
+    <string name="sport">Sport</string>
+    <string name="ageGroup">Age Group</string>
+    <string name="location">Location</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -27,5 +31,19 @@
     <string name="healthData">Health Records</string>
     <string name="signout">Sign out</string>
 
+
+    <string-array name="ageList">
+        <item>Select Age Group</item>
+        <item>Under 13</item>
+        <item>Under 17</item>
+        <item>Above 18</item>
+    </string-array>
+
+    <string-array name="genderList">
+        <item>Select Gender</item>
+        <item>Female</item>
+        <item>Male</item>
+        <item>Co Ed</item>
+    </string-array>
 
 </resources>
