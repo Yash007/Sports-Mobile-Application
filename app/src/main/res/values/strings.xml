@@ -5,10 +5,11 @@
     <string name="samsungHealth">Health Records</string>
     <string name="dashboard">Dashboard</string>
 
+
     <!-- Activity Labels -->
     <string name="signUpActivity">Sign up</string>
     <string name="forgetPasswordActivity">Forget Password</string>
-
+    <string name="createTeam">Create Team</string>
 
     <!-- All Edit text hints -->
     <string name="email">Email</string>

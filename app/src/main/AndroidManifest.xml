@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.yash007.sportsapplication">
 
+    <meta-data android:name="com.samsung.android.health.permission.read"
+        android:value="com.samsung.health.step_count" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -33,7 +37,11 @@
             android:name=".HealthActivity"
             android:label="@string/healthData"
             android:parentActivityName=".DashboardActivity" />
-        <activity android:name=".CreateTeamActivity"></activity>
+
+        <activity android:name=".CreateTeamActivity"
+            android:label="@string/createTeam"
+            android:parentActivityName=".DashboardActivity"
+            ></activity>
     </application>
 
 </manifest>
