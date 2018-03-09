@@ -8,5 +8,12 @@
     android:orientation="vertical"
     tools:context="com.example.yash007.sportsapplication.HealthActivity">
 
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:textColor="@color/colorText"
+        android:text="STEPS"
+        android:id="@+id/steps"
+        />
 </LinearLayout>

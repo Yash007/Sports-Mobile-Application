@@ -49,4 +49,16 @@
 
     <string name="signUp">Sign Up</string>
 
+
+    <!--Samsung SDK Help Strings-->
+    <string name="notice">Notice</string>
+    <string name="msg_perm_acquired">All permissions should be acquired</string>
+    <string name="msg_conn_not_available">Connection with Samsung Health is not available</string>
+    <string name="msg_req_install">Please install Samsung Health</string>
+    <string name="msg_req_upgrade">Please upgrade Samsung Health</string>
+    <string name="msg_req_enable">Please enable Samsung Health</string>
+    <string name="msg_req_agree">Please agree with Samsung Health policy</string>
+    <string name="msg_req_available">Please make Samsung Health available</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 </resources>

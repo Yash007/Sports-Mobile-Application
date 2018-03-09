@@ -22,23 +22,28 @@ import com.samsung.android.sdk.healthdata.HealthDataStore;
 import com.samsung.android.sdk.healthdata.HealthPermissionManager;
 import com.samsung.android.sdk.healthdata.HealthResultHolder;
 
+import org.w3c.dom.Text;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class HealthActivity extends Activity {
+public class HealthActivity extends AppCompatActivity {
 
     public static final String APP_TAG = "SimpleHealth";
     private static HealthActivity mInstance = null;
     private HealthDataStore mStore;
     private HealthConnectionErrorResult mConnError;
     private Set<HealthPermissionManager.PermissionKey> mKeySet;
+    private StepCountReporter mReporter;
+    private TextView stepCounterTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health);
+        stepCounterTv = (TextView) findViewById(R.id.steps);
         mInstance = this;
         mKeySet = new HashSet<HealthPermissionManager.PermissionKey>();
         mKeySet.add(new HealthPermissionManager.PermissionKey(HealthConstants.StepCount.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
@@ -46,8 +51,6 @@ public class HealthActivity extends Activity {
 
         try {
             healthDataService.initialize(this);
-            Log.d(APP_TAG,"onCreate() initialized");
-            Toast.makeText(getApplicationContext(),"onCreate() initialized",Toast.LENGTH_SHORT).show();
         }
         catch (Exception e) {
             Log.d(APP_TAG,"onCreate: error:{}", e);
@@ -56,8 +59,6 @@ public class HealthActivity extends Activity {
 
         mStore = new HealthDataStore(this, mConnectionLister);
         mStore.connectService();
-        Log.d(APP_TAG,"onCreate() connected");
-        Toast.makeText(getApplicationContext(),"onCreate() Connected :" ,Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -71,22 +72,11 @@ public class HealthActivity extends Activity {
         public void onConnected() {
             Log.d(APP_TAG, "Health data service is connected.");
             Toast.makeText(getApplicationContext(),"onConnected() ConnectionListener :" ,Toast.LENGTH_SHORT).show();
-            HealthPermissionManager pmsManager = new HealthPermissionManager(mStore);
-            try {
-                // Check whether the permissions that this application needs are acquired
-                Map<HealthPermissionManager.PermissionKey, Boolean> resultMap = pmsManager.isPermissionAcquired(mKeySet);
-                if (resultMap.containsValue(Boolean.FALSE)) {
-                    // Request the permission for reading step counts if it is not acquired
-                    Log.d(APP_TAG, "Health data service is connect.");
-                    pmsManager.requestPermissions(mKeySet, HealthActivity.this).setResultListener(mPermissionListener);
-                }
-                else {
-                    // Get the current step count and display it // ...
-                }
-            }
-            catch (Exception e) {
-                Log.e(APP_TAG, e.getClass().getName() + " - " + e.getMessage());
-                Log.e(APP_TAG, "Permission setting fails.");
+            mReporter = new StepCountReporter(mStore);
+            if (isPermissionAcquired()) {
+                mReporter.start(mStepCountObserver);
+            } else {
+                requestPermission();
             }
         }
 
@@ -117,6 +107,18 @@ public class HealthActivity extends Activity {
             }
         }
     };
+
+    private void showPermissionAlarmDialog() {
+        if (isFinishing()) {
+            return;
+        }
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(HealthActivity.this);
+        alert.setTitle(R.string.notice)
+                .setMessage(R.string.msg_perm_acquired)
+                .setPositiveButton(R.string.ok, null)
+                .show();
+    }
 
     private void showConnectionFailureDialog(HealthConnectionErrorResult errorResult)   {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -160,6 +162,53 @@ public class HealthActivity extends Activity {
         alert.show();
     }
 
+    private boolean isPermissionAcquired() {
+        HealthPermissionManager.PermissionKey permKey = new HealthPermissionManager.PermissionKey(HealthConstants.StepCount.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ);
+        HealthPermissionManager pmsManager = new HealthPermissionManager(mStore);
+        try {
+            // Check whether the permissions that this application needs are acquired
+            Map<HealthPermissionManager.PermissionKey, Boolean> resultMap = pmsManager.isPermissionAcquired(Collections.singleton(permKey));
+            return resultMap.get(permKey);
+        } catch (Exception e) {
+            Log.e(APP_TAG, "Permission request fails.", e);
+        }
+        return false;
+    }
+
+    private void requestPermission() {
+        HealthPermissionManager.PermissionKey permKey = new HealthPermissionManager.PermissionKey(HealthConstants.StepCount.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ);
+        HealthPermissionManager pmsManager = new HealthPermissionManager(mStore);
+        try {
+            // Show user permission UI for allowing user to change options
+            pmsManager.requestPermissions(Collections.singleton(permKey), HealthActivity.this)
+                    .setResultListener(result -> {
+                        Log.d(APP_TAG, "Permission callback is received.");
+                        Map<HealthPermissionManager.PermissionKey, Boolean> resultMap = result.getResultMap();
+
+                        if (resultMap.containsValue(Boolean.FALSE)) {
+                            updateStepCountView("");
+                            showPermissionAlarmDialog();
+                        } else {
+                            // Get the current step count and display it
+                            mReporter.start(mStepCountObserver);
+                        }
+                    });
+        } catch (Exception e) {
+            Log.e(APP_TAG, "Permission setting fails.", e);
+        }
+    }
+
+    private StepCountReporter.StepCountObserver mStepCountObserver = count -> {
+        Log.d(APP_TAG, "Step reported : " + count);
+        updateStepCountView(String.valueOf(count));
+    };
+
+    private void updateStepCountView(final String count) {
+        runOnUiThread(() -> stepCounterTv.setText(count));
+    }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -172,12 +221,14 @@ public class HealthActivity extends Activity {
         switch (item.getItemId()) {
 
             case R.id.refresh:
-
+                    mStore = new HealthDataStore(HealthActivity.this, mConnectionLister);
+                    mStore.connectService();
                 break;
             case R.id.healthConnect:
-
+                    requestPermission();
                 break;
             default:
+
                 break;
         }
         return true;
