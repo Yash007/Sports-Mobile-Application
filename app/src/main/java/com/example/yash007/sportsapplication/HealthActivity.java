@@ -227,6 +227,9 @@ public class HealthActivity extends AppCompatActivity {
             case R.id.healthConnect:
                     requestPermission();
                 break;
+            case android.R.id.home:
+                    onBackPressed();
+                break;
             default:
 
                 break;
