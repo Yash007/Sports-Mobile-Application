@@ -3,13 +3,17 @@ package com.example.yash007.sportsapplication;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.samsung.android.sdk.healthdata.HealthConnectionErrorResult;
 import com.samsung.android.sdk.healthdata.HealthConstants;
@@ -34,6 +38,7 @@ public class HealthActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_health);
         mInstance = this;
         mKeySet = new HashSet<HealthPermissionManager.PermissionKey>();
         mKeySet.add(new HealthPermissionManager.PermissionKey(HealthConstants.StepCount.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
@@ -41,15 +46,18 @@ public class HealthActivity extends Activity {
 
         try {
             healthDataService.initialize(this);
+            Log.d(APP_TAG,"onCreate() initialized");
+            Toast.makeText(getApplicationContext(),"onCreate() initialized",Toast.LENGTH_SHORT).show();
         }
         catch (Exception e) {
-            e.printStackTrace();
+            Log.d(APP_TAG,"onCreate: error:{}", e);
+            Toast.makeText(getApplicationContext(),"onCreate:Error " + e.getMessage(),Toast.LENGTH_SHORT).show();
         }
 
         mStore = new HealthDataStore(this, mConnectionLister);
         mStore.connectService();
-
-
+        Log.d(APP_TAG,"onCreate() connected");
+        Toast.makeText(getApplicationContext(),"onCreate() Connected :" ,Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -62,12 +70,14 @@ public class HealthActivity extends Activity {
         @Override
         public void onConnected() {
             Log.d(APP_TAG, "Health data service is connected.");
+            Toast.makeText(getApplicationContext(),"onConnected() ConnectionListener :" ,Toast.LENGTH_SHORT).show();
             HealthPermissionManager pmsManager = new HealthPermissionManager(mStore);
             try {
                 // Check whether the permissions that this application needs are acquired
                 Map<HealthPermissionManager.PermissionKey, Boolean> resultMap = pmsManager.isPermissionAcquired(mKeySet);
                 if (resultMap.containsValue(Boolean.FALSE)) {
                     // Request the permission for reading step counts if it is not acquired
+                    Log.d(APP_TAG, "Health data service is connect.");
                     pmsManager.requestPermissions(mKeySet, HealthActivity.this).setResultListener(mPermissionListener);
                 }
                 else {
@@ -83,6 +93,7 @@ public class HealthActivity extends Activity {
         @Override
         public void onConnectionFailed(HealthConnectionErrorResult healthConnectionErrorResult) {
             Log.d(APP_TAG, "Health data service is not available.");
+            Toast.makeText(HealthActivity.this,"onConnectionFailed(): Error",Toast.LENGTH_SHORT).show();
             showConnectionFailureDialog(healthConnectionErrorResult);
         }
 
@@ -147,5 +158,28 @@ public class HealthActivity extends Activity {
             alert.setNegativeButton("Cancel", null);
         }
         alert.show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_health,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.refresh:
+
+                break;
+            case R.id.healthConnect:
+
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }

@@ -138,13 +138,32 @@
         <TableRow
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:weightSum="10">
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:entries="@array/genderList"
+                android:layout_weight="10"
+                android:textSize="20sp"
+                android:background="@color/colorBackground"
+                android:popupBackground="@color/colorBackground"
+                ></Spinner>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:gravity="center">
             <Button
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="Register"
+                android:textSize="20sp"
+                android:text="@string/signUp"
                 android:layout_margin="10dp"
                 android:background="@color/colorAccent"
                 android:textColor="@color/colorText"/>

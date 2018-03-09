@@ -30,7 +30,8 @@
     <string name="profileSettings">Profile Settings</string>
     <string name="healthData">Health Records</string>
     <string name="signout">Sign out</string>
-
+    <string name="refresh">Refresh</string>
+    <string name="healthConnect">Connect to Samsung Health</string>
 
     <string-array name="ageList">
         <item>Select Age Group</item>
@@ -45,5 +46,7 @@
         <item>Male</item>
         <item>Co Ed</item>
     </string-array>
+
+    <string name="signUp">Sign Up</string>
 
 </resources>
