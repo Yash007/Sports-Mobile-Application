@@ -2,6 +2,7 @@ package com.example.yash007.sportsapplication;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
 
     public EditText userName, userPassword;
-
+    private static String PREF_NAME = "SportsData";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,12 +128,56 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             Log.d("TAG",result);
             String status = null;
+            String firstName = null;
+            String lastName = null;
+            String email = null;
+            String id = null;
+            String address = null;
+            String bio = null;
+            String pHeight = null;
+            String pWeight = null;
+            Boolean pAccountStatus = null;
+            Boolean pAuthenticated = null;
+            String pLoginType = null;
+            String pBirthday = null;
+
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 status = jsonObject.getString("Status");
                 //JSONObject profile = jsonObject.
 
-            } catch (JSONException e) {
+                JSONObject profile = jsonObject.getJSONObject("user");
+                Log.d("LOGIN_RESULT",profile.toString());
+
+                firstName = profile.getString("pFirstName");
+                lastName = profile.getString("pLastName");
+                email = profile.getString("pEmail");
+                id = profile.getString("_id");
+                address = profile.getString("pAddress");
+                bio = profile.getString("pBio");
+                pHeight = profile.getString("pHeight");
+                pWeight = profile.getString("pWeight");
+                pAccountStatus = profile.getBoolean("pAccountStatus");
+                pAuthenticated =profile.getBoolean("pAuthenticated");
+                pLoginType = profile.getString("pLoginType");
+                pBirthday = profile.getString("pBirthday");
+
+                SharedPreferences.Editor editor = getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit();
+                editor.putString("pFirstName",firstName);
+                editor.putString("pLastName",lastName);
+                editor.putString("pEmail",email);
+                editor.putString("id",id);
+                editor.putString("pAddress",address);
+                editor.putString("pBio",bio);
+                editor.putString("pHeight",pHeight);
+                editor.putString("pWeight",pWeight);
+                editor.putBoolean("pAccountStatus",pAccountStatus);
+                editor.putBoolean("pAuthenticated",pAuthenticated);
+                editor.putString("pLoginType",pLoginType);
+                editor.putString("pBirthday",pBirthday);
+                editor.apply();
+            }
+            catch (JSONException e) {
                 e.printStackTrace();
             }
             pDialog.dismiss();
