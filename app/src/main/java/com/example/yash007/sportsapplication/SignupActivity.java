@@ -62,7 +62,7 @@ public class SignupActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(SignupActivity.this);
+            pDialog = new ProgressDialog(SignupActivity.this,R.style.AppCompatAlertDialogStyle);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
