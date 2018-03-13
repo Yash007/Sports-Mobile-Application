@@ -24,12 +24,12 @@
             >
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/userName"
                 android:layout_weight="10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textEmailAddress"
                 android:padding="15dp"
                 android:hint="@string/email"
                 android:textColor="@color/colorText"
@@ -42,12 +42,12 @@
             android:layout_marginRight="10dp"
             android:weightSum="10">
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/userPassword"
                 android:layout_weight="10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
                 android:padding="15dp"
                 android:hint="@string/password"
                 android:textColor="@color/colorText"
@@ -61,14 +61,15 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/loginButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="20dp"
-                android:text="Login"
+                android:text="@string/login"
                 android:layout_margin="15dp"
                 android:padding="15dp"
-                android:onClick="openDashboardActivity"
+                android:onClick="doLogin"
                 android:background="@color/colorAccent"
                 android:textColor="@color/colorText"/>
         </TableRow>
