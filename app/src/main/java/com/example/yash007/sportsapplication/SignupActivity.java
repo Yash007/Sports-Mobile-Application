@@ -28,7 +28,6 @@ import java.util.Iterator;
 public class SignupActivity extends AppCompatActivity {
 
     private EditText firstName, lastName, email, password, confirmPassword, phone;
-    private Spinner gender;
     private ProgressDialog pDialog;
 
     @Override
@@ -42,7 +41,6 @@ public class SignupActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         confirmPassword = (EditText) findViewById(R.id.confirmPassword);
         phone = (EditText) findViewById(R.id.phoneNumber);
-        gender = (Spinner) findViewById(R.id.gender);
 
     }
 
