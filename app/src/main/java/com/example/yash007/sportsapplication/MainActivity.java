@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
 
     public EditText userName, userPassword;
-    private static String PREF_NAME = "SportsData";
+    public static final String PREF_NAME = "SportsData";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

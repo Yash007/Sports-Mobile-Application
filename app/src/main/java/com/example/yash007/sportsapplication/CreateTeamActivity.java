@@ -2,6 +2,7 @@ package com.example.yash007.sportsapplication;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class CreateTeamActivity extends AppCompatActivity {
     public EditText teamName, teamSports, teamLocation;
     public Spinner teamAgeGroup, teamGender;
 
+    private String USER_ID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,9 @@ public class CreateTeamActivity extends AppCompatActivity {
         teamLocation = (EditText) findViewById(R.id.teamLocation);
         teamAgeGroup = (Spinner) findViewById(R.id.teamAgeGroup);
         teamGender = (Spinner) findViewById(R.id.teamGender);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.PREF_NAME, MODE_PRIVATE);
+        USER_ID = sharedPreferences.getString("id","");
     }
 
     public void doCreateTeam(View v)    {
@@ -63,7 +68,7 @@ public class CreateTeamActivity extends AppCompatActivity {
             try {
 
                 //URL url = new URL("https://studytutorial.in/post.php");
-                URL url = new URL(Config.webUrl+"createTeam");
+                URL url = new URL(Config.webUrl+USER_ID+"/teams");
 
                 JSONObject postDataParams = new JSONObject();
 
