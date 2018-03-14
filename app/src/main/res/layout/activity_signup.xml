@@ -87,6 +87,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="phone"
+                android:maxLength="10"
                 android:layout_weight="10"
                 android:padding="10dp"
                 android:layout_margin="10dp"

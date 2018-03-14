@@ -81,7 +81,7 @@ public class SignupActivity extends AppCompatActivity {
                 postDataParams.put("pBirthday","");
                 postDataParams.put("pPassword",password.getText().toString());
                 postDataParams.put("pLoginType","Form");
-                postDataParams.put("pAuthenticated","fale");
+                postDataParams.put("pAuthenticated","false");
                 postDataParams.put("pAccountStatus","true");
                 postDataParams.put("pAddress","");
                 postDataParams.put("pBio","");

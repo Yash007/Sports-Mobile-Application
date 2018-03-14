@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(Config.webUrl+"loginUser");
+                URL url = new URL(Config.webUrl+"player/login");
 
                 JSONObject postDataParams = new JSONObject();
                 postDataParams.put("pEmail", userName.getText().toString());
