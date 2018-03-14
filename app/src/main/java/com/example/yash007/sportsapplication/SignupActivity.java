@@ -71,7 +71,7 @@ public class SignupActivity extends AppCompatActivity {
             try {
 
                 //URL url = new URL("https://studytutorial.in/post.php");
-                URL url = new URL(Config.webUrl+"createUser");
+                URL url = new URL(Config.webUrl+"players");
 
                 JSONObject postDataParams = new JSONObject();
 
