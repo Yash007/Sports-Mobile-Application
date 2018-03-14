@@ -34,4 +34,6 @@ dependencies {
     implementation files('libs/samsung-health-data-v1.3.0.jar')
     implementation files('libs/sdk-v1.0.0.jar')
     compile 'com.android.support:design:23.1.1'
+    compile 'com.google.android.gms:play-services-auth:11.8.0'
+
 }

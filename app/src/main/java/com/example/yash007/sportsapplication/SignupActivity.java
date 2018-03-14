@@ -56,7 +56,6 @@ public class SignupActivity extends AppCompatActivity {
 
     public class SignUpPost extends AsyncTask<String, Void, String> {
 
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -67,9 +66,7 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         protected String doInBackground(String... arg0) {
-
             try {
-
                 //URL url = new URL("https://studytutorial.in/post.php");
                 URL url = new URL(Config.webUrl+"players");
 
@@ -87,7 +84,6 @@ public class SignupActivity extends AppCompatActivity {
                 postDataParams.put("pBio","");
                 postDataParams.put("pHeight","");
                 postDataParams.put("pWeight","");
-
 
                 Log.e("params",postDataParams.toString());
 
@@ -108,9 +104,7 @@ public class SignupActivity extends AppCompatActivity {
                 os.close();
 
                 int responseCode=conn.getResponseCode();
-
                 if (responseCode == HttpURLConnection.HTTP_OK) {
-
                     BufferedReader in=new BufferedReader(new
                             InputStreamReader(
                             conn.getInputStream()));
@@ -119,15 +113,12 @@ public class SignupActivity extends AppCompatActivity {
                     String line="";
 
                     while((line = in.readLine()) != null) {
-
                         Log.e("+++++", "line: "+line);
                         sb.append(line);
                         //break;
                     }
-
                     in.close();
                     return sb.toString();
-
                 }
                 else {
                     return new String("false : "+responseCode);
@@ -161,7 +152,7 @@ public class SignupActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
             else    {
-                Toast.makeText(getApplicationContext(),"Incorrect username or password",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),status.toString(),Toast.LENGTH_LONG).show();
             }
 
 

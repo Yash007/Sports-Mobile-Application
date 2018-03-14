@@ -82,16 +82,29 @@
             android:weightSum="10">
 
             <Button
-
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_margin="10dp"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 android:text="Forgot Password ?"
                 android:onClick="openForgetPasswordActivity"
                 android:textColor="@color/colorText"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:weightSum="10">
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/googleSignIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
         </TableRow>
 
     </TableLayout>

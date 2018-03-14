@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "203661874185",
+    "project_id": "sporties-1521054953411"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203661874185:android:92571185d0058807",
+        "android_client_info": {
+          "package_name": "com.example.yash007.sportsapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "203661874185-t8bijbmoj92gjf1jeup0u52rkipuhn2l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yash007.sportsapplication",
+            "certificate_hash": "4feaeaef7428a962b35e86306aa2b974e68ccc37"
+          }
+        },
+        {
+          "client_id": "203661874185-7namktn26iskl3l2qgfmbclmj43ni42b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJt3cCBxKcOnLMj5TtpmKA-mOt6UIpcac"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

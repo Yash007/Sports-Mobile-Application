@@ -3,14 +3,23 @@ package com.example.yash007.sportsapplication;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,19 +34,92 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Iterator;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ProgressDialog pDialog;
 
     public EditText userName, userPassword;
     public static final String PREF_NAME = "SportsData";
+
+    private static final String TAG = "MainActivity";
+    private static final int RC_SIGN_IN = 9001;
+
+
+    GoogleSignInClient mGoogleSignInClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         userName = (EditText) findViewById(R.id.userName);
         userPassword = (EditText) findViewById(R.id.userPassword);
+
+        findViewById(R.id.googleSignIn).setOnClickListener(this);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestProfile()
+                .build();
+
+        SignInButton signInButton = findViewById(R.id.googleSignIn);
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        //updateUI(account);
+
+        if(account != null) {
+            String personName = account.getDisplayName();
+            String personGivenName = account.getGivenName();
+            String personFamilyName = account.getFamilyName();
+            String personEmail = account.getEmail();
+            String personId = account.getId();
+            Uri personPhoto = account.getPhotoUrl();
+
+            Log.d("--------",personName);
+            Log.d("--------",personGivenName);
+            Log.d("--------",personFamilyName);
+            Log.d("--------",personEmail);
+            Log.d("--------",personId);
+            Log.d("--------",personPhoto.toString());
+
+
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+
+            // Signed in successfully, show authenticated UI.
+            //updateUI(account);
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            //updateUI(null);
+        }
+    }
+
 
     public void openSignUpActivity(View v)  {
         Intent intent = new Intent(this, SignupActivity.class);
@@ -214,5 +296,19 @@ public class MainActivity extends AppCompatActivity {
             result.append(URLEncoder.encode(value.toString(), "UTF-8"));
         }
         return result.toString();
+    }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.googleSignIn:
+                signIn();
+                break;
+        }
     }
 }
