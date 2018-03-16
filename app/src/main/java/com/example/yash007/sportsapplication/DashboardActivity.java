@@ -42,11 +42,10 @@ public class DashboardActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.healthRecords:
-                Intent intent = new Intent(this,HealthActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(DashboardActivity.this, HealthActivity.class));
                 break;
             case R.id.profile:
-
+                startActivity(new Intent(DashboardActivity.this, ProfileActivity.class));
                 break;
             case R.id.signOut:
 

@@ -37,13 +37,10 @@ import java.util.Iterator;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ProgressDialog pDialog;
-
     public EditText userName, userPassword;
     public static final String PREF_NAME = "SportsData";
-
     private static final String TAG = "MainActivity";
     private static final int RC_SIGN_IN = 9001;
-
 
     GoogleSignInClient mGoogleSignInClient;
 
@@ -53,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         userName = (EditText) findViewById(R.id.userName);
         userPassword = (EditText) findViewById(R.id.userPassword);
-
         findViewById(R.id.googleSignIn).setOnClickListener(this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -73,25 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         //updateUI(account);
 
-        if(account != null) {
-            String personName = account.getDisplayName();
-            String personGivenName = account.getGivenName();
-            String personFamilyName = account.getFamilyName();
-            String personEmail = account.getEmail();
-            String personId = account.getId();
-            Uri personPhoto = account.getPhotoUrl();
-
-            Log.d("--------",personName);
-            Log.d("--------",personGivenName);
-            Log.d("--------",personFamilyName);
-            Log.d("--------",personEmail);
-            Log.d("--------",personId);
-            Log.d("--------",personPhoto.toString());
-
-
-        }
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -109,7 +87,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            if(account != null) {
+                String personName = account.getDisplayName();
+                String personGivenName = account.getGivenName();
+                String personFamilyName = account.getFamilyName();
+                String personEmail = account.getEmail();
+                String personId = account.getId();
+                Uri personPhoto = account.getPhotoUrl();
 
+                Log.d("--------",personName);
+                Log.d("--------",personGivenName);
+                Log.d("--------",personFamilyName);
+                Log.d("--------",personEmail);
+                Log.d("--------",personId);
+                Log.d("--------",personPhoto.toString());
+
+
+            }
             // Signed in successfully, show authenticated UI.
             //updateUI(account);
         } catch (ApiException e) {
@@ -117,6 +111,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
             //updateUI(null);
+        }
+    }
+
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.googleSignIn:
+                signIn();
+                break;
         }
     }
 
@@ -296,19 +305,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             result.append(URLEncoder.encode(value.toString(), "UTF-8"));
         }
         return result.toString();
-    }
-
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.googleSignIn:
-                signIn();
-                break;
-        }
     }
 }

@@ -32,6 +32,7 @@
                 android:inputType="textEmailAddress"
                 android:padding="15dp"
                 android:hint="@string/email"
+                android:text="sompurayash@live.com"
                 android:textColor="@color/colorText"
                 android:textColorHint="@color/colorText"/>
         </TableRow>
@@ -49,6 +50,7 @@
                 android:ems="10"
                 android:inputType="textPassword"
                 android:padding="15dp"
+                android:text="asd"
                 android:hint="@string/password"
                 android:textColor="@color/colorText"
                 android:textColorHint="@color/colorText"/>
