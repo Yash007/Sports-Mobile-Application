@@ -43,7 +43,11 @@
             android:name=".CreateTeamActivity"
             android:label="@string/createTeam"
             android:parentActivityName=".DashboardActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+
+        <activity android:name=".ProfileActivity"
+            android:label="Profile"
+            android:parentActivityName=".DashboardActivity"
+            ></activity>
     </application>
 
 </manifest>
