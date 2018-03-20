@@ -55,7 +55,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         if(isOnline())  {
+            userName = (EditText) findViewById(R.id.userName);
+            userPassword = (EditText) findViewById(R.id.userPassword);
+            findViewById(R.id.googleSignIn).setOnClickListener(this);
 
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .requestProfile()
+                    .build();
+
+            SignInButton signInButton = findViewById(R.id.googleSignIn);
+            signInButton.setSize(SignInButton.SIZE_STANDARD);
+
+            mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
         }
         else    {
             try {
@@ -70,20 +82,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d("Sporties", e.toString());
             }
         }
-
-        userName = (EditText) findViewById(R.id.userName);
-        userPassword = (EditText) findViewById(R.id.userPassword);
-        findViewById(R.id.googleSignIn).setOnClickListener(this);
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .requestProfile()
-                .build();
-
-        SignInButton signInButton = findViewById(R.id.googleSignIn);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
     }
 
     @Override

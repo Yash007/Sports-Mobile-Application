@@ -43,6 +43,15 @@ public class ProfileActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
 
         userProfileName.setText(sharedPreferences.getString("pFirstName", "John") + " " + sharedPreferences.getString("pLastName", " Doe"));
+        userCardEmail.setText(sharedPreferences.getString("pEmail","johndoe@gmail.com"));
+        userCardPhone.setText(sharedPreferences.getString("pPhone","+1(647)920-7670"));
+        Boolean auth = sharedPreferences.getBoolean("pAuthenticated",false);
+        if(auth == false)   {
+            userCardStatus.setText("Not authorized");
+        }
+        else    {
+            userCardStatus.setText("Authenticated");
+        }
 
 
         userEmailImageButton.setOnClickListener(new View.OnClickListener() {
