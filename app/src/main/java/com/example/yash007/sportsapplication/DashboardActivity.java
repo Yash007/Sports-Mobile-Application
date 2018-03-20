@@ -47,6 +47,10 @@ public class DashboardActivity extends AppCompatActivity {
             case R.id.profile:
                 startActivity(new Intent(DashboardActivity.this, ProfileActivity.class));
                 break;
+            case R.id.fingerprint:
+
+                startActivity(new Intent(DashboardActivity.this, FingerprintActivity.class));
+                break;
             case R.id.signOut:
 
                 break;

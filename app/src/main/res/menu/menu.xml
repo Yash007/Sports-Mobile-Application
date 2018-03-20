@@ -13,6 +13,11 @@
         android:orderInCategory="2">
     </item>
 
+    <item android:id="@+id/fingerprint"
+        android:title="Finger Print"
+        android:orderInCategory="4" >
+
+    </item>
     <item android:id="@+id/signOut"
         android:icon="@drawable/sign_out"
         android:title="@string/signout"
