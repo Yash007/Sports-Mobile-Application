@@ -43,7 +43,7 @@ public class CreateTeamActivity extends AppCompatActivity {
         teamAgeGroup = (Spinner) findViewById(R.id.teamAgeGroup);
         teamGender = (Spinner) findViewById(R.id.teamGender);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.PREF_NAME, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
         USER_ID = sharedPreferences.getString("id","");
     }
 

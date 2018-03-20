@@ -34,27 +34,29 @@
                     >
 
                     <ImageButton
-                        android:id="@+id/imageView1"
+                        android:id="@+id/userEmailImageButton"
                         android:layout_width="match_parent"
                         android:layout_weight="3"
+                        android:paddingLeft="15dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/email"
                         android:background="@color/colorPrimary"/>
 
                     <ImageView
-                        android:id="@+id/user_imageview"
+                        android:id="@+id/userProfileView"
                         android:layout_gravity="center_vertical"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_weight="3"
                         android:layout_height="wrap_content"
                         android:src="@drawable/user"/>
 
                     <ImageButton
-                        android:id="@+id/imageView2"
+                        android:id="@+id/userCallImageButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:paddingRight="15dp"
                         android:layout_weight="3"
                         android:src="@drawable/phone"
                         android:background="@color/colorPrimary"/>
@@ -70,13 +72,13 @@
                     android:gravity="center_horizontal"
                     android:layout_marginTop="10dp">
                     <TextView
+                        android:id="@+id/userProfileName"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="John Doe"
                         android:textStyle="bold"
-                        android:textSize="17sp"
+                        android:textSize="24sp"
                         android:textColor="@color/colorText"/>
                 </TableRow>
 
@@ -85,9 +87,9 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal">
                     <TextView
+                        android:id="@+id/userProfileAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Toronto, Ontario"
                         android:layout_marginTop="7dp"
                         android:textSize="15sp"
                         android:textColor="@color/colorText"
@@ -139,16 +141,16 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Email"
+                            android:text="@string/email"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:textColor="@color/colorText"/>
                     </TableRow>
                     <TableRow>
                         <TextView
+                            android:id="@+id/userCardEmail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="User's Email id"
                             android:layout_marginTop="5dp"
                             android:textSize="15sp"
                             android:textColor="@color/colorText"/>
@@ -208,7 +210,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="User's Phone number"
+                            android:id="@+id/userCardPhone"
                             android:layout_marginTop="5dp"
                             android:textSize="15sp"
                             android:textColor="@color/colorText"/>
@@ -259,7 +261,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Gender"
+                            android:text="@string/gender"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:textColor="@color/colorText"/>
@@ -268,7 +270,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="User's Gender"
+                            android:id="@+id/userCardGender"
                             android:layout_marginTop="5dp"
                             android:textSize="15sp"
                             android:textColor="@color/colorText"/>
@@ -319,7 +321,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Status"
+                            android:text="@string/status"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:textColor="@color/colorText"/>
@@ -328,7 +330,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="User's status"
+                            android:id="@+id/userCardStatus"
                             android:layout_marginTop="5dp"
                             android:textSize="15sp"
                             android:textColor="@color/colorText"/>
@@ -379,7 +381,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Email Notification"
+                            android:text="@string/emailNotification"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:textColor="@color/colorText"/>
@@ -388,7 +390,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="User's Email notification"
+                            android:id="@+id/userCardEmailNot"
                             android:layout_marginTop="5dp"
                             android:textSize="15sp"
                             android:textColor="@color/colorText"/>

@@ -6,4 +6,5 @@ package com.example.yash007.sportsapplication;
 
 public class Config {
     public static final String webUrl = "https://sporties.herokuapp.com/api/";
+    public static final String PREF_NAME = "SportsData";
 }

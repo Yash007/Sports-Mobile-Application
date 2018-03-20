@@ -1,8 +1,13 @@
 package com.example.yash007.sportsapplication;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ProgressDialog pDialog;
     public EditText userName, userPassword;
-    public static final String PREF_NAME = "SportsData";
+
     private static final String TAG = "MainActivity";
     private static final int RC_SIGN_IN = 9001;
 
@@ -48,6 +53,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(isOnline())  {
+
+        }
+        else    {
+            try {
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                alertDialog.setTitle("Info");
+                alertDialog.setMessage("Internet not available! Please check your connection");
+                alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+                alertDialog.setButton("Okay", (dialogInterface, i) -> alertDialog.dismiss());
+                alertDialog.show();
+            }
+            catch (Exception e) {
+                Log.d("Sporties", e.toString());
+            }
+        }
+
         userName = (EditText) findViewById(R.id.userName);
         userPassword = (EditText) findViewById(R.id.userPassword);
         findViewById(R.id.googleSignIn).setOnClickListener(this);
@@ -253,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 pLoginType = profile.getString("pLoginType");
                 pBirthday = profile.getString("pBirthday");
 
-                SharedPreferences.Editor editor = getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE).edit();
                 editor.putString("pFirstName",firstName);
                 editor.putString("pLastName",lastName);
                 editor.putString("pEmail",email);
@@ -305,5 +328,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             result.append(URLEncoder.encode(value.toString(), "UTF-8"));
         }
         return result.toString();
+    }
+
+    public boolean isOnline()   {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()) {
+            Toast.makeText(MainActivity.this, "No internet connection!!",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return  true;
     }
 }
