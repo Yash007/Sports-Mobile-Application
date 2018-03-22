@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -20,8 +22,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     private TextView userProfileName, userProfileAddress, userCardEmail;
     private TextView userCardPhone, userCardGender, userCardStatus, userCardEmailNotification;
-    private ImageButton userEmailImageButton;
-    private ImageButton userCallImageButton;
+    private ImageView userEmailImageButton;
+    private ImageView userCallImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,8 @@ public class ProfileActivity extends AppCompatActivity {
         userCardStatus = (TextView) findViewById(R.id.userCardStatus);
         userCardEmailNotification = (TextView) findViewById(R.id.userCardEmailNot);
 
-        userEmailImageButton = (ImageButton) findViewById(R.id.userEmailImageButton);
-        userCallImageButton = (ImageButton) findViewById(R.id.userCallImageButton);
+        userEmailImageButton = (ImageView) findViewById(R.id.userEmailImageButton);
+        userCallImageButton = (ImageView) findViewById(R.id.userCallImageButton);
 
         SharedPreferences sharedPreferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
 
@@ -52,7 +54,6 @@ public class ProfileActivity extends AppCompatActivity {
         else    {
             userCardStatus.setText("Authenticated");
         }
-
 
         userEmailImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,5 +85,9 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void openFingerPrint(View view)    {
+        startActivity(new Intent(ProfileActivity.this, FingerprintActivity.class));
     }
 }

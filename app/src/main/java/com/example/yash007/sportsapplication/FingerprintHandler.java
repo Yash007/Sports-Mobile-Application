@@ -8,9 +8,6 @@ import android.os.CancellationSignal;
 import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
 
-/**
- * Created by yash007 on 2018-03-20.
- */
 
 public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {
     private CancellationSignal cancellationSignal;

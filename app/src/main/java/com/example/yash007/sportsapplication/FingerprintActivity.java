@@ -2,6 +2,8 @@ package com.example.yash007.sportsapplication;
 
 import android.Manifest;
 import android.app.KeyguardManager;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
@@ -13,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -41,11 +44,29 @@ public class FingerprintActivity extends AppCompatActivity {
     private KeyGenerator keyGenerator;
     private Cipher cipher;
     private FingerprintManager.CryptoObject cryptoObject;
+    private TextView fingerprintStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fingerprint);
+
+        fingerprintStatus = (TextView) findViewById(R.id.fingerprintStatus);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(Config.PREF_UNIQUE_ID, MODE_PRIVATE);
+        String uniquId = sharedPreferences.getString(Config.PREF_UNIQUE_ID,null);
+
+        SharedPreferences sharedPrefs = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
+        String fingerPrintStatus1 = sharedPrefs.getString("pFingerPrintStatus","");
+
+
+        if(fingerPrintStatus1 == "")   {
+            fingerprintStatus.setText(R.string.fingerprintDefaultStatus);
+        }
+        else    {
+            fingerprintStatus.setText("Fingerprint assigned. Touch your finger to fingerprint sensor for verification");
+        }
+
 
         keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
         fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
@@ -72,6 +93,9 @@ public class FingerprintActivity extends AppCompatActivity {
 
             helper.startAuth(fingerprintManager, cryptoObject);
         }
+
+
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

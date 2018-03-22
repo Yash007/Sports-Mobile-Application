@@ -36,6 +36,9 @@
     <string name="signout">Sign out</string>
     <string name="refresh">Refresh</string>
     <string name="healthConnect">Connect to Samsung Health</string>
+    <string name="fingerprint">Fingerprint Login</string>
+    <string name="fingerprintTitle">Fingerprint Authentication</string>
+    <string name="fingerprintDefaultStatus">You have not assigned fingerprint to Sporites. Please touch your fingerprint sensor for assign fingerprint to Sporties.</string>
 
     <string-array name="ageList">
         <item>Select Age Group</item>

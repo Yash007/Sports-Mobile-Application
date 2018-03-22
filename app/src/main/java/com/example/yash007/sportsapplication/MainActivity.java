@@ -1,17 +1,22 @@
 package com.example.yash007.sportsapplication;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -38,6 +43,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Iterator;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -47,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "MainActivity";
     private static final int RC_SIGN_IN = 9001;
 
+    private static String uniqueId = null;
+
     GoogleSignInClient mGoogleSignInClient;
 
     @Override
@@ -54,7 +62,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(isOnline())  {
+
+        if (isOnline()) {
+
+            Toast.makeText(MainActivity.this, id(getApplicationContext()), Toast.LENGTH_LONG).show();
             userName = (EditText) findViewById(R.id.userName);
             userPassword = (EditText) findViewById(R.id.userPassword);
             findViewById(R.id.googleSignIn).setOnClickListener(this);
@@ -337,5 +348,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return false;
         }
         return  true;
+    }
+
+    public synchronized static String id(Context context) {
+        if (uniqueId == null) {
+            SharedPreferences sharedPrefs = context.getSharedPreferences(Config.PREF_UNIQUE_ID, Context.MODE_PRIVATE);
+            uniqueId = sharedPrefs.getString(Config.PREF_UNIQUE_ID,null);
+            if(uniqueId == null)    {
+                uniqueId = UUID.randomUUID().toString();
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString(Config.PREF_UNIQUE_ID, uniqueId);
+                editor.commit();
+            }
+        }
+        return uniqueId;
     }
 }
