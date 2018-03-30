@@ -2,7 +2,6 @@ package com.example.yash007.sportsapplication;
 
 import android.Manifest;
 import android.app.KeyguardManager;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
@@ -17,7 +16,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -46,15 +44,14 @@ public class FingerprintActivity extends AppCompatActivity {
     private FingerprintManager.CryptoObject cryptoObject;
     private TextView fingerprintStatus;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fingerprint);
-
         fingerprintStatus = (TextView) findViewById(R.id.fingerprintStatus);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(Config.PREF_UNIQUE_ID, MODE_PRIVATE);
-        String uniquId = sharedPreferences.getString(Config.PREF_UNIQUE_ID,null);
+
 
         SharedPreferences sharedPrefs = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
         String fingerPrintStatus1 = sharedPrefs.getString("pFingerPrintStatus","");
@@ -157,5 +154,10 @@ public class FingerprintActivity extends AppCompatActivity {
                 | NoSuchAlgorithmException | InvalidKeyException e) {
             throw new RuntimeException("Failed to init Cipher", e);
         }
+
+
     }
+
+
+
 }

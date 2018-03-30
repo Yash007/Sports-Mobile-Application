@@ -2,12 +2,14 @@ package com.example.yash007.sportsapplication;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
+import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
-
 
 public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {
     private CancellationSignal cancellationSignal;
@@ -56,9 +58,17 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     @Override
     public void onAuthenticationSucceeded(
             FingerprintManager.AuthenticationResult result) {
+        //update method for adding fingerprint
 
-        Toast.makeText(appContext,
-                "Authentication succeeded.",
-                Toast.LENGTH_LONG).show();
+        onAuthSuccess();
     }
+
+    public void onAuthSuccess() {
+        Intent intent = new Intent(appContext, FingerPrintUpdateActivity.class);
+        intent.putExtra("status","success");
+        appContext.startActivity(intent);
+        ((AppCompatActivity) appContext).finish();
+    }
+
+
 }

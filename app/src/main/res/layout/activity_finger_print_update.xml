@@ -6,33 +6,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_vertical|center_horizontal"
-
     android:background="@color/colorBackground"
-    tools:context="com.example.yash007.sportsapplication.FingerprintActivity">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:text="@string/fingerprintTitle"
-        android:gravity="center_horizontal"
-        android:padding="10dp"
-        />
+    tools:context="com.example.yash007.sportsapplication.FingerPrintUpdateActivity">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_fp_40px"
-        android:id="@+id/imageView"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:src="@drawable/success"
         android:contentDescription="@string/fingerprint"
+        android:layout_margin="20dp"
         />
 
     <TextView
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fingerprintStatus"
+        android:textSize="24dp"
+        android:text="@string/success"
         android:gravity="center"
-        android:padding="25dp"
-        android:textSize="16sp" />
+        />
+
 </LinearLayout>
