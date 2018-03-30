@@ -53,6 +53,8 @@ public class TeamGridViewAdapter extends ArrayAdapter<GridItem> {
 
             holder.titleTextView = (TextView) row.findViewById(R.id.teamNameGrid);
             holder.imageView = (ImageView) row.findViewById(R.id.teamPicGrid);
+            holder.ageGroupView = (TextView) row.findViewById(R.id.teamGroupGrid);
+            holder.teamId = (TextView) row.findViewById(R.id.teamIdGrid);
 
             row.setTag(holder);
         }
@@ -64,6 +66,7 @@ public class TeamGridViewAdapter extends ArrayAdapter<GridItem> {
         holder.titleTextView.setText(Html.fromHtml(item.getTitle()));
 
         holder.imageView.setImageResource(R.drawable.team_grid);
+        holder.ageGroupView.setText(Html.fromHtml(item.getAge()));
 
         return row;
     }
@@ -71,5 +74,7 @@ public class TeamGridViewAdapter extends ArrayAdapter<GridItem> {
     static class ViewHolder {
         TextView titleTextView;
         ImageView imageView;
+        TextView ageGroupView;
+        TextView teamId;
     }
 }

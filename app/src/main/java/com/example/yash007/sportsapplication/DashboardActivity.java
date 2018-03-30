@@ -62,11 +62,28 @@ public class DashboardActivity extends AppCompatActivity {
         mGridAdapter = new TeamGridViewAdapter(this, R.layout.gridview_team, mGridData);
         mGridView.setAdapter(mGridAdapter);
 
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                GridItem item = (GridItem) parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(DashboardActivity.this, ProfileActivity.class);
+                intent.putExtra("title",item.getTitle());
+                intent.putExtra("id",item.getId());
+
+
+                Toast.makeText(getApplicationContext(),item.getId(),Toast.LENGTH_LONG).show();
+                startActivity(intent);
+
+            }
+        });
 
         SharedPreferences sharedPreferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
         USER_ID = sharedPreferences.getString("id","");
 
         new GetTeams().execute();
+
     }
 
     @Override
@@ -136,13 +153,16 @@ public class DashboardActivity extends AppCompatActivity {
                         String id = c.getString("_id");
                         String teamName = c.getString("tName");
                         String teamPic = c.getString("tPic");
+                        String teamAge = c.getString("tAgeGroup");
 
                         // tmp hash map for single contact
 
                         item = new GridItem();
                         // adding each child node to HashMap key => value
                         item.setTitle(teamName);
-                        item.setImage(id);
+                        item.setImage(teamPic);
+                        item.setId(id);
+                        item.setAge(teamAge);
 
                         // adding contact to contact list
                         mGridData.add(item);

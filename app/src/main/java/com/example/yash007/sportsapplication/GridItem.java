@@ -9,6 +9,24 @@ public class GridItem {
 
     private String title;
     private String image;
+    private String id;
+    private String age;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
 
     public GridItem()   {
         super();
