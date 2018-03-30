@@ -7,11 +7,20 @@
     android:background="@color/colorBackground"
     >
 
-    <LinearLayout
+    <GridView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:id="@+id/teamGridListView"
+        android:layout_margin="5dp"
+        android:columnWidth="140dp"
+        android:gravity="center"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="5dp"
+        android:focusable="true"
+        android:clickable="true"
+        >
+    </GridView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/createTeamButton"
