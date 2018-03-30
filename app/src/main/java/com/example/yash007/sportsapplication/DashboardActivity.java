@@ -52,7 +52,6 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(DashboardActivity.this, FingerprintActivity.class));
                 break;
             case R.id.signOut:
-
                 break;
             default:
                 break;

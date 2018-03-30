@@ -62,10 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        String id = id(getApplicationContext());
         if (isOnline()) {
-
-            Toast.makeText(MainActivity.this, id(getApplicationContext()), Toast.LENGTH_LONG).show();
             userName = (EditText) findViewById(R.id.userName);
             userPassword = (EditText) findViewById(R.id.userPassword);
             findViewById(R.id.googleSignIn).setOnClickListener(this);
@@ -103,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    //Google login method
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -116,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //Google login supporting method
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d("--------",personFamilyName);
                 Log.d("--------",personEmail);
                 Log.d("--------",personId);
-                Log.d("--------",personPhoto.toString());
+                //Log.d("--------",personPhoto.toString());
 
 
             }
@@ -146,12 +146,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
+    //Google login supporting method
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+    //google login supporting method
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -176,6 +177,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         new LoginPost().execute();
     }
 
+    //login with Credentials
     public class LoginPost extends AsyncTask<String, Void, String> {
 
         @Override
@@ -263,6 +265,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Boolean pAuthenticated = null;
             String pLoginType = null;
             String pBirthday = null;
+            String pPhone = null;
 
             try {
                 JSONObject jsonObject = new JSONObject(result);
@@ -284,6 +287,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 pAuthenticated =profile.getBoolean("pAuthenticated");
                 pLoginType = profile.getString("pLoginType");
                 pBirthday = profile.getString("pBirthday");
+                pPhone = profile.getString("pPhone");
 
                 SharedPreferences.Editor editor = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE).edit();
                 editor.putString("pFirstName",firstName);
@@ -298,6 +302,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 editor.putBoolean("pAuthenticated",pAuthenticated);
                 editor.putString("pLoginType",pLoginType);
                 editor.putString("pBirthday",pBirthday);
+                editor.putString("pPhone",pPhone);
                 editor.apply();
             }
             catch (JSONException e) {
@@ -339,6 +344,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return result.toString();
     }
 
+    //Internet connection checking method
     public boolean isOnline()   {
         ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -350,6 +356,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return  true;
     }
 
+    //Method for generating unique id for device
     public synchronized static String id(Context context) {
         if (uniqueId == null) {
             SharedPreferences sharedPrefs = context.getSharedPreferences(Config.PREF_UNIQUE_ID, Context.MODE_PRIVATE);
