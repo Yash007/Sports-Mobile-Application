@@ -68,12 +68,10 @@ public class DashboardActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 GridItem item = (GridItem) parent.getItemAtPosition(position);
 
-                Intent intent = new Intent(DashboardActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, TeamActivity.class);
                 intent.putExtra("title",item.getTitle());
                 intent.putExtra("id",item.getId());
 
-
-                Toast.makeText(getApplicationContext(),item.getId(),Toast.LENGTH_LONG).show();
                 startActivity(intent);
 
             }

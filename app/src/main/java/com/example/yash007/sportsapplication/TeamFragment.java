@@ -18,4 +18,8 @@ public class TeamFragment extends android.support.v4.app.Fragment {
         return inflater.inflate(R.layout.fragment_team,container, false);
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 }
