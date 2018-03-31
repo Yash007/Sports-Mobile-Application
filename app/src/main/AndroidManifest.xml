@@ -56,7 +56,10 @@
             android:label="Profile"
             android:parentActivityName=".DashboardActivity" />
         <activity android:name=".FingerprintActivity" />
-        <activity android:name=".FingerPrintUpdateActivity"></activity>
+        <activity android:name=".FingerPrintUpdateActivity" />
+        <activity android:name=".TeamActivity"
+            android:parentActivityName=".DashboardActivity"
+            ></activity>
     </application>
 
 </manifest>

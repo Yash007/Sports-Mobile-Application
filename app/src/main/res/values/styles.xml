@@ -30,4 +30,13 @@
         <item name="android:background">@color/colorBackground</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="tabStyle" parent="Base.Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/myTab</item>
+    </style>
+
+    <style name="myTab" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:textSize">18sp</item>
+        <item name="textAllCaps">true</item>
+    </style>
 </resources>
