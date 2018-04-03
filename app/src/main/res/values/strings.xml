@@ -9,6 +9,7 @@
     <!-- Activity Labels -->
     <string name="signUpActivity">Sign up</string>
     <string name="forgetPasswordActivity">Forget Password</string>
+    <string name="changePasswordActivity">Change Password</string>
     <string name="createTeam">Create Team</string>
 
     <!-- All Edit text hints -->
@@ -27,6 +28,11 @@
     <string name="emailNotification">Email Notification</string>
     <string name="status">Status</string>
     <string name="success">Success</string>
+    <string name="changePassword">Change Password</string>
+    <string name="pass">******</string>
+    <string name="oldPassword">Old Password</string>
+    <string name="newPassword">New Password</string>
+    <string name="updatePasswordButton">Update</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

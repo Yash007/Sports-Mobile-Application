@@ -57,8 +57,12 @@
             android:parentActivityName=".DashboardActivity" />
         <activity android:name=".FingerprintActivity" />
         <activity android:name=".FingerPrintUpdateActivity" />
-        <activity android:name=".TeamActivity"
+        <activity
+            android:name=".TeamActivity"
+            android:parentActivityName=".DashboardActivity" />
+        <activity android:name=".ChangePasswordActivity"
             android:parentActivityName=".DashboardActivity"
+            android:label="@string/changePasswordActivity"
             ></activity>
     </application>
 

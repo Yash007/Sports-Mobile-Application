@@ -90,4 +90,8 @@ public class ProfileActivity extends AppCompatActivity {
     public void openFingerPrint(View view)    {
         startActivity(new Intent(ProfileActivity.this, FingerprintActivity.class));
     }
+
+    public void openChangePassword(View view)   {
+        startActivity(new Intent(ProfileActivity.this, ChangePasswordActivity.class ));
+    }
 }
