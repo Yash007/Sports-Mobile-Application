@@ -22,8 +22,8 @@ public class TeamActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(teamTitle);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("Team").setIcon(R.drawable.team));
-        tabLayout.addTab(tabLayout.newTab().setText("Member").setIcon(R.drawable.user));
-        tabLayout.addTab(tabLayout.newTab().setText("Event").setIcon(R.drawable.user));
+        tabLayout.addTab(tabLayout.newTab().setText("Members").setIcon(R.drawable.user));
+        tabLayout.addTab(tabLayout.newTab().setText("Events").setIcon(R.drawable.calendar));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
