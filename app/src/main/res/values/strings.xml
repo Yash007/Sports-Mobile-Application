@@ -61,6 +61,21 @@
         <item>Co Ed</item>
     </string-array>
 
+    <string-array name="eventType">
+        <item>Event Type</item>
+        <item>Game</item>
+        <item>Tournament</item>
+        <item>Training</item>
+        <item>Meeting</item>
+    </string-array>
+
+    <string-array name="recurringSpinner">
+        <item>Recurring Event</item>
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+
     <string name="signUp">Sign Up</string>
 
 
@@ -75,4 +90,5 @@
     <string name="msg_req_available">Please make Samsung Health available</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="title_activity_create_event">CreateEventActivity</string>
 </resources>
