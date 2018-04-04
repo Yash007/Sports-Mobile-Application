@@ -135,6 +135,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Log.d("--------",personPhoto.toString());
 
 
+                new GoogleLoginPost(personName,personFamilyName,personEmail).execute();
+
             }
             // Signed in successfully, show authenticated UI.
             //updateUI(account);
@@ -369,5 +371,124 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         return uniqueId;
+    }
+
+    //Google Login REST API with Our server
+
+    //login with Credentials
+    public class GoogleLoginPost extends AsyncTask<String, Void, String> {
+
+        String firstName, lastName, email;
+
+        public GoogleLoginPost(String firstName, String lastName, String email) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(MainActivity.this,R.style.AppCompatAlertDialogStyle);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        protected String doInBackground(String... arg0) {
+            try {
+                //URL url = new URL("https://studytutorial.in/post.php");
+                URL url = new URL(Config.webUrl+"player/login/social");
+
+                JSONObject postDataParams = new JSONObject();
+
+                postDataParams.put("pFirstName", firstName);
+                postDataParams.put("pLastName", lastName);
+                postDataParams.put("pEmail",email);
+                postDataParams.put("pBirthday","");
+                postDataParams.put("pPassword","");
+                postDataParams.put("pPhone","");
+                postDataParams.put("pLoginType","Google");
+                postDataParams.put("pAuthenticated","false");
+                postDataParams.put("pAccountStatus","true");
+                postDataParams.put("pAddress","");
+                postDataParams.put("pBio","");
+                postDataParams.put("pHeight","");
+                postDataParams.put("pWeight","");
+                postDataParams.put("pAdnroidId","");
+
+                Log.e("params",postDataParams.toString());
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(15000 /* milliseconds */);
+                conn.setConnectTimeout(15000 /* milliseconds */);
+                conn.setRequestMethod("POST");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                OutputStream os = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
+                writer.write(getPostDataString(postDataParams));
+
+                writer.flush();
+                writer.close();
+                os.close();
+
+                int responseCode=conn.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader in=new BufferedReader(new
+                            InputStreamReader(
+                            conn.getInputStream()));
+
+                    StringBuffer sb = new StringBuffer("");
+                    String line="";
+
+                    while((line = in.readLine()) != null) {
+                        Log.e("+++++", "line: "+line);
+                        sb.append(line);
+                        //break;
+                    }
+                    in.close();
+                    return sb.toString();
+                }
+                else {
+                    return new String("false : "+responseCode);
+                }
+            }
+            catch(Exception e) {
+                Log.e("~~~", e.toString());
+                return new String("Exception: " + e.getMessage());
+            }
+
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.d("TAG",result);
+            String status = null;
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                status = jsonObject.getString("Status");
+                //JSONObject profile = jsonObject.
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            pDialog.dismiss();
+
+            if(status.equals("Success") == true) {
+                Toast.makeText(getApplicationContext(),"Logged in",Toast.LENGTH_LONG).show();
+
+                startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
+            }
+            else    {
+                Toast.makeText(getApplicationContext(),status.toString(),Toast.LENGTH_LONG).show();
+            }
+
+
+        }
     }
 }

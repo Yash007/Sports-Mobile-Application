@@ -1,5 +1,6 @@
 package com.example.yash007.sportsapplication;
 
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,11 @@ public class TeamActivity extends AppCompatActivity {
 
         teamTitle = getIntent().getExtras().getString("title");
         teamId = getIntent().getExtras().getString("id");
+
+        SharedPreferences.Editor editor = getSharedPreferences(Config.PREF_TEAM,MODE_PRIVATE).edit();
+        editor.putString("teamName",teamTitle);
+        editor.putString("teamId",teamId);
+        editor.commit();
 
         teamTitle = teamTitle.substring(0,1).toUpperCase() + teamTitle.substring(1).toLowerCase();
 

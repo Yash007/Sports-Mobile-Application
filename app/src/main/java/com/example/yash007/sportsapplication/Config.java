@@ -8,4 +8,5 @@ public class Config {
     public static final String webUrl = "https://sporties.herokuapp.com/api/";
     public static final String PREF_NAME = "SportsData";
     public static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
+    public static final String PREF_TEAM = "TeamData";
 }
