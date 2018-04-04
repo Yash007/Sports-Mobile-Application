@@ -27,9 +27,9 @@ import java.util.Iterator;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
-    private EditText oldPassword;
-    private EditText newPassword;
-    private EditText confirmPassword;
+    public EditText oldPassword;
+    public EditText newPassword;
+    public EditText confirmPassword;
     private ProgressDialog pDialog;
 
     SharedPreferences preferences;
@@ -46,11 +46,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
     }
 
     public void doUpdatePassword(View view) {
-        if(newPassword.getText().toString() == confirmPassword.getText().toString())    {
+        String newPass = newPassword.getText().toString().trim();
+        String confirmPass = confirmPassword.getText().toString().trim();
+        if(newPass.equals(newPass))    {
             new UpdatePassword().execute();
         }
         else    {
-            Toast.makeText(ChangePasswordActivity.this,"New password and Confirm password must be same", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ChangePasswordActivity.this,newPass + "   --- "+ confirmPass, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -85,7 +87,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(15000 /* milliseconds */);
                 conn.setConnectTimeout(15000 /* milliseconds */);
-                conn.setRequestMethod("POST");
+                conn.setRequestMethod("PUT");
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
 
@@ -141,7 +143,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
             }
             pDialog.dismiss();
 
-            if(status.equals("Success") == true) {
+            String temp = "Success";
+            if(status.equals(temp)) {
                 Toast.makeText(getApplicationContext(),"Password Updated successfully. Please login now",Toast.LENGTH_LONG).show();
 
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
