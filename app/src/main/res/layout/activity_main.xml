@@ -7,88 +7,84 @@
     tools:context="com.example.yash007.sportsapplication.MainActivity"
     android:orientation="vertical"
     android:weightSum="10"
-    android:background="@color/colorBackground">
+    android:background="@color/colorPrimary">
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:layout_weight="9"
-        android:paddingTop="0dp">
+        android:padding="10dp"
+        >
 
         <TableRow
-            android:padding="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_margin="10dp"
             android:weightSum="10"
             >
 
             <EditText
                 android:id="@+id/userName"
-                android:layout_weight="10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:layout_weight="10"
                 android:inputType="textEmailAddress"
-                android:padding="15dp"
                 android:hint="@string/email"
                 android:text="sompurayash@live.com"
+                android:background="@drawable/edit_text_design"
+                android:theme="@style/editText"
+                android:drawableLeft="@drawable/theme_email"
                 android:textColor="@color/colorText"
-                android:textColorHint="@color/colorText"/>
+                />
         </TableRow>
 
         <TableRow
-            android:padding="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:weightSum="10">
+            android:layout_margin="10dp"
+            android:weightSum="10"
+            >
             <EditText
                 android:id="@+id/userPassword"
                 android:layout_weight="10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:inputType="textPassword"
-                android:padding="15dp"
                 android:text="asd"
                 android:hint="@string/password"
+                android:background="@drawable/edit_text_design"
+                android:theme="@style/editText"
+                android:drawableLeft="@drawable/theme_password"
                 android:textColor="@color/colorText"
-                android:textColorHint="@color/colorText"/>
+                />
         </TableRow>
 
         <TableRow
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:weightSum="10"
-            android:gravity="center">
+            android:layout_margin="10dp"
+            android:gravity="center_horizontal|center_vertical"
+            >
 
             <Button
                 android:id="@+id/loginButton"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="20dp"
                 android:text="@string/login"
-                android:layout_margin="15dp"
-                android:padding="15dp"
                 android:onClick="doLogin"
-                android:background="@color/colorAccent"
-                android:textColor="@color/colorText"/>
+                android:background="@drawable/button_design"
+                android:theme="@style/button"
+                android:drawableLeft="@drawable/theme_unlock"
+                android:textColor="@color/colorText"
+                />
         </TableRow>
 
         <TableRow
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:weightSum="10">
+            android:layout_margin="10dp"
+            android:gravity="center_horizontal"
+            android:weightSum="10"
+            >
 
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="10dp"
                 android:textSize="12sp"
                 android:text="Forgot Password ?"
                 android:onClick="openForgetPasswordActivity"
@@ -96,11 +92,10 @@
         </TableRow>
 
         <TableRow
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:weightSum="10">
+            android:layout_margin="10dp"
+            android:weightSum="10"
+            android:gravity="center_horizontal"
+            >
 
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/googleSignIn"
@@ -127,8 +122,8 @@
 
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/signUpButton"
                 android:onClick="openSignUpActivity"
                 android:textColor="@color/colorText"/>
