@@ -35,7 +35,9 @@
         <activity
             android:name=".SignupActivity"
             android:label="@string/signUpActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateVisible"
+            />
         <activity
             android:name=".ForgetPasswordActivity"
             android:label="@string/forgetPasswordActivity"
