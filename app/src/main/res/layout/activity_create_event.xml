@@ -106,7 +106,10 @@
                     android:background="@drawable/edit_text_design"
                     android:theme="@style/editText"
                     android:drawableLeft="@drawable/theme_location"
-                    android:textColor="@color/colorText"/>
+                    android:textColor="@color/colorText"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    />
 
             </TableRow>
 
@@ -125,6 +128,8 @@
                     android:theme="@style/editText"
                     android:drawableLeft="@drawable/theme_location"
                     android:textColor="@color/colorText"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     />
 
             </TableRow>
