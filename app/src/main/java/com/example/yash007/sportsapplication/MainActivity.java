@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .requestProfile()
                     .build();
 
-            SignInButton signInButton = findViewById(R.id.googleSignIn);
+            SignInButton signInButton = (SignInButton) findViewById(R.id.googleSignIn);
             signInButton.setSize(SignInButton.SIZE_STANDARD);
 
             mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
