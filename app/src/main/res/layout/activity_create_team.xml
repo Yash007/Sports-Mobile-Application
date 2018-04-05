@@ -81,6 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
+                android:spinnerMode="dropdown"
                 android:popupBackground="@color/colorBackground"
                 android:entries="@array/genderList"
                 android:background="@drawable/spinner_design"
