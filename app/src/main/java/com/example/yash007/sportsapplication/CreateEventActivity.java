@@ -1,5 +1,6 @@
 package com.example.yash007.sportsapplication;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -78,13 +79,14 @@ public class CreateEventActivity extends AppCompatActivity {
                 updateLabel();
             }
 
+
         };
 
 
         eventDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(CreateEventActivity.this, date, myCalendar.get(Calendar.YEAR),
+                new DatePickerDialog(CreateEventActivity.this,AlertDialog.THEME_DEVICE_DEFAULT_DARK, date, myCalendar.get(Calendar.YEAR),
                         myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -100,17 +102,25 @@ public class CreateEventActivity extends AppCompatActivity {
                 int minute = mcurrentTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
 
-                mTimePicker = new TimePickerDialog(CreateEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                mTimePicker = new TimePickerDialog(CreateEventActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        eventTime.setText("" + selectedHour + ":" + selectedMinute);
-                        time = selectedHour + ":" + selectedMinute;
+                        //eventTime.setText("" + selectedHour + ":" + selectedMinute);
+
+                        String hour = String.valueOf(selectedHour);
+                        String minute = String.valueOf(selectedMinute);
+                        if(hour.length() == 1)  {
+                            hour = "0" + hour;
+                        }
+                        if(minute.length() == 1)    {
+                            minute = "0" + minute;
+                        }
+                        time = hour + ":" + minute;
+                        updateTime(time);
                     }
                 }, hour, minute, true);//Yes 24 hour time
-                mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
 
-                updateTime(time);
             }
         });
 
@@ -126,8 +136,10 @@ public class CreateEventActivity extends AppCompatActivity {
     public void addEvent(View view) {
         new CreateTeamPost().execute();
     }
+
+
     private void updateLabel() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "MM/dd/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CANADA);
 
         eventDate.setText(sdf.format(myCalendar.getTime()));
@@ -168,7 +180,7 @@ public class CreateEventActivity extends AppCompatActivity {
                 postDataParams.put("eDate",eventDate.getText().toString());
                 postDataParams.put("eTime",eventTime.getText().toString());
                 postDataParams.put("eType",eventType.getSelectedItem().toString());
-                postDataParams.put("eAddress","");
+                postDataParams.put("eAddress",eventAddress.getText().toString());
                 postDataParams.put("eVenue",eventVenue.getText().toString());
                 postDataParams.put("eNotes",eventNotes.getText().toString());
                 postDataParams.put("tId",teamId.toString());

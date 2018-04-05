@@ -9,6 +9,7 @@
         <item name="android:navigationBarColor">@color/colorPrimary</item>
         <item name="android:itemBackground">@color/colorPrimary</item>
         <item name="android:textColor">@color/colorText</item>
+
     </style>
 
     <style name="inputStyle">

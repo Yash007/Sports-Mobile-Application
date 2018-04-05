@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:padding="7dp"
+    android:layout_marginBottom="7dp"
+    android:elevation="10dp"
+    android:showDividers="none"
+    >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TableRow
+            android:weightSum="10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|center_vertical"
+                >
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/events_calendar"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/listEventDate"
+                    android:gravity="center_horizontal|center_vertical"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/listEventTime"
+                    android:gravity="center_horizontal|center_vertical"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="start"
+                android:paddingTop="5dp"
+                android:layout_weight="9"
+                android:paddingLeft="10dp"
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="gone"
+                    android:id="@+id/listEventId"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12pt"
+                    android:text="Event Type"
+                    android:id="@+id/listEventType"
+                    />
+
+                <TextView
+                    android:id="@+id/listEventVenue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/theme_location"
+                    android:textSize="8pt"
+                    android:drawablePadding="10dp"
+                    android:text="venue"
+                    android:layout_marginTop="5dp"
+                    />
+
+                <TextView
+                    android:id="@+id/listEventAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/theme_location"
+                    android:textSize="8pt"
+                    android:drawablePadding="10dp"
+                    android:text="Address"
+                    android:layout_marginTop="5dp"
+                    />
+
+                <TextView
+                    android:id="@+id/listEventNotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/theme_notes"
+                    android:textSize="8pt"
+                    android:drawablePadding="10dp"
+                    android:text="Notes"
+                    android:layout_marginTop="5dp"
+                    />
+            </LinearLayout>
+        </TableRow>
+
+
+    </TableLayout>
+</LinearLayout>
