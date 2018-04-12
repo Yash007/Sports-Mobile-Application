@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondryColor"
+    android:padding="10dp"
+    android:elevation="10dp"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:text="@string/changeName"
+        android:textSize="12pt"
+        android:gravity="left"
+        android:paddingBottom="10dp"
+        />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:padding="10dp"
+            >
+
+            <EditText
+                android:id="@+id/dialogFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:hint="@string/firstName"
+                android:background="@drawable/edit_text_dialog_design"
+                android:theme="@style/editText"
+                android:drawableLeft="@drawable/theme_user"
+                android:textColor="@color/colorText"
+                />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:padding="10dp"
+            >
+
+            <EditText
+                android:id="@+id/dialogLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:hint="@string/lastName"
+                android:background="@drawable/edit_text_dialog_design"
+                android:theme="@style/editText"
+                android:drawableLeft="@drawable/theme_user"
+                android:textColor="@color/colorText"
+                />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="right"
+            >
+
+            <Button
+                android:id="@+id/dialogChageNameDenyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:padding="10dp"
+                android:background="@drawable/button_design"
+                android:textColor="@color/colorText"
+                android:layout_marginRight="10dp"
+                />
+
+            <Button
+                android:id="@+id/dialogChangeNameOkayButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                android:padding="10dp"
+                android:background="@drawable/button_design"
+                android:textColor="@color/colorText"
+                />
+
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
