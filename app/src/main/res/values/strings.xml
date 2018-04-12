@@ -40,6 +40,9 @@
     <string name="changeEmail">Change Email</string>
     <string name="changePhone">Change Phone</string>
     <string name="changeGender">Change Gender</string>
+    <string name="changeHeightWeight">Change Height and Weight</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
