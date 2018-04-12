@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical|center_horizontal"
     android:orientation="vertical"
-    android:background="@color/colorBackground"
+    android:background="@color/colorPrimary"
     tools:context="com.example.yash007.sportsapplication.CreateEventActivity">
 
     <ScrollView
@@ -17,13 +17,12 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical|center_horizontal">
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="10dp" >
 
             <TableRow
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:weightSum="10"
-                android:layout_marginTop="10dp">
+                android:layout_margin="10dp"
+                android:weightSum="10">
 
                 <TextView
                     android:id="@+id/textview1"
@@ -32,28 +31,31 @@
                     android:layout_weight="10"
                     android:text="Create New Event"
                     android:gravity="center"
-                    android:textSize="12pt"/>
+                    android:textSize="12pt"
+                    />
             </TableRow>
 
             <TableRow
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_margin="10dp"
                 android:weightSum="10">
 
                 <Spinner
                     android:id="@+id/eventType"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="10"
-                    android:layout_margin="10dp"
-                    android:background="@color/colorBackground"
+                    android:spinnerMode="dropdown"
                     android:popupBackground="@color/colorBackground"
-                    android:entries="@array/eventType"/>
+                    android:entries="@array/eventType"
+                    android:background="@drawable/spinner_design_event_type"
+                    android:theme="@style/editText"
+                    android:paddingLeft="50dp"
+                    android:textColor="@color/colorText"
+                    />
             </TableRow>
 
             <TableRow
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_margin="10dp"
                 android:weightSum="10">
 
                 <EditText
@@ -63,17 +65,19 @@
                     android:inputType="textPersonName"
                     android:layout_weight="10"
                     android:hint="Date"
-                    android:padding="10dp"
-                    android:layout_margin="10dp"
+                    android:background="@drawable/edit_text_design"
+                    android:theme="@style/editText"
+                    android:drawableLeft="@drawable/theme_calendar"
                     android:textColor="@color/colorText"
-                    android:textColorHint="@color/colorText"/>
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    />
 
 
             </TableRow>
 
             <TableRow
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_margin="10dp"
                 android:weightSum="10">
 
                 <EditText
@@ -83,35 +87,59 @@
                     android:inputType="textPersonName"
                     android:layout_weight="10"
                     android:hint="Time"
-                    android:padding="10dp"
-                    android:layout_margin="10dp"
+                    android:background="@drawable/edit_text_design"
+                    android:theme="@style/editText"
+                    android:drawableLeft="@drawable/theme_clock"
                     android:textColor="@color/colorText"
-                    android:textColorHint="@color/colorText"/>
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    />
             </TableRow>
 
             <TableRow
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_margin="10dp"
                 android:weightSum="10">
 
                 <EditText
                     android:id="@+id/eventVenue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
                     android:inputType="textPersonName"
                     android:layout_weight="10"
-                    android:padding="10dp"
-                    android:layout_margin="10dp"
                     android:hint="Venue"
+                    android:background="@drawable/edit_text_design"
+                    android:theme="@style/editText"
+                    android:drawableLeft="@drawable/theme_location"
                     android:textColor="@color/colorText"
-                    android:textColorHint="@color/colorText"/>
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    />
 
             </TableRow>
 
             <TableRow
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_margin="10dp"
+                android:weightSum="10">
+
+                <EditText
+                    android:id="@+id/eventAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:layout_weight="10"
+                    android:hint="Address"
+                    android:background="@drawable/edit_text_design"
+                    android:theme="@style/editText"
+                    android:drawableLeft="@drawable/theme_location"
+                    android:textColor="@color/colorText"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_margin="10dp"
                 android:weightSum="10">
 
                 <EditText
@@ -119,33 +147,33 @@
                     style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:layout_margin="10dp"
                     android:layout_weight="10"
-                    android:ems="10"
                     android:gravity="top|left"
                     android:hint="Notes"
                     android:inputType="textCapSentences|textMultiLine"
-                    android:padding="10dp"
+                    android:background="@drawable/edit_text_design"
+                    android:theme="@style/editText"
+                    android:drawableLeft="@drawable/theme_notes"
                     android:textColor="@color/colorText"
-                    android:textColorHint="@color/colorText"
-                    android:background="@color/colorBackground"/>
+                    />
 
             </TableRow>
 
             <TableRow
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center">
+                android:layout_margin="10dp"
+                android:weightSum="10"
+                android:gravity="center_vertical|center_horizontal"
+                >
                 <Button
                     android:id="@+id/button2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:text="Create"
+                    android:text="Add Event"
                     android:onClick="addEvent"
-                    android:layout_margin="10dp"
-                    android:background="@color/colorAccent"
-                    android:textColor="@color/colorText"/>
+                    android:background="@drawable/button_design"
+                    android:drawableLeft="@drawable/theme_add"
+                    android:theme="@style/button"
+                    />
             </TableRow>
         </TableLayout>
 

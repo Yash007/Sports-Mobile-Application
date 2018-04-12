@@ -1,5 +1,6 @@
 package com.example.yash007.sportsapplication;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -16,6 +17,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,10 +43,12 @@ import java.util.Locale;
 
 public class CreateEventActivity extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
     private ProgressDialog pDialog;
     Calendar myCalendar;
     Spinner eventType;
-    EditText eventDate, eventVenue, eventNotes, eventTime;
+    EditText eventDate, eventVenue, eventNotes, eventTime, eventAddress;
+    public static final String TAG="CreateTeam";
 
 
 
@@ -50,6 +60,8 @@ public class CreateEventActivity extends AppCompatActivity {
         eventVenue = (EditText) findViewById(R.id.eventVenue);
         eventNotes = (EditText) findViewById(R.id.eventNotes);
         eventTime = (EditText) findViewById(R.id.eventTime);
+        eventAddress = (EditText) findViewById(R.id.eventAddress);
+
 
         eventType = (Spinner) findViewById(R.id.eventType);
         myCalendar = Calendar.getInstance();
@@ -67,13 +79,14 @@ public class CreateEventActivity extends AppCompatActivity {
                 updateLabel();
             }
 
+
         };
 
 
         eventDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(CreateEventActivity.this, date, myCalendar.get(Calendar.YEAR),
+                new DatePickerDialog(CreateEventActivity.this,AlertDialog.THEME_DEVICE_DEFAULT_DARK, date, myCalendar.get(Calendar.YEAR),
                         myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -89,17 +102,32 @@ public class CreateEventActivity extends AppCompatActivity {
                 int minute = mcurrentTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
 
-                mTimePicker = new TimePickerDialog(CreateEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                mTimePicker = new TimePickerDialog(CreateEventActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        eventTime.setText("" + selectedHour + ":" + selectedMinute);
-                        time = selectedHour + ":" + selectedMinute;
+                        //eventTime.setText("" + selectedHour + ":" + selectedMinute);
+
+                        String hour = String.valueOf(selectedHour);
+                        String minute = String.valueOf(selectedMinute);
+                        if(hour.length() == 1)  {
+                            hour = "0" + hour;
+                        }
+                        if(minute.length() == 1)    {
+                            minute = "0" + minute;
+                        }
+                        time = hour + ":" + minute;
+                        updateTime(time);
                     }
                 }, hour, minute, true);//Yes 24 hour time
-                mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
 
-                updateTime(time);
+            }
+        });
+
+        eventVenue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openAutocompleteActivity();
             }
         });
     }
@@ -108,8 +136,10 @@ public class CreateEventActivity extends AppCompatActivity {
     public void addEvent(View view) {
         new CreateTeamPost().execute();
     }
+
+
     private void updateLabel() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "MM/dd/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CANADA);
 
         eventDate.setText(sdf.format(myCalendar.getTime()));
@@ -150,7 +180,7 @@ public class CreateEventActivity extends AppCompatActivity {
                 postDataParams.put("eDate",eventDate.getText().toString());
                 postDataParams.put("eTime",eventTime.getText().toString());
                 postDataParams.put("eType",eventType.getSelectedItem().toString());
-                postDataParams.put("eAddress","");
+                postDataParams.put("eAddress",eventAddress.getText().toString());
                 postDataParams.put("eVenue",eventVenue.getText().toString());
                 postDataParams.put("eNotes",eventNotes.getText().toString());
                 postDataParams.put("tId",teamId.toString());
@@ -255,5 +285,63 @@ public class CreateEventActivity extends AppCompatActivity {
             result.append(URLEncoder.encode(value.toString(), "UTF-8"));
         }
         return result.toString();
+    }
+
+    private void openAutocompleteActivity() {
+        try {
+            // The autocomplete activity requires Google Play Services to be available. The intent
+            // builder checks this and throws an exception if it is not the case.
+            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                    .build(this);
+            startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
+        } catch (GooglePlayServicesRepairableException e) {
+            // Indicates that Google Play Services is either not installed or not up to date. Prompt
+            // the user to correct the issue.
+            GoogleApiAvailability.getInstance().getErrorDialog(this, e.getConnectionStatusCode(),
+                    0 /* requestCode */).show();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            // Indicates that Google Play Services is not available and the problem is not easily
+            // resolvable.
+            String message = "Google Play Services is not available: " +
+                    GoogleApiAvailability.getInstance().getErrorString(e.errorCode);
+
+            Log.e(TAG, message);
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Called after the autocomplete activity has finished to return its result.
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Check that the result was from the autocomplete widget.
+        if (requestCode == REQUEST_CODE_AUTOCOMPLETE) {
+            if (resultCode == RESULT_OK) {
+                // Get the user's selected place from the Intent.
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                Log.i(TAG, "Place Selected: " + place.getName());
+
+                // Format the place's details and display them in the TextView.
+                eventVenue.setText(place.getName().toString().trim());
+                eventAddress.setText(place.getAddress().toString().trim());
+
+                // Display attributions if required.
+                CharSequence attributions = place.getAttributions();
+//                if (!TextUtils.isEmpty(attributions)) {
+//                    mPlaceAttribution.setText(Html.fromHtml(attributions.toString()));
+//                } else {
+//                    mPlaceAttribution.setText("");
+//                }
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                Log.e(TAG, "Error: Status = " + status.toString());
+            } else if (resultCode == RESULT_CANCELED) {
+                // Indicates that the activity closed before a selection was made. For example if
+                // the user pressed the back button.
+            }
+        }
     }
 }

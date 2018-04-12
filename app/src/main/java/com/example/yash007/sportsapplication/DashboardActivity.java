@@ -82,6 +82,8 @@ public class DashboardActivity extends AppCompatActivity {
 
         new GetTeams().execute();
 
+        //Toast.makeText(DashboardActivity.this,USER_ID,Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

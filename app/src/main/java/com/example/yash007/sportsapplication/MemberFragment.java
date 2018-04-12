@@ -67,7 +67,7 @@ public class MemberFragment extends android.support.v4.app.Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             // Showing progress dialog
-            pDialog = new ProgressDialog(context);
+            pDialog = new ProgressDialog(context,R.style.AppCompatAlertDialogStyle);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
