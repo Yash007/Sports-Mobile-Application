@@ -1,6 +1,7 @@
 package com.example.yash007.sportsapplication;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -12,11 +13,16 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
+
+import java.sql.BatchUpdateException;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -24,6 +30,11 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView userCardPhone, userCardGender, userCardStatus, userCardEmailNotification;
     private ImageView userEmailImageButton;
     private ImageView userCallImageButton;
+
+    public SharedPreferences sharedPreferences;
+
+    //shared prefs variable
+    public String firstName, lastName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +53,10 @@ public class ProfileActivity extends AppCompatActivity {
         userEmailImageButton = (ImageView) findViewById(R.id.userEmailImageButton);
         userCallImageButton = (ImageView) findViewById(R.id.userCallImageButton);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
+
+        firstName = sharedPreferences.getString("pFirstName","John");
+        lastName = sharedPreferences.getString("pLastName","Doe");
 
         userProfileName.setText(sharedPreferences.getString("pFirstName", "John") + " " + sharedPreferences.getString("pLastName", " Doe"));
         userCardEmail.setText(sharedPreferences.getString("pEmail","johndoe@gmail.com"));
@@ -83,6 +97,43 @@ public class ProfileActivity extends AppCompatActivity {
                 } else {
                     startActivity(intent);
                 }
+            }
+        });
+
+
+        userProfileName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Dialog dialog = new Dialog(ProfileActivity.this);
+
+                dialog.setContentView(R.layout.dialog_change_name);
+                EditText firstNameEdit = (EditText) dialog.findViewById(R.id.dialogFirstName);
+                EditText lastNameEdit = (EditText) dialog.findViewById(R.id.dialogLastName);
+
+                firstNameEdit.setText(firstName.toString().trim());
+                lastNameEdit.setText(lastName.toString().trim());
+
+                Button cancel = (Button) dialog.findViewById(R.id.dialogChangeNameCancelButton);
+                Button okaye = (Button) dialog.findViewById(R.id.dialogChangeNameOkayButton);
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                okaye.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        //API Code will be here
+                    }
+                });
+
+                dialog.getWindow().getAttributes().width = LinearLayout.LayoutParams.MATCH_PARENT;
+                dialog.show();
             }
         });
     }

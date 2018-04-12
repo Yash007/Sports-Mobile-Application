@@ -162,6 +162,7 @@
                     </TableLayout>
 
                     <ImageView
+                        android:id="@+id/openChangeEmail"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:layout_weight="1"
@@ -222,6 +223,7 @@
                     </TableLayout>
 
                     <ImageView
+                        android:id="@+id/openChangePhone"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:layout_weight="1"
@@ -282,6 +284,7 @@
                     </TableLayout>
 
                     <ImageView
+                        android:id="@+id/openChangeGender"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:layout_weight="1"
