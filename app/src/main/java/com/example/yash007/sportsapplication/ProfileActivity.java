@@ -36,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
     public SharedPreferences sharedPreferences;
 
     //shared prefs variable
-    public String firstName, lastName, email;
+    public String firstName, lastName, email, phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
         firstName = sharedPreferences.getString("pFirstName","John");
         lastName = sharedPreferences.getString("pLastName","Doe");
         email = sharedPreferences.getString("pEmail","johnDoe@gmail.com");
+        phone = sharedPreferences.getString("pPhone","");
 
         userProfileName.setText(sharedPreferences.getString("pFirstName", "John") + " " + sharedPreferences.getString("pLastName", " Doe"));
         userCardEmail.setText(sharedPreferences.getString("pEmail","johndoe@gmail.com"));
@@ -155,6 +156,38 @@ public class ProfileActivity extends AppCompatActivity {
 
                 Button cancel = (Button) dialog.findViewById(R.id.dialogChangeEmailCancelButton);
                 Button okay = (Button) dialog.findViewById(R.id.dialogChangeEmailOkayButton);
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                okay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        //API Code will be here
+                    }
+                });
+
+                dialog.getWindow().getAttributes().width = LinearLayout.LayoutParams.MATCH_PARENT;
+                dialog.show();
+            }
+        });
+
+        openChangePhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(ProfileActivity.this);
+                dialog.setContentView(R.layout.dialog_change_phone);
+
+                EditText phoneEdit = (EditText) dialog.findViewById(R.id.dialogPhone);
+                phoneEdit.setText(phone.toString().trim());
+
+                Button cancel = (Button) dialog.findViewById(R.id.dialogChangePhoneCancelButton);
+                Button okay = (Button) dialog.findViewById(R.id.dialogChangePhoneOkayButton);
 
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override

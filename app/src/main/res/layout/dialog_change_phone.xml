@@ -40,7 +40,7 @@
             >
 
             <EditText
-                android:id="@+id/dialogEmail"
+                android:id="@+id/dialogPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -68,7 +68,7 @@
             >
 
             <Button
-                android:id="@+id/dialogChagePhoneDenyButton"
+                android:id="@+id/dialogChangePhoneCancelButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
