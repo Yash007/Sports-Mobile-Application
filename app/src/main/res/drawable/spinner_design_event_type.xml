@@ -5,14 +5,14 @@
             <item android:gravity="left" android:width="100dp"
                 android:end="200dp">
                 <shape>
-                    <solid android:color="@color/colorBackground">
+                    <solid android:color="@color/secondryColor">
 
                     </solid>
                 </shape>
             </item>
             <item android:gravity="right" android:start="0dp">
                 <shape>
-                    <solid android:color="@color/colorBackground">
+                    <solid android:color="@color/secondryColor">
 
                     </solid>
                 </shape>
