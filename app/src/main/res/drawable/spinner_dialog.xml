@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list android:opacity="transparent">
+            <item android:gravity="left" android:width="100dp"
+                android:end="200dp">
+                <shape>
+                    <solid android:color="@color/black">
+
+                    </solid>
+                </shape>
+            </item>
+            <item android:gravity="right" android:start="0dp">
+                <shape>
+                    <solid android:color="@color/black">
+
+                    </solid>
+                </shape>
+            </item>
+            <item android:width="60dp" android:height="60dp">
+                <bitmap android:src="@drawable/theme_gender" android:gravity="center"/>
+            </item>
+        </layer-list>
+    </item>
+</selector>
