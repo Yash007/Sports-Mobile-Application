@@ -31,10 +31,12 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView userEmailImageButton;
     private ImageView userCallImageButton;
 
+    private ImageView openChangeEmail, openChangePhone, openChangeGender;
+
     public SharedPreferences sharedPreferences;
 
     //shared prefs variable
-    public String firstName, lastName;
+    public String firstName, lastName, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +55,15 @@ public class ProfileActivity extends AppCompatActivity {
         userEmailImageButton = (ImageView) findViewById(R.id.userEmailImageButton);
         userCallImageButton = (ImageView) findViewById(R.id.userCallImageButton);
 
+        openChangeEmail = (ImageView) findViewById(R.id.openChangeEmail);
+        openChangePhone = (ImageView) findViewById(R.id.openChangePhone);
+        openChangeGender = (ImageView) findViewById(R.id.openChangeGender);
+
         sharedPreferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
 
         firstName = sharedPreferences.getString("pFirstName","John");
         lastName = sharedPreferences.getString("pLastName","Doe");
+        email = sharedPreferences.getString("pEmail","johnDoe@gmail.com");
 
         userProfileName.setText(sharedPreferences.getString("pFirstName", "John") + " " + sharedPreferences.getString("pLastName", " Doe"));
         userCardEmail.setText(sharedPreferences.getString("pEmail","johndoe@gmail.com"));
@@ -125,6 +132,38 @@ public class ProfileActivity extends AppCompatActivity {
                 });
 
                 okaye.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        //API Code will be here
+                    }
+                });
+
+                dialog.getWindow().getAttributes().width = LinearLayout.LayoutParams.MATCH_PARENT;
+                dialog.show();
+            }
+        });
+
+        openChangeEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(ProfileActivity.this);
+                dialog.setContentView(R.layout.dialog_change_email);
+
+                EditText emailEdit = (EditText) dialog.findViewById(R.id.dialogEmail);
+                emailEdit.setText(email.toString().trim());
+
+                Button cancel = (Button) dialog.findViewById(R.id.dialogChangeEmailCancelButton);
+                Button okay = (Button) dialog.findViewById(R.id.dialogChangeEmailOkayButton);
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                okay.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         dialog.dismiss();
