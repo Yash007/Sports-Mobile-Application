@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -31,12 +32,12 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView userEmailImageButton;
     private ImageView userCallImageButton;
 
-    private ImageView openChangeEmail, openChangePhone, openChangeGender;
+    private ImageView openChangeEmail, openChangePhone;
 
     public SharedPreferences sharedPreferences;
 
     //shared prefs variable
-    public String firstName, lastName, email, phone;
+    public String firstName, lastName, email, phone, height, weight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         openChangeEmail = (ImageView) findViewById(R.id.openChangeEmail);
         openChangePhone = (ImageView) findViewById(R.id.openChangePhone);
-        openChangeGender = (ImageView) findViewById(R.id.openChangeGender);
 
         sharedPreferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
 
