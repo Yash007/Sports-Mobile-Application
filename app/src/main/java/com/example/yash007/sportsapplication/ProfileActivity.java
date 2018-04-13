@@ -275,8 +275,8 @@ public class ProfileActivity extends AppCompatActivity {
                 final Dialog dialog = new Dialog(ProfileActivity.this);
                 dialog.setContentView(R.layout.dialog_change_height);
 
-                EditText height = (EditText) dialog.findViewById(R.id.dialogHeight);
-
+                EditText heightEdit = (EditText) dialog.findViewById(R.id.dialogHeight);
+                heightEdit.setText(height.toString().trim());
                 Button cancel = (Button) dialog.findViewById(R.id.dialogChangeHeightCancelButton);
                 Button okay = (Button) dialog.findViewById(R.id.dialogChangeHeightOkayButton);
 
@@ -293,7 +293,7 @@ public class ProfileActivity extends AppCompatActivity {
                         dialog.dismiss();
                         //API Code will be here
                         String[] arguments = new String[1];
-                        arguments[0] = height.getText().toString().trim();
+                        arguments[0] = heightEdit.getText().toString().trim();
 
                         new ApiController(ProfileActivity.this, "Height", arguments);
                     }
@@ -311,7 +311,8 @@ public class ProfileActivity extends AppCompatActivity {
                 final Dialog dialog = new Dialog(ProfileActivity.this);
                 dialog.setContentView(R.layout.dialog_change_weight);
 
-                EditText weight = (EditText) dialog.findViewById(R.id.dialogWeight);
+                EditText weightEdit = (EditText) dialog.findViewById(R.id.dialogWeight);
+                weightEdit.setText(weight.toString().trim());
 
                 Button cancel = (Button) dialog.findViewById(R.id.dialogChangeWeightCancelButton);
                 Button okay = (Button) dialog.findViewById(R.id.dialogChangeWeightOkayButton);
@@ -329,7 +330,7 @@ public class ProfileActivity extends AppCompatActivity {
                         dialog.dismiss();
                         //API Code will be here
                         String[] arguments = new String[1];
-                        arguments[0] = weight.getText().toString().trim();
+                        arguments[0] = weightEdit.getText().toString().trim();
 
                         new ApiController(ProfileActivity.this, "Weight", arguments);
                     }
