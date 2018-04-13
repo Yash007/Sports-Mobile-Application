@@ -155,6 +155,7 @@ public class ProfileActivity extends AppCompatActivity {
                         arguments[1] = lastNameEdit.getText().toString().trim();
 
                         new ApiController(ProfileActivity.this, "Name", arguments);
+                        updateValues();
                     }
                 });
 
@@ -347,5 +348,23 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void openChangePassword(View view)   {
         startActivity(new Intent(ProfileActivity.this, ChangePasswordActivity.class ));
+    }
+
+    public void updateValues()  {
+        sharedPreferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
+        userProfileName.setText(sharedPreferences.getString("pFirstName", "John") + " " + sharedPreferences.getString("pLastName", " Doe"));
+        userCardEmail.setText(sharedPreferences.getString("pEmail","johndoe@gmail.com"));
+        userCardPhone.setText(sharedPreferences.getString("pPhone","+1(647)920-7670"));
+        Boolean auth = sharedPreferences.getBoolean("pAuthenticated",false);
+        if(auth == false)   {
+            userCardStatus.setText("Not authorized");
+        }
+        else    {
+            userCardStatus.setText("Authenticated");
+        }
+
+        userCardDob.setText(sharedPreferences.getString("pDob","").toString().trim());
+        userCardHeight.setText(sharedPreferences.getString("pHeight","").toString().trim());
+        userCardWeight.setText(sharedPreferences.getString("pWeight","").toString().trim());
     }
 }

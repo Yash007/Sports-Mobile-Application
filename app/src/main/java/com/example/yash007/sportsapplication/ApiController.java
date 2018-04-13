@@ -23,18 +23,19 @@ import java.util.Iterator;
 public class ApiController {
 
     ProgressDialog pDialog;
-    private Context context;
+    private ProfileActivity context;
     private String className;
     private String[] arguments;
     private SharedPreferences preferences;
     private SharedPreferences.Editor prefs;
 
-    public ApiController(Context context, String className, String[] arguments) {
+    public ApiController(ProfileActivity context, String className, String[] arguments) {
         this.context = context;
         this.className = className;
         this.arguments = arguments;
 
         doClassCall();
+
     }
 
 
@@ -44,11 +45,11 @@ public class ApiController {
 
     private class ApiClassHandler extends AsyncTask<String, Void, String> {
 
-        private Context context1;
+        private ProfileActivity context1;
         private String className1;
         private String[] arguments1;
 
-        private ApiClassHandler(Context context1, String className1, String[] arguments1)  {
+        private ApiClassHandler(ProfileActivity context1, String className1, String[] arguments1)  {
             this.context1 = context1;
             this.className1 = className1;
             this.arguments1 = arguments1;
@@ -192,11 +193,14 @@ public class ApiController {
                     prefs.commit();
                     Toast.makeText(context1, "Weight has been changed successfully.", Toast.LENGTH_LONG).show();
                 }
+
+                context1.updateValues();
+
+
             }
             else    {
                 Toast.makeText(context1,status.toString(),Toast.LENGTH_LONG).show();
             }
-
 
         }
     }
