@@ -310,7 +310,7 @@ public class ProfileActivity extends AppCompatActivity {
                 final Dialog dialog = new Dialog(ProfileActivity.this);
                 dialog.setContentView(R.layout.dialog_change_weight);
 
-                EditText height = (EditText) dialog.findViewById(R.id.dialogHeight);
+                EditText weight = (EditText) dialog.findViewById(R.id.dialogWeight);
 
                 Button cancel = (Button) dialog.findViewById(R.id.dialogChangeWeightCancelButton);
                 Button okay = (Button) dialog.findViewById(R.id.dialogChangeWeightOkayButton);
@@ -327,6 +327,10 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         dialog.dismiss();
                         //API Code will be here
+                        String[] arguments = new String[1];
+                        arguments[0] = weight.getText().toString().trim();
+
+                        new ApiController(ProfileActivity.this, "Weight", arguments);
                     }
                 });
 

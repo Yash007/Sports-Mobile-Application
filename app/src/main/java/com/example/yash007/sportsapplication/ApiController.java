@@ -19,20 +19,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Iterator;
-import java.util.Map;
-
-/**
- * Created by yash007 on 2018-04-13.
- */
 
 public class ApiController {
 
     ProgressDialog pDialog;
-    Context context;
-    String className;
-    String[] arguments;
-    SharedPreferences preferences;
-    SharedPreferences.Editor prefs;
+    private Context context;
+    private String className;
+    private String[] arguments;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor prefs;
 
     public ApiController(Context context, String className, String[] arguments) {
         this.context = context;
@@ -43,17 +38,17 @@ public class ApiController {
     }
 
 
-    public void doClassCall()   {
+    private void doClassCall()   {
         new ApiClassHandler(context, className, arguments).execute();
     }
 
-    public class ApiClassHandler extends AsyncTask<String, Void, String> {
+    private class ApiClassHandler extends AsyncTask<String, Void, String> {
 
-        public Context context1;
-        public String className1;
-        public String[] arguments1;
+        private Context context1;
+        private String className1;
+        private String[] arguments1;
 
-        public ApiClassHandler(Context context1, String className1, String[] arguments1)  {
+        private ApiClassHandler(Context context1, String className1, String[] arguments1)  {
             this.context1 = context1;
             this.className1 = className1;
             this.arguments1 = arguments1;
@@ -98,6 +93,12 @@ public class ApiController {
                     Log.d("URL",url.toString());
 
                     postDataParams.put("pHeight",arguments1[0].toString().trim());
+                }
+                else if(className1.equals("Weight")) {
+                    url = new URL(Config.webUrl+"player/"+id+"/weight");
+                    Log.d("URL",url.toString());
+
+                    postDataParams.put("pWeight",arguments1[0].toString().trim());
                 }
 
 
@@ -185,6 +186,11 @@ public class ApiController {
                     prefs.putString("pHeight", arguments1[0].toString().trim());
                     prefs.commit();
                     Toast.makeText(context1, "Height has been changed successfully.", Toast.LENGTH_LONG).show();
+                }
+                else if(className1.equals("Weight")) {
+                    prefs.putString("pWeight", arguments1[0].toString().trim());
+                    prefs.commit();
+                    Toast.makeText(context1, "Weight has been changed successfully.", Toast.LENGTH_LONG).show();
                 }
             }
             else    {
