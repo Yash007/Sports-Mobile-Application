@@ -2,8 +2,10 @@ package com.example.yash007.sportsapplication;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -101,6 +103,14 @@ public class ApiController {
 
                     postDataParams.put("pWeight",arguments1[0].toString().trim());
                 }
+                else if(className1.equals("Password"))  {
+                    url = new URL(Config.webUrl+"player/"+id+"/password");
+                    Log.d("URL",url.toString());
+
+                    postDataParams.put("pEmail",arguments1[0]);
+                    postDataParams.put("pPassword", arguments1[1]);
+                    postDataParams.put("newPassword",arguments1[2]);
+                }
 
 
                 Log.e("params",postDataParams.toString());
@@ -193,6 +203,14 @@ public class ApiController {
                         prefs.putString("pWeight", arguments1[0]);
                         prefs.commit();
                         Toast.makeText(context1, "Weight has been changed successfully.", Toast.LENGTH_LONG).show();
+                        break;
+                    case "Password":
+                        prefs.putString("pPassword", arguments1[2]);
+                        prefs.commit();
+                        Toast.makeText(context1, "Password has been changed successfully.", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(context1, MainActivity.class);
+                        context1.startActivity(intent);
+                        ((AppCompatActivity) context1).finish();
                         break;
                 }
                 context1.updateValues();

@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -367,12 +368,25 @@ public class ProfileActivity extends AppCompatActivity {
                 okay.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        dialog.dismiss();
-                        //API Code will be here
-                        String[] arguments = new String[1];
-                        //arguments[0] = .getText().toString().trim();
 
-                        new ApiController(ProfileActivity.this, "Height", arguments);
+                        String newPassword, confirmPassword;
+                        newPassword = newPasswordEdit.getText().toString().trim();
+                        confirmPassword = confirmPasswordEdit.getText().toString().trim();
+
+                        if(newPassword.equals(confirmPassword)) {
+                            dialog.dismiss();
+                            //API Code will be here
+                            String[] arguments = new String[3];
+                            arguments[0] = email;
+                            arguments[1] = oldPasswordEdit.getText().toString().trim();
+                            arguments[2] = newPassword;
+
+                            new ApiController(ProfileActivity.this, "Password", arguments);
+                        }
+                        else    {
+                            Toast.makeText(ProfileActivity.this, "New and Confirm password must be same", Toast.LENGTH_LONG).show();
+                        }
+
                     }
                 });
 
