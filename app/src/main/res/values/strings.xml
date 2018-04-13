@@ -46,6 +46,7 @@
     <string name="dob">Date of birth</string>
     <string name="changeWeight">Change Weight</string>
     <string name="changeHeight">Change Height</string>
+    <string name="changeDob">Change Date of Birth</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
