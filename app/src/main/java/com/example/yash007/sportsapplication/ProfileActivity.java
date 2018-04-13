@@ -27,17 +27,17 @@ import java.sql.BatchUpdateException;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private TextView userProfileName, userProfileAddress, userCardEmail;
+    private TextView userProfileName, userProfileAddress, userCardEmail, userCardDob, userCardHeight, userCardWeight;
     private TextView userCardPhone, userCardGender, userCardStatus, userCardEmailNotification;
     private ImageView userEmailImageButton;
     private ImageView userCallImageButton;
 
-    private ImageView openChangeEmail, openChangePhone;
+    private ImageView openChangeEmail, openChangePhone, openChangeDob, openChangeHeight, openChangeWeight;
 
     public SharedPreferences sharedPreferences;
 
     //shared prefs variable
-    public String firstName, lastName, email, phone, height, weight;
+    public String firstName, lastName, email, phone, height, weight, dob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +52,18 @@ public class ProfileActivity extends AppCompatActivity {
         userCardGender = (TextView) findViewById(R.id.userCardGender);
         userCardStatus = (TextView) findViewById(R.id.userCardStatus);
         userCardEmailNotification = (TextView) findViewById(R.id.userCardEmailNot);
+        userCardDob = (TextView) findViewById(R.id.userCardDob);
+        userCardHeight = (TextView) findViewById(R.id.userCardHeight);
+        userCardWeight = (TextView) findViewById(R.id.userCardWeight);
 
         userEmailImageButton = (ImageView) findViewById(R.id.userEmailImageButton);
         userCallImageButton = (ImageView) findViewById(R.id.userCallImageButton);
 
         openChangeEmail = (ImageView) findViewById(R.id.openChangeEmail);
         openChangePhone = (ImageView) findViewById(R.id.openChangePhone);
+        openChangeDob = (ImageView) findViewById(R.id.openChangeDob);
+        openChangeHeight = (ImageView) findViewById(R.id.openChangeHeight);
+        openChangeWeight = (ImageView) findViewById(R.id.openChangeWeight);
 
         sharedPreferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
 
@@ -65,6 +71,12 @@ public class ProfileActivity extends AppCompatActivity {
         lastName = sharedPreferences.getString("pLastName","Doe");
         email = sharedPreferences.getString("pEmail","johnDoe@gmail.com");
         phone = sharedPreferences.getString("pPhone","");
+        height = sharedPreferences.getString("pHeight","");
+        weight = sharedPreferences.getString("pWeight","");
+        dob = sharedPreferences.getString("pDob","");
+
+
+
 
         userProfileName.setText(sharedPreferences.getString("pFirstName", "John") + " " + sharedPreferences.getString("pLastName", " Doe"));
         userCardEmail.setText(sharedPreferences.getString("pEmail","johndoe@gmail.com"));
@@ -76,6 +88,10 @@ public class ProfileActivity extends AppCompatActivity {
         else    {
             userCardStatus.setText("Authenticated");
         }
+
+        userCardDob.setText(sharedPreferences.getString("pDob","").toString().trim());
+        userCardHeight.setText(sharedPreferences.getString("pHeight","").toString().trim());
+        userCardWeight.setText(sharedPreferences.getString("pWeight","").toString().trim());
 
         userEmailImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
