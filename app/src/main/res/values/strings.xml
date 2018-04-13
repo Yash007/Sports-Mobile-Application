@@ -44,6 +44,8 @@
     <string name="height">Height</string>
     <string name="weight">Weight</string>
     <string name="dob">Date of birth</string>
+    <string name="changeWeight">Change Weight</string>
+    <string name="changeHeight">Change Height</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
