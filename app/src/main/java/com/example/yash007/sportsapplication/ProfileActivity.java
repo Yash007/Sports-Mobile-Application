@@ -366,5 +366,13 @@ public class ProfileActivity extends AppCompatActivity {
         userCardDob.setText(sharedPreferences.getString("pDob","").toString().trim());
         userCardHeight.setText(sharedPreferences.getString("pHeight","").toString().trim());
         userCardWeight.setText(sharedPreferences.getString("pWeight","").toString().trim());
+
+        firstName = sharedPreferences.getString("pFirstName","John");
+        lastName = sharedPreferences.getString("pLastName","Doe");
+        email = sharedPreferences.getString("pEmail","johnDoe@gmail.com");
+        phone = sharedPreferences.getString("pPhone","");
+        height = sharedPreferences.getString("pHeight","");
+        weight = sharedPreferences.getString("pWeight","");
+        dob = sharedPreferences.getString("pDob","");
     }
 }
