@@ -39,27 +39,23 @@ public class ApiController {
         this.className = className;
         this.arguments = arguments;
 
-        doClassCall(this.className);
+        doClassCall();
     }
 
 
-    public void doClassCall(String className)   {
-        if (className.equals("Name"))   {
-             new ChangeName(context,arguments).execute();
-        }
-        else    {
-            Log.d("API",className);
-        }
-
+    public void doClassCall()   {
+        new ApiClassHandler(context, className, arguments).execute();
     }
 
-    public class ChangeName extends AsyncTask<String, Void, String> {
+    public class ApiClassHandler extends AsyncTask<String, Void, String> {
 
         public Context context1;
+        public String className1;
         public String[] arguments1;
 
-        public ChangeName(Context context1, String[] arguments1)  {
+        public ApiClassHandler(Context context1, String className1, String[] arguments1)  {
             this.context1 = context1;
+            this.className1 = className1;
             this.arguments1 = arguments1;
         }
 
@@ -76,13 +72,22 @@ public class ApiController {
             try {
                 preferences = context1.getSharedPreferences(Config.PREF_NAME,Context.MODE_PRIVATE);
                 String id = preferences.getString("id","");
-                URL url = new URL(Config.webUrl+"player/"+id+"/name");
-                Log.d("URL",url.toString());
-
                 JSONObject postDataParams = new JSONObject();
+                URL url = null;
+                if(className1.equals("Name"))   {
+                    url = new URL(Config.webUrl+"player/"+id+"/name");
+                    Log.d("URL",url.toString());
 
-                postDataParams.put("pFirstName",arguments1[0].toString().trim());
-                postDataParams.put("pLastName",arguments1[1].toString().trim());
+                    postDataParams.put("pFirstName",arguments1[0].toString().trim());
+                    postDataParams.put("pLastName",arguments1[1].toString().trim());
+                }
+                else if(className1.equals("Email")) {
+                    url = new URL(Config.webUrl+"player/"+id+"/email");
+                    Log.d("URL",url.toString());
+
+                    postDataParams.put("pEmail",arguments1[0].toString().trim());
+                }
+
 
                 Log.e("params",postDataParams.toString());
 
@@ -147,12 +152,18 @@ public class ApiController {
 
             String temp = "Success";
             if(status.equals(temp)) {
-
                 prefs = context1.getSharedPreferences(Config.PREF_NAME, Context.MODE_PRIVATE).edit();
-                prefs.putString("pFirstName", arguments1[0].toString().trim());
-                prefs.putString("pLastName", arguments1[1].toString().trim());
-                prefs.commit();
-                Toast.makeText(context1,"Name has been changed successfully.",Toast.LENGTH_LONG).show();
+                if(className1.equals("Name")) {
+                    prefs.putString("pFirstName", arguments1[0].toString().trim());
+                    prefs.putString("pLastName", arguments1[1].toString().trim());
+                    prefs.commit();
+                    Toast.makeText(context1, "Name has been changed successfully.", Toast.LENGTH_LONG).show();
+                }
+                else if(className1.equals("Email")) {
+                    prefs.putString("pEmail", arguments1[0].toString().trim());
+                    prefs.commit();
+                    Toast.makeText(context1, "Email has been changed successfully.", Toast.LENGTH_LONG).show();
+                }
             }
             else    {
                 Toast.makeText(context1,status.toString(),Toast.LENGTH_LONG).show();

@@ -191,6 +191,11 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         dialog.dismiss();
                         //API Code will be here
+
+                        String[] arguments = new String[1];
+                        arguments[0] = emailEdit.getText().toString().trim();
+
+                        new ApiController(ProfileActivity.this, "Email", arguments);
                     }
                 });
 
