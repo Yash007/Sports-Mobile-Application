@@ -153,6 +153,12 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         dialog.dismiss();
                         //API Code will be here
+
+                        String[] arguments = new String[2];
+                        arguments[0] = firstNameEdit.getText().toString().trim();
+                        arguments[1] = lastNameEdit.getText().toString().trim();
+
+                        new ApiController(ProfileActivity.this, "Name", arguments);
                     }
                 });
 
