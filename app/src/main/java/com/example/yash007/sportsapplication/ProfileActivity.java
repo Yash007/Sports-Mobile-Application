@@ -224,6 +224,102 @@ public class ProfileActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+
+        openChangeDob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(ProfileActivity.this);
+                dialog.setContentView(R.layout.dialog_change_dob);
+
+                EditText dob = (EditText) dialog.findViewById(R.id.dialogDob);
+
+                Button cancel = (Button) dialog.findViewById(R.id.dialogChangeDobCancelButton);
+                Button okay = (Button) dialog.findViewById(R.id.dialogChangeDobOkayButton);
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                okay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        //API Code will be here
+                    }
+                });
+
+                dialog.getWindow().getAttributes().width = LinearLayout.LayoutParams.MATCH_PARENT;
+                dialog.show();
+
+            }
+        });
+
+        openChangeHeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(ProfileActivity.this);
+                dialog.setContentView(R.layout.dialog_change_height);
+
+                EditText height = (EditText) dialog.findViewById(R.id.dialogHeight);
+
+                Button cancel = (Button) dialog.findViewById(R.id.dialogChangeHeightCancelButton);
+                Button okay = (Button) dialog.findViewById(R.id.dialogChangeHeightOkayButton);
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                okay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        //API Code will be here
+                    }
+                });
+
+                dialog.getWindow().getAttributes().width = LinearLayout.LayoutParams.MATCH_PARENT;
+                dialog.show();
+
+            }
+        });
+
+        openChangeWeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(ProfileActivity.this);
+                dialog.setContentView(R.layout.dialog_change_weight);
+
+                EditText height = (EditText) dialog.findViewById(R.id.dialogHeight);
+
+                Button cancel = (Button) dialog.findViewById(R.id.dialogChangeWeightCancelButton);
+                Button okay = (Button) dialog.findViewById(R.id.dialogChangeWeightOkayButton);
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                okay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        //API Code will be here
+                    }
+                });
+
+                dialog.getWindow().getAttributes().width = LinearLayout.LayoutParams.MATCH_PARENT;
+                dialog.show();
+
+            }
+        });
     }
 
     public void openFingerPrint(View view)    {
