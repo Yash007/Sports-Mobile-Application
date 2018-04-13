@@ -167,39 +167,40 @@ public class ApiController {
             String temp = "Success";
             if(status.equals(temp)) {
                 prefs = context1.getSharedPreferences(Config.PREF_NAME, Context.MODE_PRIVATE).edit();
-                if(className1.equals("Name")) {
-                    prefs.putString("pFirstName", arguments1[0].toString().trim());
-                    prefs.putString("pLastName", arguments1[1].toString().trim());
-                    prefs.commit();
-                    Toast.makeText(context1, "Name has been changed successfully.", Toast.LENGTH_LONG).show();
+                switch (className1) {
+                    case "Name":
+                        prefs.putString("pFirstName", arguments1[0]);
+                        prefs.putString("pLastName", arguments1[1]);
+                        prefs.commit();
+                        Toast.makeText(context1, "Name has been changed successfully.", Toast.LENGTH_LONG).show();
+                        break;
+                    case "Email":
+                        prefs.putString("pEmail", arguments1[0]);
+                        prefs.commit();
+                        Toast.makeText(context1, "Email has been changed successfully.", Toast.LENGTH_LONG).show();
+                        break;
+                    case "Phone":
+                        prefs.putString("pPhone", arguments1[0]);
+                        prefs.commit();
+                        Toast.makeText(context1, "Phone has been changed successfully.", Toast.LENGTH_LONG).show();
+                        break;
+                    case "Height":
+                        prefs.putString("pHeight", arguments1[0]);
+                        prefs.commit();
+                        Toast.makeText(context1, "Height has been changed successfully.", Toast.LENGTH_LONG).show();
+                        break;
+                    case "Weight":
+                        prefs.putString("pWeight", arguments1[0]);
+                        prefs.commit();
+                        Toast.makeText(context1, "Weight has been changed successfully.", Toast.LENGTH_LONG).show();
+                        break;
                 }
-                else if(className1.equals("Email")) {
-                    prefs.putString("pEmail", arguments1[0].toString().trim());
-                    prefs.commit();
-                    Toast.makeText(context1, "Email has been changed successfully.", Toast.LENGTH_LONG).show();
-                }
-                else if(className1.equals("Phone")) {
-                    prefs.putString("pPhone", arguments1[0].toString().trim());
-                    prefs.commit();
-                    Toast.makeText(context1, "Phone has been changed successfully.", Toast.LENGTH_LONG).show();
-                }
-                else if(className1.equals("Height")) {
-                    prefs.putString("pHeight", arguments1[0].toString().trim());
-                    prefs.commit();
-                    Toast.makeText(context1, "Height has been changed successfully.", Toast.LENGTH_LONG).show();
-                }
-                else if(className1.equals("Weight")) {
-                    prefs.putString("pWeight", arguments1[0].toString().trim());
-                    prefs.commit();
-                    Toast.makeText(context1, "Weight has been changed successfully.", Toast.LENGTH_LONG).show();
-                }
-
                 context1.updateValues();
 
 
             }
             else    {
-                Toast.makeText(context1,status.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(context1,status,Toast.LENGTH_LONG).show();
             }
 
         }
