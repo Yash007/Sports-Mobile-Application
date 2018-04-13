@@ -93,6 +93,12 @@ public class ApiController {
 
                     postDataParams.put("pPhone",arguments1[0].toString().trim());
                 }
+                else if(className1.equals("Height")) {
+                    url = new URL(Config.webUrl+"player/"+id+"/height");
+                    Log.d("URL",url.toString());
+
+                    postDataParams.put("pHeight",arguments1[0].toString().trim());
+                }
 
 
                 Log.e("params",postDataParams.toString());
@@ -174,6 +180,11 @@ public class ApiController {
                     prefs.putString("pPhone", arguments1[0].toString().trim());
                     prefs.commit();
                     Toast.makeText(context1, "Phone has been changed successfully.", Toast.LENGTH_LONG).show();
+                }
+                else if(className1.equals("Height")) {
+                    prefs.putString("pHeight", arguments1[0].toString().trim());
+                    prefs.commit();
+                    Toast.makeText(context1, "Height has been changed successfully.", Toast.LENGTH_LONG).show();
                 }
             }
             else    {

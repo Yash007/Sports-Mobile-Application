@@ -28,7 +28,7 @@ import java.sql.BatchUpdateException;
 public class ProfileActivity extends AppCompatActivity {
 
     private TextView userProfileName, userProfileAddress, userCardEmail, userCardDob, userCardHeight, userCardWeight;
-    private TextView userCardPhone, userCardGender, userCardStatus, userCardEmailNotification;
+    private TextView userCardPhone, userCardStatus, userCardEmailNotification;
     private ImageView userEmailImageButton;
     private ImageView userCallImageButton;
 
@@ -49,7 +49,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         userCardEmail = (TextView) findViewById(R.id.userCardEmail);
         userCardPhone = (TextView) findViewById(R.id.userCardPhone);
-        userCardGender = (TextView) findViewById(R.id.userCardGender);
         userCardStatus = (TextView) findViewById(R.id.userCardStatus);
         userCardEmailNotification = (TextView) findViewById(R.id.userCardEmailNot);
         userCardDob = (TextView) findViewById(R.id.userCardDob);
@@ -74,9 +73,6 @@ public class ProfileActivity extends AppCompatActivity {
         height = sharedPreferences.getString("pHeight","");
         weight = sharedPreferences.getString("pWeight","");
         dob = sharedPreferences.getString("pDob","");
-
-
-
 
         userProfileName.setText(sharedPreferences.getString("pFirstName", "John") + " " + sharedPreferences.getString("pLastName", " Doe"));
         userCardEmail.setText(sharedPreferences.getString("pEmail","johndoe@gmail.com"));
@@ -295,6 +291,10 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         dialog.dismiss();
                         //API Code will be here
+                        String[] arguments = new String[1];
+                        arguments[0] = height.getText().toString().trim();
+
+                        new ApiController(ProfileActivity.this, "Height", arguments);
                     }
                 });
 
