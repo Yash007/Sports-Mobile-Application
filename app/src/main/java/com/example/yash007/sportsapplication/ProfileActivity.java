@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.media.Image;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -28,11 +29,11 @@ import java.sql.BatchUpdateException;
 public class ProfileActivity extends AppCompatActivity {
 
     private TextView userProfileName, userProfileAddress, userCardEmail, userCardDob, userCardHeight, userCardWeight;
-    private TextView userCardPhone, userCardStatus, userCardEmailNotification;
+    private TextView userCardPhone, userCardStatus;
     private ImageView userEmailImageButton;
     private ImageView userCallImageButton;
 
-    private ImageView openChangeEmail, openChangePhone, openChangeDob, openChangeHeight, openChangeWeight;
+    private ImageView openChangeEmail, openChangePhone, openChangeDob, openChangeHeight, openChangeWeight, openChangePassword;
 
     public SharedPreferences sharedPreferences;
 
@@ -50,7 +51,6 @@ public class ProfileActivity extends AppCompatActivity {
         userCardEmail = (TextView) findViewById(R.id.userCardEmail);
         userCardPhone = (TextView) findViewById(R.id.userCardPhone);
         userCardStatus = (TextView) findViewById(R.id.userCardStatus);
-        userCardEmailNotification = (TextView) findViewById(R.id.userCardEmailNot);
         userCardDob = (TextView) findViewById(R.id.userCardDob);
         userCardHeight = (TextView) findViewById(R.id.userCardHeight);
         userCardWeight = (TextView) findViewById(R.id.userCardWeight);
@@ -63,6 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
         openChangeDob = (ImageView) findViewById(R.id.openChangeDob);
         openChangeHeight = (ImageView) findViewById(R.id.openChangeHeight);
         openChangeWeight = (ImageView) findViewById(R.id.openChangeWeight);
+        openChangePassword = (ImageView) findViewById(R.id.openChangePassword);
 
         sharedPreferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
 
@@ -341,14 +342,49 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+
+
+        openChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(ProfileActivity.this);
+                dialog.setContentView(R.layout.dialog_change_password);
+
+                EditText oldPasswordEdit = (EditText) dialog.findViewById(R.id.dialogOldPassword);
+                EditText newPasswordEdit = (EditText) dialog.findViewById(R.id.dialogNewPassword);
+                EditText confirmPasswordEdit = (EditText) dialog.findViewById(R.id.dialogConfirmPassword);
+
+                Button cancel = (Button) dialog.findViewById(R.id.dialogChangePasswordCancelButton);
+                Button okay = (Button) dialog.findViewById(R.id.dialogChangePasswordOkayButton);
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                okay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        //API Code will be here
+                        String[] arguments = new String[1];
+                        //arguments[0] = .getText().toString().trim();
+
+                        new ApiController(ProfileActivity.this, "Height", arguments);
+                    }
+                });
+
+                dialog.getWindow().getAttributes().width = LinearLayout.LayoutParams.MATCH_PARENT;
+                dialog.show();
+
+            }
+        });
     }
 
     public void openFingerPrint(View view)    {
         startActivity(new Intent(ProfileActivity.this, FingerprintActivity.class));
-    }
-
-    public void openChangePassword(View view)   {
-        startActivity(new Intent(ProfileActivity.this, ChangePasswordActivity.class ));
     }
 
     public void updateValues()  {

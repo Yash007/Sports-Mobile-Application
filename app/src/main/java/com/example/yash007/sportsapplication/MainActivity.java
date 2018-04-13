@@ -464,7 +464,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
-
         @Override
         protected void onPostExecute(String result) {
             Log.d("TAG",result);
@@ -487,8 +486,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             else    {
                 Toast.makeText(getApplicationContext(),status.toString(),Toast.LENGTH_LONG).show();
             }
-
-
         }
     }
 }
