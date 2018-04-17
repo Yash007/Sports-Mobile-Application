@@ -4,8 +4,11 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/gridview_design"
     android:layout_margin="10dp"
+    android:elevation="10dp"
+    android:divider="@color/colorPrimaryDark"
+    android:dividerPadding="5dp"
     >
 
     <ImageView
@@ -23,7 +26,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="5dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         >
         <TextView
             android:layout_width="match_parent"
