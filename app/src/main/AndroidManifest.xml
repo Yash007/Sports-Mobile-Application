@@ -67,10 +67,6 @@
         <activity
             android:name=".TeamActivity"
             android:parentActivityName=".DashboardActivity" />
-        <activity
-            android:name=".ChangePasswordActivity"
-            android:label="@string/changePasswordActivity"
-            android:parentActivityName=".DashboardActivity" />
         <activity android:name=".CreateEventActivity" />
         <activity android:name=".SearchPlayerActivity"></activity>
     </application>

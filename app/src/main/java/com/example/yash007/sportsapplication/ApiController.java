@@ -214,8 +214,6 @@ public class ApiController {
                         break;
                 }
                 context1.updateValues();
-
-
             }
             else    {
                 Toast.makeText(context1,status,Toast.LENGTH_LONG).show();

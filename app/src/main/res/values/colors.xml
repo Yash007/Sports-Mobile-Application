@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#333333</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#FF0000</color>
-    <color name="colorBackground">#000000</color>
+    <color name="colorPrimary">#1E6AAF</color>
+    <color name="colorPrimaryDark">#18548C</color>
+    <color name="colorAccent">#4AC8E0</color>
+    <color name="colorBackground">#18548C</color>
     <color name="colorText">#FFFFFF</color>
+    <color name="loginButton">#4AC8E0</color>
 
-    <color name="black">#000000</color>
+    <color name="black">#18548C</color>
 
-    <color name="secondryColor">#333333</color>
-    <color name="thirdColor">#222222</color>
+    <color name="secondryColor">#4AC8E0</color>
+    <color name="thirdColor">#18548C</color>
 
 </resources>

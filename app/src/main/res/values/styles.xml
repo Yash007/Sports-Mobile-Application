@@ -73,6 +73,5 @@
         <item name="android:textColor">@color/colorText</item>
         <item name="android:layout_gravity">center_vertical|center_horizontal</item>
         <item name="android:textSize">8pt</item>
-        <item name="android:width">100dp</item>
     </style>
 </resources>
