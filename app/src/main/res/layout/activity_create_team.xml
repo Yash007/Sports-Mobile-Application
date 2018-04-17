@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.yash007.sportsapplication.CreateTeamActivity"
     android:orientation="vertical"
-    android:background="@color/colorPrimary">
+    android:background="@drawable/gradient">
 
     <TableLayout
         android:layout_width="match_parent"
