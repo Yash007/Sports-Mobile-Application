@@ -4,161 +4,141 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.yash007.sportsapplication.SignupActivity"
     android:background="@drawable/gradient"
-    >
-    <LinearLayout
+    tools:context="com.example.yash007.sportsapplication.SignupActivity">
+
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:gravity="center_vertical|center_horizontal">
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|center_horizontal"
-            android:layout_gravity="center_horizontal|center_vertical"
-            >
+        <TableRow
+            android:layout_margin="10dp"
+            android:weightSum="10">
 
-            <TableRow
+            <EditText
+                android:id="@+id/firstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:background="@drawable/edit_text_design"
+                android:drawableLeft="@drawable/theme_user"
+                android:hint="@string/firstName"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorText"
+                android:theme="@style/editText" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="10dp"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/lastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:background="@drawable/edit_text_design"
+                android:drawableLeft="@drawable/theme_user"
+                android:hint="@string/lastName"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorText"
+                android:theme="@style/editText" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="10dp"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:background="@drawable/edit_text_design"
+                android:drawableLeft="@drawable/theme_email"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorText"
+                android:theme="@style/editText" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="10dp"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:background="@drawable/edit_text_design"
+                android:drawableLeft="@drawable/theme_phone"
+                android:hint="@string/phoneNumber"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:textColor="@color/colorText"
+                android:theme="@style/editText" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="10dp"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:background="@drawable/edit_text_design"
+                android:drawableLeft="@drawable/theme_password"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:textColor="@color/colorText"
+                android:theme="@style/editText" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="10dp"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/confirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:background="@drawable/edit_text_design"
+                android:drawableLeft="@drawable/theme_password"
+                android:hint="@string/confirmPassword"
+                android:inputType="textPassword"
+                android:textColor="@color/colorText"
+                android:theme="@style/editText" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="10dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:weightSum="10">
+
+            <Button
+                android:id="@+id/signUpButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:weightSum="10"
-                >
-                <EditText
-                    android:id="@+id/firstName"
-                    android:layout_weight="10"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:hint="@string/firstName"
-                    android:background="@drawable/edit_text_design"
-                    android:theme="@style/editText"
-                    android:drawableLeft="@drawable/theme_user"
-                    android:textColor="@color/colorText"
-                    />
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_margin="10dp"
-                android:weightSum="10"
-                >
-
-                <EditText
-                    android:id="@+id/lastName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:layout_weight="10"
-                    android:hint="@string/lastName"
-                    android:background="@drawable/edit_text_design"
-                    android:theme="@style/editText"
-                    android:drawableLeft="@drawable/theme_user"
-                    android:textColor="@color/colorText"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_margin="10dp"
-                android:weightSum="10"
-                >
-
-                <EditText
-                    android:id="@+id/email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:layout_weight="10"
-                    android:hint="@string/email"
-                    android:background="@drawable/edit_text_design"
-                    android:theme="@style/editText"
-                    android:drawableLeft="@drawable/theme_email"
-                    android:textColor="@color/colorText"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_margin="10dp"
-                android:weightSum="10"
-                >
-
-                <EditText
-                    android:id="@+id/phoneNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:maxLength="10"
-                    android:layout_weight="10"
-                    android:hint="@string/phoneNumber"
-                    android:background="@drawable/edit_text_design"
-                    android:theme="@style/editText"
-                    android:drawableLeft="@drawable/theme_phone"
-                    android:textColor="@color/colorText"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_margin="10dp"
-                android:weightSum="10"
-                >
-
-                <EditText
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:layout_weight="10"
-                    android:hint="@string/password"
-                    android:background="@drawable/edit_text_design"
-                    android:theme="@style/editText"
-                    android:drawableLeft="@drawable/theme_password"
-                    android:textColor="@color/colorText"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_margin="10dp"
-                android:weightSum="10"
-                >
-
-                <EditText
-                    android:id="@+id/confirmPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:layout_weight="10"
-                    android:hint="@string/confirmPassword"
-                    android:background="@drawable/edit_text_design"
-                    android:theme="@style/editText"
-                    android:drawableLeft="@drawable/theme_password"
-                    android:textColor="@color/colorText"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_margin="10dp"
-                android:weightSum="10"
-                android:gravity="center_horizontal|center_vertical"
-                >
-                <Button
-                    android:id="@+id/signUpButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="@string/signUp"
-                    android:layout_margin="10dp"
-                    android:onClick="doSignUp"
-                    android:background="@drawable/button_design"
-                    android:theme="@style/button"
-                    android:drawableLeft="@drawable/theme_unlock"
-                    />
-            </TableRow>
-        </TableLayout>
-    </LinearLayout>
+                android:background="@drawable/button_design"
+                android:drawableLeft="@drawable/theme_unlock"
+                android:onClick="doSignUp"
+                android:text="@string/signUp"
+                android:textSize="20sp"
+                android:theme="@style/button" />
+        </TableRow>
+    </TableLayout>
 </ScrollView>

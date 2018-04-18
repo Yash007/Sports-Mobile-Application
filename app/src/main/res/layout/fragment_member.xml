@@ -2,18 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@drawable/gradient"
     tools:context="com.example.yash007.sportsapplication.MemberFragment">
 
     <ListView
+        android:id="@+id/playerList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/playerList"
-        android:layout_margin="5dp"
-        android:dividerHeight="10dp"
-        android:elevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:divider="@color/colorBackground"
-        />
+        android:dividerHeight="10dp"
+        android:elevation="10dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addPlayerButton"
