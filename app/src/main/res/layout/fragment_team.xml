@@ -1,9 +1,111 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     tools:context="com.example.yash007.sportsapplication.TeamFragment">
 
-    
-</RelativeLayout>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TableRow
+            android:gravity="center_horizontal|center_vertical"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp">
+
+            <ImageView
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:padding="10dp"
+                android:src="@drawable/team_profile" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/table_row_design"
+            android:elevation="3dp">
+
+            <TextView
+                android:id="@+id/teamFragmentName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/theme_users"
+                android:drawablePadding="10dp"
+                android:paddingLeft="10dp"
+                android:text="TEAM NAME"
+                android:textColor="@color/colorText"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/table_row_design"
+            android:elevation="3dp">
+
+            <TextView
+                android:id="@+id/teamFragmentSports"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/theme_sports"
+                android:drawablePadding="10dp"
+                android:paddingLeft="10dp"
+                android:text="TEAM SPORTS"
+                android:textColor="@color/colorText"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/table_row_design"
+            android:elevation="3dp">
+
+            <TextView
+                android:id="@+id/teamFragmentAgeGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/theme_age_group"
+                android:drawablePadding="10dp"
+                android:paddingLeft="10dp"
+                android:text="TEAM AGE GROUP"
+                android:textColor="@color/colorText"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/table_row_design"
+            android:elevation="3dp">
+
+            <TextView
+                android:id="@+id/teamFragmentGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/theme_gender"
+                android:drawablePadding="10dp"
+                android:paddingLeft="10dp"
+                android:text="TEAM GENDER"
+                android:textColor="@color/colorText"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/table_row_design"
+            android:elevation="3dp">
+
+            <TextView
+                android:id="@+id/teamFragmentLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/theme_location"
+                android:drawablePadding="10dp"
+                android:paddingLeft="10dp"
+                android:text="TEAM LOCATION"
+                android:textColor="@color/colorText"
+                android:textSize="18sp" />
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>
