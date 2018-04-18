@@ -64,7 +64,67 @@ public class TeamGridViewAdapter extends ArrayAdapter<GridItem> {
         GridItem item = mGridData.get(position);
         holder.titleTextView.setText(Html.fromHtml(item.getTitle()));
 
-        holder.imageView.setImageResource(R.drawable.team_grid);
+        switch (item.getImage())    {
+            case "cricket":
+                holder.imageView.setImageResource(R.drawable.cricket);
+                break;
+            case "Cricket":
+                holder.imageView.setImageResource(R.drawable.cricket);
+                break;
+            case "Badminton":
+                holder.imageView.setImageResource(R.drawable.badminton);
+                break;
+            case "Baseball":
+                holder.imageView.setImageResource(R.drawable.baseball);
+                break;
+            case "Basketball":
+                holder.imageView.setImageResource(R.drawable.basketball);
+                break;
+            case "Chess":
+                holder.imageView.setImageResource(R.drawable.chess);
+                break;
+            case "Football":
+                holder.imageView.setImageResource(R.drawable.football);
+                break;
+            case "Golf":
+                holder.imageView.setImageResource(R.drawable.golf);
+                break;
+            case "Gymnastics":
+                holder.imageView.setImageResource(R.drawable.gymnastics);
+                break;
+            case "Hockey(Ice)":
+                holder.imageView.setImageResource(R.drawable.ice_hockey);
+                break;
+            case "Hockey(Field)":
+                holder.imageView.setImageResource(R.drawable.hockey);
+                break;
+            case "Polo":
+                holder.imageView.setImageResource(R.drawable.polo);
+                break;
+            case "Water Polo":
+                holder.imageView.setImageResource(R.drawable.water);
+                break;
+            case "Soccer":
+                holder.imageView.setImageResource(R.drawable.soccer);
+                break;
+            case "Sailing":
+                holder.imageView.setImageResource(R.drawable.sailboat);
+                break;
+            case "Tennis":
+                holder.imageView.setImageResource(R.drawable.tennis);
+                break;
+            case "Rugby":
+                holder.imageView.setImageResource(R.drawable.rugby);
+                break;
+            case "Volleyball":
+                holder.imageView.setImageResource(R.drawable.volleyball);
+                break;
+            case "Wrestling":
+                holder.imageView.setImageResource(R.drawable.wrestling);
+                break;
+
+        }
+        //holder.imageView.setImageResource(R.drawable.team_grid);
         holder.ageGroupView.setText(Html.fromHtml(item.getAge()));
 
         return row;

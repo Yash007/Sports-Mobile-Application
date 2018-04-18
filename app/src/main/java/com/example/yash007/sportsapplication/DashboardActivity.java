@@ -152,7 +152,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                         String id = c.getString("_id");
                         String teamName = c.getString("tName");
-                        String teamPic = c.getString("tPic");
+                        String teamPic = c.getString("tSports");
                         String teamAge = c.getString("tAgeGroup");
 
                         // tmp hash map for single contact
