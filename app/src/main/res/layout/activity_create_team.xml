@@ -39,16 +39,16 @@
             android:layout_margin="10dp"
             android:weightSum="10">
 
-            <EditText
+            <Spinner
                 android:id="@+id/teamSports"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
                 android:layout_weight="10"
-                android:hint="@string/sport"
-                android:background="@drawable/edit_text_design"
+                android:popupBackground="@color/colorBackground"
+                android:entries="@array/sports"
+                android:background="@drawable/spinner_design_sports"
                 android:theme="@style/editText"
-                android:drawableLeft="@drawable/theme_sports"
+                android:paddingLeft="50dp"
                 android:textColor="@color/colorText"
                 />
 

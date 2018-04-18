@@ -42,8 +42,8 @@ public class CreateTeamActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
     private ProgressDialog pDialog;
-    public EditText teamName, teamSports, teamLocation;
-    public Spinner teamAgeGroup, teamGender;
+    public EditText teamName, teamLocation;
+    public Spinner teamAgeGroup, teamGender, teamSports;
     public static final String TAG="CreateTeam";
 
     private String USER_ID;
@@ -53,7 +53,7 @@ public class CreateTeamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_team);
 
         teamName = (EditText) findViewById(R.id.teamName);
-        teamSports = (EditText) findViewById(R.id.teamSports);
+        teamSports = (Spinner) findViewById(R.id.teamSports);
         teamLocation = (EditText) findViewById(R.id.teamLocation);
         teamAgeGroup = (Spinner) findViewById(R.id.teamAgeGroup);
         teamGender = (Spinner) findViewById(R.id.teamGender);
@@ -99,7 +99,7 @@ public class CreateTeamActivity extends AppCompatActivity {
                 JSONObject postDataParams = new JSONObject();
 
                 postDataParams.put("tName", teamName.getText().toString());
-                postDataParams.put("tSports", teamSports.getText().toString());
+                postDataParams.put("tSports", teamSports.getSelectedItem().toString());
                 postDataParams.put("tGender",teamGender.getSelectedItem().toString());
                 postDataParams.put("tAgeGroup",teamAgeGroup.getSelectedItem().toString());
                 postDataParams.put("tAddress",teamLocation.getText().toString());

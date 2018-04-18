@@ -106,4 +106,26 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="title_activity_create_event">CreateEventActivity</string>
+
+    <string-array name="sports">
+        <item>Sports</item>
+        <item>Badminton</item>
+        <item>Baseball</item>
+        <item>Basketball</item>
+        <item>Chess</item>
+        <item>Cricket</item>
+        <item>Football</item>
+        <item>Golf</item>
+        <item>Gymnastics</item>
+        <item>Hockey(Field)</item>
+        <item>Hockey(Ice)</item>
+        <item>Polo</item>
+        <item>Water Polo</item>
+        <item>Soccer</item>
+        <item>Sailing</item>
+        <item>Tennis</item>
+        <item>Rugby</item>
+        <item>Volleyball</item>
+        <item>Wrestling</item>
+    </string-array>
 </resources>
