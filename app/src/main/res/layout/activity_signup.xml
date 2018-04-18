@@ -138,7 +138,6 @@
                 android:drawableLeft="@drawable/theme_unlock"
                 android:onClick="doSignUp"
                 android:text="@string/signUp"
-                android:textSize="20sp"
                 android:theme="@style/button" />
         </TableRow>
     </TableLayout>
