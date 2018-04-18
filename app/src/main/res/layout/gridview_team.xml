@@ -6,15 +6,15 @@
     android:orientation="vertical"
     android:background="@drawable/gridview_design"
     android:layout_margin="10dp"
-    android:elevation="10dp"
+    android:elevation="3dp"
     android:divider="@color/colorPrimaryDark"
-    android:dividerPadding="5dp"
+    android:dividerPadding="3dp"
     >
 
     <ImageView
         android:id="@+id/teamPicGrid"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_margin="20dp"
         android:src="@drawable/team_grid"
         android:contentDescription="@string/teamName"
