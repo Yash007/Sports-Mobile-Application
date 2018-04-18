@@ -70,6 +70,7 @@
                 android:drawableLeft="@drawable/theme_unlock"
                 android:onClick="doLogin"
                 android:text="@string/login"
+                android:elevation="3dp"
                 android:textColor="@color/colorText"
                 android:theme="@style/button" />
         </TableRow>
