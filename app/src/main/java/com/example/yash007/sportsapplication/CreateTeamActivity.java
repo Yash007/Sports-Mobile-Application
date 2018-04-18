@@ -68,9 +68,6 @@ public class CreateTeamActivity extends AppCompatActivity {
             }
         });
 
-
-
-
     }
 
     public void doCreateTeam(View v)    {
@@ -236,29 +233,21 @@ public class CreateTeamActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Check that the result was from the autocomplete widget.
         if (requestCode == REQUEST_CODE_AUTOCOMPLETE) {
             if (resultCode == RESULT_OK) {
-                // Get the user's selected place from the Intent.
                 Place place = PlaceAutocomplete.getPlace(this, data);
                 Log.i(TAG, "Place Selected: " + place.getName());
 
-                // Format the place's details and display them in the TextView.
                 teamLocation.setText(place.getName().toString().trim());
 
-                // Display attributions if required.
                 CharSequence attributions = place.getAttributions();
-//                if (!TextUtils.isEmpty(attributions)) {
-//                    mPlaceAttribution.setText(Html.fromHtml(attributions.toString()));
-//                } else {
-//                    mPlaceAttribution.setText("");
-//                }
-            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+            }
+            else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 Log.e(TAG, "Error: Status = " + status.toString());
-            } else if (resultCode == RESULT_CANCELED) {
-                // Indicates that the activity closed before a selection was made. For example if
-                // the user pressed the back button.
+            }
+            else if (resultCode == RESULT_CANCELED) {
+
             }
         }
     }
