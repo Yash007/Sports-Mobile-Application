@@ -1,6 +1,7 @@
 package com.example.yash007.sportsapplication;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -57,6 +59,15 @@ public class MemberFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(context,SearchPlayerActivity.class));
+            }
+        });
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.dialog_profile);
+                dialog.show();
             }
         });
     }

@@ -2,15 +2,19 @@ package com.example.yash007.sportsapplication;
 
 import android.app.ProgressDialog;
 import android.app.SearchManager;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -30,6 +34,7 @@ public class SearchPlayerActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     private ListView lv;
     ArrayList<HashMap<String, String>> contactList;
+    Button addPlayer;
 
     String TAG = "SearchPlayerActivity";
 
@@ -42,6 +47,15 @@ public class SearchPlayerActivity extends AppCompatActivity {
         contactList = new ArrayList<>();
 
         lv = (ListView) findViewById(R.id.searchPlayerResult);
+
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
+
     }
 
     @Override
@@ -203,7 +217,7 @@ public class SearchPlayerActivity extends AppCompatActivity {
              * */
             ListAdapter adapter = new SimpleAdapter(
                     SearchPlayerActivity.this, contactList,
-                    R.layout.list_players, new String[]{"id","name", "email",
+                    R.layout.list_search_players, new String[]{"id","name", "email",
                     "mobile"}, new int[]{R.id.listPlayerId,R.id.listPlayerName,
                     R.id.listPlayerEmail, R.id.listPlayerHeightWeight});
 
@@ -211,5 +225,6 @@ public class SearchPlayerActivity extends AppCompatActivity {
         }
 
     }
+
 
 }

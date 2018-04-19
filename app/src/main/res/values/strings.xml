@@ -49,6 +49,8 @@
     <string name="changeDob">Change Date of Birth</string>
     <string name="addres">Address</string>
     <string name="bio">Bio</string>
+    <string name="add">Add</string>
+    <string name="close">Close</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

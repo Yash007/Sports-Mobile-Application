@@ -136,12 +136,10 @@ public class TeamFragment extends android.support.v4.app.Fragment {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            // Dismiss the progress dialog
+
             if (pDialog.isShowing())
                 pDialog.dismiss();
-            /**
-             * Updating parsed JSON data into ListView
-             * */
+
             teamName.setText(tempTeamName);
             teamAgeGroup.setText(tempTeamAgeGroup);
             teamGender.setText(tempTeamGender);
