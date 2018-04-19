@@ -2,6 +2,7 @@ package com.example.yash007.sportsapplication;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,12 +24,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Iterator;
+
 public class TeamEditActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
-    EditText teamName, teamLocation;
-    Spinner teamGender, teamSports, teamAgeGroup;
-    String teamId;
+    public EditText teamName, teamLocation;
+    public Spinner teamGender, teamSports, teamAgeGroup;
+    public String teamId;
 
     String TAG = "TeamEditAcitivity";
     private ProgressDialog pDialog;
@@ -206,6 +217,131 @@ public class TeamEditActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+
+    public void doUpdateTeam(View view) {
+
+    }
+
+    public class UpdateTeam extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(TeamEditActivity.this,R.style.AppCompatAlertDialogStyle);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        protected String doInBackground(String... arg0) {
+            try {
+
+
+                //URL url = new URL("https://studytutorial.in/post.php");
+                URL url = new URL(Config.webUrl+"player/"+teamId);
+
+                JSONObject postDataParams = new JSONObject();
+
+                postDataParams.put("tName", teamName.getText().toString().trim() );
+                postDataParams.put("tSports", teamSports.getSelectedItem().toString().trim());
+                postDataParams.put("tAddress", teamLocation.getText().toString().trim());
+                postDataParams.put("tPic","teamPic");
+                postDataParams.put("tAgeGroup",teamAgeGroup.getSelectedItem().toString().trim());
+                postDataParams.put("tGender",teamGender.getSelectedItem().toString().trim());
+
+                Log.e("params111",postDataParams.toString());
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(15000);
+                conn.setConnectTimeout(15000);
+                conn.setRequestMethod("PUT");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                OutputStream os = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
+                writer.write(getPostDataString(postDataParams));
+
+                writer.flush();
+                writer.close();
+                os.close();
+
+                int responseCode=conn.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader in= new BufferedReader(new
+                            InputStreamReader(
+                            conn.getInputStream()));
+
+                    StringBuffer sb = new StringBuffer("");
+                    String line="";
+
+                    while((line = in.readLine()) != null) {
+                        Log.e("+++++", "line: "+line);
+                        sb.append(line);
+                        //break;
+                    }
+                    in.close();
+                    return sb.toString();
+                }
+                else {
+                    return new String("false : "+responseCode);
+                }
+            }
+            catch(Exception e) {
+                Log.e("~~~", e.toString());
+                return new String("Exception: " + e.getMessage());
+            }
+
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.d("TAG",result);
+            String status = null;
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                status = jsonObject.getString("Status");
+                //JSONObject profile = jsonObject.
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            pDialog.dismiss();
+
+            if(status.equals("Success") == true) {
+                Toast.makeText(getApplicationContext(),"Team details has been updated.",Toast.LENGTH_LONG).show();
+
+            }
+            else    {
+                Toast.makeText(getApplicationContext(),status.toString(),Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    public String getPostDataString(JSONObject params) throws Exception {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        Iterator<String> itr = params.keys();
+        while(itr.hasNext()){
+
+            String key = itr.next();
+            Object value = params.get(key);
+
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            Log.d("TAG",result.toString());
+            result.append(URLEncoder.encode(key, "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(value.toString(), "UTF-8"));
+        }
+        return result.toString();
     }
 }
 

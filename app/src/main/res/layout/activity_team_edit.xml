@@ -121,10 +121,10 @@
                 android:id="@+id/teamCreateButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/createTeam"
-                android:onClick="doCreateTeam"
+                android:text="@string/editTeam"
+                android:onClick="doUpdateTeam"
                 android:background="@drawable/button_design"
-                android:drawableLeft="@drawable/theme_add"
+                android:drawableLeft="@drawable/theme_save"
                 android:theme="@style/button"
                 />
         </TableRow>
