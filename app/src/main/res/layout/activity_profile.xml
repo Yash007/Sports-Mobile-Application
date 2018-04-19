@@ -131,6 +131,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:paddingLeft="10dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/email_card"
                         android:layout_weight="1"
@@ -191,8 +192,9 @@
                     android:weightSum="9"
                     >
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:paddingLeft="10dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/phone_card"
                         android:layout_weight="1"
@@ -255,6 +257,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:paddingLeft="10dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/status_card"
                         android:layout_weight="1"
@@ -316,6 +319,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="30dp"
+                        android:paddingLeft="10dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/fingerprint"
                         android:layout_weight="1"
@@ -376,7 +380,8 @@
                     >
                     <ImageView
                         android:layout_width="24dp"
-                        android:layout_height="30dp"
+                        android:layout_height="24dp"
+                        android:paddingLeft="10dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/lock"
                         android:layout_weight="1"
@@ -440,7 +445,8 @@
                     >
                     <ImageView
                         android:layout_width="24dp"
-                        android:layout_height="30dp"
+                        android:layout_height="24dp"
+                        android:paddingLeft="10dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/dob"
                         android:layout_weight="1"
@@ -504,7 +510,8 @@
                     >
                     <ImageView
                         android:layout_width="24dp"
-                        android:layout_height="30dp"
+                        android:layout_height="24dp"
+                        android:paddingLeft="10dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/height"
                         android:layout_weight="1"
@@ -568,7 +575,8 @@
                     >
                     <ImageView
                         android:layout_width="24dp"
-                        android:layout_height="30dp"
+                        android:layout_height="24dp"
+                        android:paddingLeft="10dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/weight"
                         android:layout_weight="1"
@@ -631,7 +639,8 @@
                     >
                     <ImageView
                         android:layout_width="24dp"
-                        android:layout_height="30dp"
+                        android:layout_height="24dp"
+                        android:paddingLeft="10dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/theme_location"
                         android:layout_weight="1"
@@ -695,7 +704,8 @@
                     >
                     <ImageView
                         android:layout_width="24dp"
-                        android:layout_height="30dp"
+                        android:layout_height="24dp"
+                        android:paddingLeft="10dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/bio"
                         android:layout_weight="1"

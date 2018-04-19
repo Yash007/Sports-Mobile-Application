@@ -10,8 +10,7 @@
         android:layout_height="match_parent"
         android:id="@+id/eventsList"
         android:layout_margin="5dp"
-        android:dividerHeight="10dp"
-        android:divider="@color/colorBackground"
+        android:dividerHeight="5dp"
         />
 
     <android.support.design.widget.FloatingActionButton
@@ -24,6 +23,7 @@
         android:layout_marginBottom="20dp"
         android:src="@drawable/add"
         android:elevation="20dp"
+        android:background="@color/colorPrimary"
         />
 
 </RelativeLayout>

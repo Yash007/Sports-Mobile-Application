@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/list_design"
     android:padding="7dp"
     android:layout_marginBottom="7dp"
-    android:elevation="10dp"
+    android:elevation="3dp"
     android:showDividers="none"
     >
 
@@ -27,14 +27,14 @@
                 android:gravity="center_horizontal|center_vertical"
                 >
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
                     android:src="@drawable/events_calendar"
                     />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:id="@+id/listEventDate"
                     android:gravity="center_horizontal|center_vertical"
                     />
@@ -42,7 +42,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:id="@+id/listEventTime"
                     android:gravity="center_horizontal|center_vertical"
                     />
@@ -67,7 +67,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12pt"
+                    android:textSize="16sp"
                     android:text="Event Type"
                     android:id="@+id/listEventType"
                     />
@@ -77,8 +77,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/theme_location"
-                    android:textSize="8pt"
+                    android:textSize="14sp"
                     android:drawablePadding="10dp"
+                    android:maxLines="1"
                     android:text="venue"
                     android:layout_marginTop="5dp"
                     />
@@ -88,9 +89,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/theme_location"
-                    android:textSize="8pt"
+                    android:textSize="14sp"
                     android:drawablePadding="10dp"
                     android:text="Address"
+                    android:maxLines="1"
                     android:layout_marginTop="5dp"
                     />
 
@@ -99,9 +101,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/theme_notes"
-                    android:textSize="8pt"
+                    android:textSize="14sp"
                     android:drawablePadding="10dp"
                     android:text="Notes"
+                    android:maxLines="1"
                     android:layout_marginTop="5dp"
                     />
             </LinearLayout>

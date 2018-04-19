@@ -11,9 +11,8 @@
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:divider="@color/colorBackground"
-        android:dividerHeight="10dp"
-        android:elevation="10dp" />
+        android:layout_margin="5dp"
+        android:elevation="3dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addPlayerButton"
@@ -24,6 +23,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         android:src="@drawable/add"
+        android:elevation="5dp"
         />
 
 </RelativeLayout>
