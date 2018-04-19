@@ -24,10 +24,8 @@ import java.util.Iterator;
 public class FingerPrintUpdateActivity extends AppCompatActivity {
 
     private ProgressDialog pDialog;
-    public String pFirstName, pLastName, pEmail, pPassword, pPhone, pLoginType, pAddress, pBio, pAndroidId;
-    public int pHeight, pWeight;
+    public String pAndroidId;
     public String id;
-    public boolean pAuthenticated, pAccountStatus;
     String uniqueId;
 
     @Override
@@ -49,8 +47,6 @@ public class FingerPrintUpdateActivity extends AppCompatActivity {
         else    {
             Log.d("TTT","Not Matched" + status1);
         }
-
-
     }
 
     public class AddFingerPrint extends AsyncTask<String, Void, String> {
@@ -68,41 +64,17 @@ public class FingerPrintUpdateActivity extends AppCompatActivity {
             try {
 
                 SharedPreferences sharedPreferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
-                pFirstName = sharedPreferences.getString("pFirstName","");
-                pLastName = sharedPreferences.getString("pLastName","");
-                pEmail = sharedPreferences.getString("pEmail","");
-                pPassword = sharedPreferences.getString("pPassword","");
-                pLoginType = sharedPreferences.getString("pLoginType","");
-                pPhone = sharedPreferences.getString("pPhone","");
-                pAuthenticated = sharedPreferences.getBoolean("pAuthenticated",false);
-                pAccountStatus = sharedPreferences.getBoolean("pAccountStatus",true);
-                pAddress = sharedPreferences.getString("pAddress","");
-                pBio = sharedPreferences.getString("pBio","");
-                pHeight = sharedPreferences.getInt("pHeight",0);
-                pWeight = sharedPreferences.getInt("pWeight",0);
                 pAndroidId = uniqueId;
-                id = sharedPreferences.getString("_id","");
+                id = sharedPreferences.getString("id","");
 
 
                 //URL url = new URL("https://studytutorial.in/post.php");
-                URL url = new URL(Config.webUrl+"player/"+id);
+                URL url = new URL(Config.webUrl+"player/"+id+"/fingerprint");
 
+                Log.d("UUUUU",url.toString());
                 JSONObject postDataParams = new JSONObject();
 
-                postDataParams.put("pFirstName", pFirstName );
-                postDataParams.put("pLastName", pLastName);
-                postDataParams.put("pEmail", pEmail);
-                postDataParams.put("pPassword",pPassword);
-                postDataParams.put("pPhone",pPhone);
-                postDataParams.put("pLoginType",pLoginType);
-                postDataParams.put("pAuthenticated",pAuthenticated);
-                postDataParams.put("pAccountStatus",pAccountStatus);
-                postDataParams.put("pAddress",pAddress);
-                postDataParams.put("pBio",pBio);
-                postDataParams.put("pHeight",pHeight);
-                postDataParams.put("pWeight",pWeight);
                 postDataParams.put("pAndroidId",pAndroidId);
-                postDataParams.put("pBirthday","");
 
                 Log.e("params111",postDataParams.toString());
 
@@ -154,7 +126,7 @@ public class FingerPrintUpdateActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             Log.d("TAG",result);
-            String status = null;
+            String status = "";
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 status = jsonObject.getString("Status");
@@ -165,12 +137,13 @@ public class FingerPrintUpdateActivity extends AppCompatActivity {
             }
             pDialog.dismiss();
 
-            if(status.equals("Success") == true) {
-                Toast.makeText(getApplicationContext(),"Fingerprint has been added.",Toast.LENGTH_LONG).show();
 
+            String moon = "Success";
+            if(status.equals(moon) == true) {
+                Toast.makeText(FingerPrintUpdateActivity.this,"Fingerprint has been added.",Toast.LENGTH_LONG).show();
             }
             else    {
-                Toast.makeText(getApplicationContext(),status.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(FingerPrintUpdateActivity.this,status,Toast.LENGTH_LONG).show();
             }
 
 
