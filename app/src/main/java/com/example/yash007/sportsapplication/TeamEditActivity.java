@@ -1,0 +1,211 @@
+package com.example.yash007.sportsapplication;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class TeamEditActivity extends AppCompatActivity {
+
+    private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
+    EditText teamName, teamLocation;
+    Spinner teamGender, teamSports, teamAgeGroup;
+    String teamId;
+
+    String TAG = "TeamEditAcitivity";
+    private ProgressDialog pDialog;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_team_edit);
+
+        teamName = (EditText) findViewById(R.id.editTeamName);
+        teamLocation = (EditText) findViewById(R.id.editTeamLocation);
+        teamGender = (Spinner) findViewById(R.id.editTeamGender);
+        teamSports = (Spinner) findViewById(R.id.editTeamSports);
+        teamAgeGroup = (Spinner) findViewById(R.id.editTeamAgeGroup);
+        teamId = getIntent().getExtras().getString("teamId");
+
+        teamLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openAutocompleteActivity();
+            }
+        });
+
+        new GetTeamInfo().execute();
+
+
+    }
+
+    public class GetTeamInfo extends AsyncTask<Void, Void, Void> {
+
+        String tempTeamName, tempTeamSports, tempTeamGender, tempTeamAgeGroup, tempTeamLocation;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            tempTeamSports = "cricket";
+            // Showing progress dialog
+            pDialog = new ProgressDialog(TeamEditActivity.this,R.style.AppCompatAlertDialogStyle);
+            pDialog.setMessage("Loading team details..");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            HttpHandler sh = new HttpHandler();
+            String jsonStr = sh.makeServiceCall(Config.webUrl+"team/"+teamId);
+
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+
+                    // Getting JSON Array node
+                    JSONArray contacts = jsonObj.getJSONArray("Team");
+
+                    // looping through All Contacts
+                    for (int i = 0; i < contacts.length(); i++) {
+                        JSONObject c = contacts.getJSONObject(i);
+
+                        tempTeamName = c.getString("tName");
+                        tempTeamSports = c.getString("tSports");
+                        tempTeamGender = c.getString("tGender");
+                        tempTeamAgeGroup = c.getString("tAgeGroup");
+                        tempTeamLocation = c.getString("tAddress");
+
+                    }
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(TeamEditActivity.this,
+                                    "Json parsing error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
+
+                }
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(TeamEditActivity.this,
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+            if (pDialog.isShowing())
+                pDialog.dismiss();
+
+            teamName.setText(tempTeamName);
+            teamLocation.setText(tempTeamLocation);
+
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(TeamEditActivity.this, R.array.sports, android.R.layout.simple_spinner_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            teamSports.setAdapter(adapter);
+            if (tempTeamSports != null) {
+                int spinnerPosition = adapter.getPosition(tempTeamSports);
+                teamSports.setSelection(spinnerPosition);
+            }
+
+            ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(TeamEditActivity.this, R.array.genderList, android.R.layout.simple_spinner_item);
+            adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            teamGender.setAdapter(adapter1);
+            if (tempTeamGender != null) {
+                int spinnerPosition1 = adapter1.getPosition(tempTeamGender);
+                teamGender.setSelection(spinnerPosition1);
+            }
+
+            ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(TeamEditActivity.this, R.array.ageList, android.R.layout.simple_spinner_item);
+            adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            teamAgeGroup.setAdapter(adapter2);
+            if (tempTeamAgeGroup != null) {
+                int spinnerPosition2 = adapter2.getPosition(tempTeamAgeGroup);
+                teamAgeGroup.setSelection(spinnerPosition2);
+            }
+        }
+    }
+
+    private void openAutocompleteActivity() {
+        try {
+            // The autocomplete activity requires Google Play Services to be available. The intent
+            // builder checks this and throws an exception if it is not the case.
+            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                    .build(this);
+            startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
+        } catch (GooglePlayServicesRepairableException e) {
+            // Indicates that Google Play Services is either not installed or not up to date. Prompt
+            // the user to correct the issue.
+            GoogleApiAvailability.getInstance().getErrorDialog(this, e.getConnectionStatusCode(),
+                    0 /* requestCode */).show();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            // Indicates that Google Play Services is not available and the problem is not easily
+            // resolvable.
+            String message = "Google Play Services is not available: " +
+                    GoogleApiAvailability.getInstance().getErrorString(e.errorCode);
+
+            Log.e(TAG, message);
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Called after the autocomplete activity has finished to return its result.
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_AUTOCOMPLETE) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                Log.i(TAG, "Place Selected: " + place.getName());
+
+                teamLocation.setText(place.getName().toString().trim());
+
+                CharSequence attributions = place.getAttributions();
+            }
+            else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                Log.e(TAG, "Error: Status = " + status.toString());
+            }
+            else if (resultCode == RESULT_CANCELED) {
+
+            }
+        }
+    }
+}
+

@@ -75,9 +75,10 @@ public class SearchPlayerActivity extends AppCompatActivity {
             searchView.setOnSearchClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //some operation
+
                 }
             });
+
             EditText searchPlate = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
             searchPlate.setHint("Search");
             View searchPlateView = searchView.findViewById(android.support.v7.appcompat.R.id.search_plate);

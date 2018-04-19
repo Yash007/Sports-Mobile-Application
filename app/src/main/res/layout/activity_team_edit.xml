@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.yash007.sportsapplication.CreateTeamActivity"
+    android:orientation="vertical"
+    android:background="@drawable/gradient">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|center_horizontal"
+        android:padding="10dp"
+        >
+
+        <TableRow
+            android:layout_margin="10dp"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/editTeamName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:layout_weight="10"
+                android:hint="@string/teamName"
+                android:background="@drawable/edit_text_design"
+                android:theme="@style/editText"
+                android:drawableLeft="@drawable/theme_users"
+                android:textColor="@color/colorText"
+                />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="10dp"
+            android:weightSum="10">
+
+            <Spinner
+                android:id="@+id/editTeamSports"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:popupBackground="@color/colorBackground"
+                android:entries="@array/sports"
+                android:background="@drawable/spinner_design_sports"
+                android:theme="@style/editText"
+                android:paddingLeft="50dp"
+                android:textColor="@color/colorText"
+                />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="10dp"
+            android:weightSum="10">
+
+            <Spinner
+                android:id="@+id/editTeamAgeGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:popupBackground="@color/colorBackground"
+                android:entries="@array/ageList"
+                android:background="@drawable/spinner_design_age_group"
+                android:theme="@style/editText"
+                android:paddingLeft="50dp"
+                android:textColor="@color/colorText"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="10dp"
+            android:weightSum="10">
+
+            <Spinner
+                android:id="@+id/editTeamGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:spinnerMode="dropdown"
+                android:popupBackground="@color/colorBackground"
+                android:entries="@array/genderList"
+                android:background="@drawable/spinner_design"
+                android:theme="@style/editText"
+                android:paddingLeft="50dp"
+                android:textColor="@color/colorText"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="10dp"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/editTeamLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:layout_weight="10"
+                android:hint="@string/location"
+                android:background="@drawable/edit_text_design"
+                android:theme="@style/editText"
+                android:drawableLeft="@drawable/theme_location"
+                android:textColor="@color/colorText"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="10dp"
+            android:weightSum="10"
+            android:gravity="center_horizontal|center_vertical"
+            >
+            <Button
+                android:id="@+id/teamCreateButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/createTeam"
+                android:onClick="doCreateTeam"
+                android:background="@drawable/button_design"
+                android:drawableLeft="@drawable/theme_add"
+                android:theme="@style/button"
+                />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

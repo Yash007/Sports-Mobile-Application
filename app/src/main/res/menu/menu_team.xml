@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item android:id="@+id/teamHealthSettings"
+        android:icon="@drawable/heartbeat"
+        android:title="@string/healthData"
+        app:showAsAction="always"
+        android:orderInCategory="1">
+    </item>
+
+    <item android:id="@+id/teamUserProfileSettings"
+        android:orderInCategory="2"
+        android:title="@string/profileSettings" />
+
+    <item android:id="@+id/teamProfileSettings"
+        android:orderInCategory="3"
+        android:title="Edit Team details"
+        />
+
+    <item android:id="@+id/teamSignOut"
+        android:title="@string/signout"
+        android:orderInCategory="4">
+    </item>
+
+</menu>

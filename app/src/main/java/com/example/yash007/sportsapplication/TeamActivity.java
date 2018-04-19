@@ -1,10 +1,14 @@
 package com.example.yash007.sportsapplication;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class TeamActivity extends AppCompatActivity {
 
@@ -52,5 +56,38 @@ public class TeamActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_team,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.teamHealthSettings:
+                startActivity(new Intent(TeamActivity.this, HealthActivity.class));
+                break;
+            case R.id.teamUserProfileSettings:
+                startActivity(new Intent(TeamActivity.this, ProfileActivity.class));
+                break;
+            case R.id.teamProfileSettings:
+                //Team Profile Edit Activity
+                Intent intent = new Intent(TeamActivity.this, TeamEditActivity.class);
+                intent.putExtra("teamId",teamId);
+                startActivity(intent);
+                break;
+            case R.id.teamSignOut:
+                startActivity(new Intent(TeamActivity.this, MainActivity.class));
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }
