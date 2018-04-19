@@ -16,6 +16,7 @@
             android:paddingTop="20dp">
 
             <ImageView
+                android:id="@+id/teamFragmentPic"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
                 android:padding="10dp"
