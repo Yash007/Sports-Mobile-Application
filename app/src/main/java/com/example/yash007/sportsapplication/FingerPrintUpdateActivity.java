@@ -146,6 +146,10 @@ public class FingerPrintUpdateActivity extends AppCompatActivity {
                 Toast.makeText(FingerPrintUpdateActivity.this,status,Toast.LENGTH_LONG).show();
             }
 
+            SharedPreferences.Editor prefs = getSharedPreferences(Config.PREF_NAME,MODE_PRIVATE).edit();
+            prefs.putString("pFingerPrintStatus","added");
+            prefs.commit();
+
 
         }
     }
