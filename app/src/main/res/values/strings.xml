@@ -52,6 +52,10 @@
     <string name="add">Add</string>
     <string name="close">Close</string>
     <string name="editTeam">Save Details</string>
+    <string name="fingerprintUnlock">Fingerprint Unlock</string>
+    <string name="fingerprintDetails">Confirm fingerprint to continue.</string>
+    <string name="touchSensor">Touch Sensor</string>
+    <string name="logout">Logout</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
