@@ -154,8 +154,6 @@ public class FingerprintActivity extends AppCompatActivity {
                 | NoSuchAlgorithmException | InvalidKeyException e) {
             throw new RuntimeException("Failed to init Cipher", e);
         }
-
-
     }
 
 

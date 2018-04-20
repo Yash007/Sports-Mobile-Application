@@ -149,8 +149,6 @@ public class FingerPrintUpdateActivity extends AppCompatActivity {
             SharedPreferences.Editor prefs = getSharedPreferences(Config.PREF_NAME,MODE_PRIVATE).edit();
             prefs.putString("pFingerPrintStatus","added");
             prefs.commit();
-
-
         }
     }
 
