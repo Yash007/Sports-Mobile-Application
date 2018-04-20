@@ -137,4 +137,13 @@
         <item>Volleyball</item>
         <item>Wrestling</item>
     </string-array>
+
+
+    <!--Validation Strings-->
+    <string name="firstNameError">Enter valid first name</string>
+    <string name="lastNameError">Enter valid last name</string>
+    <string name="emailError">Enter valid email</string>
+    <string name="phoneError">Enter valid phone number</string>
+    <string name="passwordError">Enter valid password</string>
+    <string name="passwordConfirmError">Both password must be same</string>
 </resources>

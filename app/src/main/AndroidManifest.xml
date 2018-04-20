@@ -61,12 +61,13 @@
             android:parentActivityName=".DashboardActivity" />
         <activity android:name=".FingerprintActivity" />
         <activity android:name=".FingerPrintUpdateActivity" />
+
         <activity
             android:name=".TeamActivity"
             android:parentActivityName=".DashboardActivity" />
+
         <activity android:name=".CreateEventActivity" />
         <activity android:name=".SearchPlayerActivity" />
         <activity android:name=".TeamEditActivity"></activity>
     </application>
-
 </manifest>

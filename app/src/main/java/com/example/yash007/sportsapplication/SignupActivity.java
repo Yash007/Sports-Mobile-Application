@@ -6,11 +6,15 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +33,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private EditText firstName, lastName, email, password, confirmPassword, phone;
     private ProgressDialog pDialog;
+    private AwesomeValidation awesomeValidation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +47,26 @@ public class SignupActivity extends AppCompatActivity {
         confirmPassword = (EditText) findViewById(R.id.confirmPassword);
         phone = (EditText) findViewById(R.id.phoneNumber);
 
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+
+        awesomeValidation.addValidation(this, R.id.firstName, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.firstNameError);
+        awesomeValidation.addValidation(this, R.id.lastName, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.lastNameError);
+        awesomeValidation.addValidation(this,R.id.email, Patterns.EMAIL_ADDRESS, R.string.emailError);
+        awesomeValidation.addValidation(this, R.id.phoneNumber, "^[2-9]{2}[0-9]{8}$", R.string.phoneError);
+        String regexPassword = "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}";
+
+        awesomeValidation.addValidation(this,R.id.password, regexPassword, R.string.passwordError);
+        awesomeValidation.addValidation(this, R.id.confirmPassword, R.id.password, R.string.passwordConfirmError);
     }
 
     public void doSignUp(View v)  {
         if(password.getText().toString().equals(confirmPassword.getText().toString()) == true)  {
             //code for sign up
-            new SignUpPost().execute();
+
+            if(awesomeValidation.validate())    {
+                new SignUpPost().execute();
+            }
+
         }
         else    {
             Toast.makeText(SignupActivity.this, "Password must be same", Toast.LENGTH_SHORT).show();

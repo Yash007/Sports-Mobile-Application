@@ -155,7 +155,4 @@ public class FingerprintActivity extends AppCompatActivity {
             throw new RuntimeException("Failed to init Cipher", e);
         }
     }
-
-
-
 }
