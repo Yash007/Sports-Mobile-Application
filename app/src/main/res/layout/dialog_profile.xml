@@ -10,7 +10,7 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:padding="20dp"
         >
         <TableRow
             android:layout_marginBottom="5dp"
@@ -20,8 +20,8 @@
             >
 
             <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
+                android:layout_width="112dp"
+                android:layout_height="112dp"
                 android:padding="10dp"
                 android:src="@drawable/user" />
         </TableRow>
@@ -30,12 +30,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
+
             <TextView
+                android:id="@+id/dialogProfileFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:drawableLeft="@drawable/theme_user"
+                android:drawablePadding="10dp"
+                android:textSize="24sp" />
+        </TableRow>
+        <TableRow
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:id="@+id/dialogProfileEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name: Full Name"
-                android:textSize="16sp"
-                android:layout_marginBottom="5dp"
+                android:textSize="20sp"
+                android:layout_marginBottom="2dp"
+                android:drawableLeft="@drawable/theme_email"
+                android:drawablePadding="10dp"
                 />
         </TableRow>
         <TableRow
@@ -44,11 +61,13 @@
             android:layout_height="wrap_content"
             >
             <TextView
+                android:id="@+id/dialogProfilePhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name: Full Name"
-                android:textSize="16sp"
-                android:layout_marginBottom="5dp"
+                android:textSize="20sp"
+                android:layout_marginBottom="2dp"
+                android:drawableLeft="@drawable/theme_phone"
+                android:drawablePadding="10dp"
                 />
         </TableRow>
         <TableRow
@@ -57,11 +76,13 @@
             android:layout_height="wrap_content"
             >
             <TextView
+                android:id="@+id/dialogProfileHeightWeight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name: Full Name"
-                android:textSize="16sp"
-                android:layout_marginBottom="5dp"
+                android:textSize="20sp"
+                android:layout_marginBottom="2dp"
+                android:drawableLeft="@drawable/theme_height"
+                android:drawablePadding="10dp"
                 />
         </TableRow>
         <TableRow
@@ -70,11 +91,13 @@
             android:layout_height="wrap_content"
             >
             <TextView
+                android:id="@+id/dialogProfileBirthday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name: Full Name"
-                android:textSize="16sp"
-                android:layout_marginBottom="5dp"
+                android:textSize="20sp"
+                android:layout_marginBottom="2dp"
+                android:drawableLeft="@drawable/theme_birthday"
+                android:drawablePadding="10dp"
                 />
         </TableRow>
         <TableRow
@@ -83,24 +106,13 @@
             android:layout_height="wrap_content"
             >
             <TextView
+                android:id="@+id/dialogProfileAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name: Full Name"
-                android:textSize="16sp"
-                android:layout_marginBottom="5dp"
-                />
-        </TableRow>
-        <TableRow
-            android:layout_marginBottom="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Name: Full Name"
-                android:textSize="16sp"
-                android:layout_marginBottom="5dp"
+                android:textSize="20sp"
+                android:maxLines="2"
+                android:drawableLeft="@drawable/theme_location"
+                android:drawablePadding="10dp"
                 />
         </TableRow>
     </TableLayout>
@@ -116,7 +128,7 @@
             >
 
             <Button
-                android:id="@+id/dialogChangeWeightCancelButton"
+                android:id="@+id/dialogProfileCloseButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/close"
