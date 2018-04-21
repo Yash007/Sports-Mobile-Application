@@ -64,8 +64,6 @@ public class TeamEditActivity extends AppCompatActivity {
         });
 
         new GetTeamInfo().execute();
-
-
     }
 
     public class GetTeamInfo extends AsyncTask<Void, Void, Void> {
@@ -221,7 +219,7 @@ public class TeamEditActivity extends AppCompatActivity {
 
 
     public void doUpdateTeam(View view) {
-
+        new UpdateTeam().execute();
     }
 
     public class UpdateTeam extends AsyncTask<String, Void, String> {
@@ -305,7 +303,6 @@ public class TeamEditActivity extends AppCompatActivity {
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 status = jsonObject.getString("Status");
-                //JSONObject profile = jsonObject.
 
             } catch (JSONException e) {
                 e.printStackTrace();

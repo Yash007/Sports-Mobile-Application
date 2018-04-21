@@ -57,6 +57,8 @@
     <string name="touchSensor">Touch Sensor</string>
     <string name="logout">Logout</string>
     <string name="addToTeam">Add Player</string>
+    <string name="profile">View profile</string>
+    <string name="deleteProfile">Remove from team</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

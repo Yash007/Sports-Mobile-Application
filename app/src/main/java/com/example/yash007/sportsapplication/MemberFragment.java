@@ -10,10 +10,14 @@ import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -76,6 +80,39 @@ public class MemberFragment extends android.support.v4.app.Fragment {
                 new GetProfile(playerId.getText().toString().trim()).execute();
             }
         });
+
+        registerForContextMenu(lv);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        if (v.getId() == R.id.playerList)   {
+
+            MenuInflater inflater = context.getMenuInflater();
+            inflater.inflate(R.menu.menu_player_option, menu);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch (item.getItemId())   {
+            case R.id.viewPlayerProfile:
+                TextView playerId = info.targetView.findViewById(R.id.listPlayerId);
+                new GetProfile(playerId.getText().toString().trim()).execute();
+                return true;
+            case R.id.deletePlayer:
+                TextView playerIdDelete = info.targetView.findViewById(R.id.listPlayerId);
+                new GetProfile(playerIdDelete.getText().toString().trim()).execute();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+
+
     }
 
     public class GetPlayers extends AsyncTask<Void, Void, Void> {
@@ -282,6 +319,101 @@ public class MemberFragment extends android.support.v4.app.Fragment {
                     dialog.dismiss();
                 }
             });
+        }
+
+    }
+
+    public class DeletePlayer extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+            pDialog = new ProgressDialog(context,R.style.AppCompatAlertDialogStyle);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            HttpHandler sh = new HttpHandler();
+            String teamId = context.getIntent().getExtras().getString("id");
+            String jsonStr = sh.makeServiceCall(Config.webUrl+"team/"+teamId+"/players");
+
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+
+                    // Getting JSON Array node
+                    JSONArray contacts = jsonObj.getJSONArray("Players");
+
+                    // looping through All Contacts
+                    for (int i = 0; i < contacts.length(); i++) {
+                        JSONObject c = contacts.getJSONObject(i);
+
+                        String id = c.getString("_id");
+                        String firstName = c.getString("pFirstName");
+                        String lastName = c.getString("pLastName");
+                        String email = c.getString("pEmail");
+                        String height = "Height : " + c.getString("pHeight") + " cm. Weight: " + c.getString("pWeight") + " k g.";
+
+                        // tmp hash map for single contact
+                        HashMap<String, String> contact = new HashMap<>();
+
+                        // adding each child node to HashMap key => value
+                        contact.put("id", id);
+                        contact.put("name", firstName + " " + lastName);
+                        contact.put("email",email);
+                        contact.put("height",height);
+
+                        // adding contact to contact list
+                        contactList.add(contact);
+                    }
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    context.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context,
+                                    "Json parsing error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
+
+                }
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                context.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context,
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            // Dismiss the progress dialog
+            if (pDialog.isShowing())
+                pDialog.dismiss();
+            /**
+             * Updating parsed JSON data into ListView
+             * */
+            ListAdapter adapter = new SimpleAdapter(
+                    context, contactList,
+                    R.layout.list_players, new String[]{"id","name", "email",
+                    "height"}, new int[]{R.id.listPlayerId,R.id.listPlayerName,
+                    R.id.listPlayerEmail, R.id.listPlayerHeightWeight});
+
+            lv.setAdapter(adapter);
         }
 
     }
