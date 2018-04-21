@@ -56,6 +56,7 @@
     <string name="fingerprintDetails">Confirm fingerprint to continue.</string>
     <string name="touchSensor">Touch Sensor</string>
     <string name="logout">Logout</string>
+    <string name="addToTeam">Add Player</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

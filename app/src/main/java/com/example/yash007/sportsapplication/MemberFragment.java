@@ -61,7 +61,9 @@ public class MemberFragment extends android.support.v4.app.Fragment {
         addPlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context,SearchPlayerActivity.class));
+                Intent intent = new Intent(context, SearchPlayerActivity.class);
+                intent.putExtra("teamId", context.getIntent().getExtras().getString("id"));
+                startActivity(intent);
             }
         });
 
@@ -69,7 +71,7 @@ public class MemberFragment extends android.support.v4.app.Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                TextView playerId = (TextView) lv.findViewById(R.id.listPlayerId);
+                TextView playerId = (TextView) view.findViewById(R.id.listPlayerId);
                 Toast.makeText(context,playerId.getText().toString(), Toast.LENGTH_SHORT).show();
                 new GetProfile(playerId.getText().toString().trim()).execute();
             }
