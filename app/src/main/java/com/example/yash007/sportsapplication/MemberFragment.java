@@ -92,7 +92,6 @@ public class MemberFragment extends android.support.v4.app.Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 TextView playerId = (TextView) view.findViewById(R.id.listPlayerId);
-                Toast.makeText(context,playerId.getText().toString(), Toast.LENGTH_SHORT).show();
                 new GetProfile(playerId.getText().toString().trim()).execute();
             }
         });
@@ -156,6 +155,7 @@ public class MemberFragment extends android.support.v4.app.Fragment {
                     // Getting JSON Array node
                     JSONArray contacts = jsonObj.getJSONArray("Players");
 
+                    contactList.clear();
                     // looping through All Contacts
                     for (int i = 0; i < contacts.length(); i++) {
                         JSONObject c = contacts.getJSONObject(i);
@@ -168,6 +168,7 @@ public class MemberFragment extends android.support.v4.app.Fragment {
 
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
+
 
                         // adding each child node to HashMap key => value
                         contact.put("id", id);
@@ -441,6 +442,7 @@ public class MemberFragment extends android.support.v4.app.Fragment {
 
             if(status.equals("Success") == true) {
                 Toast.makeText(context,"Player removed from team",Toast.LENGTH_LONG).show();
+                new GetPlayers().execute();
             }
             else    {
                 Toast.makeText(context,"Error in removing player. Please try again",Toast.LENGTH_LONG).show();

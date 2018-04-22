@@ -67,7 +67,6 @@ public class SearchPlayerActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView playerId = (TextView) view.findViewById(R.id.listPlayerId);
-                Toast.makeText(SearchPlayerActivity.this,playerId.getText().toString(), Toast.LENGTH_SHORT).show();
                 new GetProfile(playerId.getText().toString().trim()).execute();
             }
         });
