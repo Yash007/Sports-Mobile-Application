@@ -126,6 +126,7 @@ public class TeamGridViewAdapter extends ArrayAdapter<GridItem> {
         }
         //holder.imageView.setImageResource(R.drawable.team_grid);
         holder.ageGroupView.setText(Html.fromHtml(item.getAge()));
+        holder.teamId.setText(Html.fromHtml(item.getId()));
 
         return row;
     }

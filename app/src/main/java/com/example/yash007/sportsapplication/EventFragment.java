@@ -12,12 +12,17 @@ import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -74,6 +79,41 @@ public class EventFragment extends android.support.v4.app.Fragment {
         SharedPreferences preferences = this.getActivity().getSharedPreferences(Config.PREF_NAME,MODE_PRIVATE);
         USER_ID = preferences.getString("id","");
         new GetEvents(USER_ID).execute();
+
+        registerForContextMenu(lv);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        if (v.getId() == R.id.eventsList)   {
+
+            MenuInflater inflater = context.getMenuInflater();
+            inflater.inflate(R.menu.menu_event_option, menu);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch (item.getItemId())   {
+            case R.id.eventOptionView:
+
+                return true;
+            case R.id.eventOptionMap:
+
+                return true;
+            case R.id.eventOptionEdit:
+
+                return true;
+            case R.id.eventOptionDelete:
+                    TextView id = info.targetView.findViewById(R.id.listEventId);
+                    Toast.makeText(context, id.getText().toString(), Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     @Override

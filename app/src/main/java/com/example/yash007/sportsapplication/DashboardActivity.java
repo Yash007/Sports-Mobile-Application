@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,14 +19,24 @@ import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -40,6 +51,7 @@ public class DashboardActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
 
     private String USER_ID;
+    String captainId;
 
 
     @Override
@@ -47,6 +59,9 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         createTeam = (FloatingActionButton) findViewById(R.id.createTeamButton);
+
+        SharedPreferences preferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
+        captainId = preferences.getString("id","");
 
         mGridView = (GridView) findViewById(R.id.teamGridListView);
 
@@ -82,8 +97,32 @@ public class DashboardActivity extends AppCompatActivity {
 
         new GetTeams().execute();
 
+        registerForContextMenu(mGridView);
+
         //Toast.makeText(DashboardActivity.this,USER_ID,Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        if (v.getId() == R.id.teamGridListView)   {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_option_team, menu);
+        }
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId())   {
+            case R.id.teamOptionDelete:
+                TextView id = info.targetView.findViewById(R.id.teamIdGrid);
+                new DeleteTeam(id.getText().toString().trim(), captainId).execute();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     @Override
@@ -105,7 +144,6 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(DashboardActivity.this, ProfileActivity.class));
                 break;
             case R.id.fingerprint:
-
                 startActivity(new Intent(DashboardActivity.this, FingerprintActivity.class));
                 break;
             case R.id.signOut:
@@ -146,6 +184,7 @@ public class DashboardActivity extends AppCompatActivity {
                     // Getting JSON Array node
                     JSONArray contacts = jsonObj.getJSONArray("team");
 
+                    mGridData.clear();
                     GridItem item;
                     // looping through All Contacts
                     for (int i = 0; i < contacts.length(); i++) {
@@ -211,6 +250,137 @@ public class DashboardActivity extends AppCompatActivity {
             mGridAdapter.setGridData(mGridData);
         }
 
+    }
+
+    public class DeleteTeam extends AsyncTask<String, Void, String> {
+
+        String teamId;
+        String captainId;
+
+        public DeleteTeam(String teamId, String captainId)   {
+            this.teamId = teamId;
+            this.captainId = captainId;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(DashboardActivity.this, R.style.AppCompatAlertDialogStyle);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        protected String doInBackground(String... arg0) {
+
+            try {
+                URL url = new URL(Config.webUrl+captainId+"/teams/"+teamId+"/terminate");
+                Log.d("YASHSOMPURA",url.toString());
+
+                JSONObject postDataParams = new JSONObject();
+                Log.e("params",postDataParams.toString());
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(15000 /* milliseconds */);
+                conn.setConnectTimeout(15000 /* milliseconds */);
+                conn.setRequestMethod("DELETE");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                OutputStream os = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
+                writer.write(getPostDataString(postDataParams));
+
+                writer.flush();
+                writer.close();
+                os.close();
+
+                int responseCode=conn.getResponseCode();
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+
+                    BufferedReader in=new BufferedReader(new
+                            InputStreamReader(
+                            conn.getInputStream()));
+
+                    StringBuffer sb = new StringBuffer("");
+                    String line="";
+
+                    while((line = in.readLine()) != null) {
+
+                        Log.e("+++++", "line: "+line);
+                        sb.append(line);
+                        //break;
+                    }
+
+                    in.close();
+                    return sb.toString();
+
+                }
+                else {
+                    return new String("false : "+responseCode);
+                }
+            }
+            catch(Exception e) {
+                Log.e("~~~", e.toString());
+                return new String("Exception: " + e.getMessage());
+            }
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.d("TAG",result);
+            String status = null;
+
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                status = jsonObject.getString("Status");
+                //JSONObject profile = jsonObject.
+
+                JSONObject profile = jsonObject.getJSONObject("user");
+                Log.d("LOGIN_RESULT",profile.toString());
+
+
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
+            }
+            pDialog.dismiss();
+
+            if(status.equals("Success") == true) {
+                Toast.makeText(DashboardActivity.this,"Team terminated successfully.",Toast.LENGTH_LONG).show();
+                new GetTeams().execute();
+            }
+            else    {
+                Toast.makeText(DashboardActivity.this,"Error in termination of team. Please try again",Toast.LENGTH_LONG).show();
+            }
+
+
+        }
+    }
+
+    public String getPostDataString(JSONObject params) throws Exception {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        Iterator<String> itr = params.keys();
+        while(itr.hasNext()){
+
+            String key = itr.next();
+            Object value = params.get(key);
+
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            Log.d("TAG",result.toString());
+            result.append(URLEncoder.encode(key, "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(value.toString(), "UTF-8"));
+        }
+        return result.toString();
     }
 
 

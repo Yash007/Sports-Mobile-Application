@@ -164,7 +164,7 @@ public class MemberFragment extends android.support.v4.app.Fragment {
                         String firstName = c.getString("pFirstName");
                         String lastName = c.getString("pLastName");
                         String email = c.getString("pEmail");
-                        String height = "Height : " + c.getString("pHeight") + " cm. Weight: " + c.getString("pWeight") + " k g.";
+                        String height = "Height : " + c.getString("pHeight") + " cm. Weight: " + c.getString("pWeight") + " kg.";
 
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
