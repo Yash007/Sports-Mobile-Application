@@ -1,9 +1,7 @@
 package com.example.yash007.sportsapplication;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -11,11 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -25,6 +22,7 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,95 +34,148 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Iterator;
-import java.util.Locale;
 
-public class CreateEventActivity extends AppCompatActivity {
+public class EventEditActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
+    String TAG = "Event";
     private ProgressDialog pDialog;
-    Calendar myCalendar;
-    Spinner eventType;
-    EditText eventDate, eventVenue, eventNotes, eventTime, eventAddress;
-    public static final String TAG="CreateTeam";
+    public String eventType, eventDate, eventTime,  eventVenue,  eventAddress,  eventNotes;
 
-
+    public Spinner eventEditType;
+    public EditText eventEditDate, eventEditTime, eventEditVenue, eventEditAddres, eventEditNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_event);
+        setContentView(R.layout.activity_event_edit);
 
-        eventVenue = (EditText) findViewById(R.id.eventVenue);
-        eventNotes = (EditText) findViewById(R.id.eventNotes);
-        eventTime = (EditText) findViewById(R.id.eventTime);
-        eventAddress = (EditText) findViewById(R.id.eventAddress);
+        eventEditType = (Spinner) findViewById(R.id.eventEditType);
+        eventEditDate = (EditText) findViewById(R.id.eventEditDate);
+        eventEditTime = (EditText) findViewById(R.id.eventEditTime);
+        eventEditVenue = (EditText) findViewById(R.id.eventEditVenue);
+        eventEditAddres = (EditText) findViewById(R.id.eventEditAddress);
+        eventEditNotes = (EditText) findViewById(R.id.eventEditNotes);
+
+        new GetEventById(getIntent().getExtras().getString("teamId"),
+                getIntent().getExtras().getString("captainId"),
+                getIntent().getExtras().getString("eventId")
+                ).execute();
+    }
+
+    public class GetEventById extends AsyncTask<Void, Void, Void> {
+
+        String teamId, captainId, eventId;
+
+        String eventType,eventTime, eventDate, eventVenue, eventAddress, eventNotes;
+        public  GetEventById(String teamId, String captainId,String eventId)   {
+            this.teamId = teamId;
+            this.captainId = captainId;
+            this.eventId = eventId;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+            pDialog = new ProgressDialog(EventEditActivity.this,R.style.AppCompatAlertDialogStyle);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            HttpHandler sh = new HttpHandler();
+            String teamId = getIntent().getExtras().getString("id");
 
 
-        eventType = (Spinner) findViewById(R.id.eventType);
-        myCalendar = Calendar.getInstance();
-        final DatePickerDialog.OnDateSetListener date;
-        final DatePickerDialog.OnDateSetListener time;
+            String jsonStr = sh.makeServiceCall(Config.webUrl + captainId + "/teams/" + this.teamId + "/events/"+eventId);
 
-        eventDate = (EditText) findViewById(R.id.eventDate);
-//        date = new DatePickerDialog.OnDateSetListener() {
-//            @Override
-//            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-//                // TODO Auto-generated method stub
-//                myCalendar.set(Calendar.HOUR_OF_DAY, year);
-//                myCalendar.set(Calendar.MONTH, monthOfYear);
-//                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//                updateLabel();
-//            }
-//
-//
-//        };
+            Log.d("TTTTT",Config.webUrl + captainId + "/teams/" + this.teamId + "/events/"+eventId);
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
 
+                    // Getting JSON Array node
+                    JSONArray contacts = jsonObj.getJSONArray("Event");
 
-//        eventDate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                new DatePickerDialog(CreateEventActivity.this,AlertDialog.THEME_DEVICE_DEFAULT_DARK, date, myCalendar.get(Calendar.YEAR),
-//                        myCalendar.get(Calendar.MONTH),
-//                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-//            }
-//        });
+                    // looping through All Contacts
 
-        eventTime.setOnClickListener(new View.OnClickListener() {
-            public String time;
-            @Override
-            public void onClick(View view) {
-                // TODO Auto-generated method stub
-                Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
-                TimePickerDialog mTimePicker;
+                        JSONObject c = contacts.getJSONObject(0);
 
-                mTimePicker = new TimePickerDialog(CreateEventActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK, new TimePickerDialog.OnTimeSetListener() {
+                        String eventId = c.getString("_id");
+                        //String eventDate = c.getString("eDate");
+                        eventType = c.getString("eType");
+                        eventTime = c.getString("eTime");
+                        eventVenue = c.getString("eVenue");
+                        eventAddress = c.getString("eAddress");
+                        eventNotes = c.getString("eNotes");
+
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(EventEditActivity.this,
+                                    "Json parsing error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
+
+                }
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        //eventTime.setText("" + selectedHour + ":" + selectedMinute);
-
-                        String hour = String.valueOf(selectedHour);
-                        String minute = String.valueOf(selectedMinute);
-                        if(hour.length() == 1)  {
-                            hour = "0" + hour;
-                        }
-                        if(minute.length() == 1)    {
-                            minute = "0" + minute;
-                        }
-                        time = hour + ":" + minute;
-                        updateTime(time);
+                    public void run() {
+                        Toast.makeText(EventEditActivity.this,
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG)
+                                .show();
                     }
-                }, hour, minute, true);//Yes 24 hour time
-                mTimePicker.show();
-
+                });
             }
-        });
+            return null;
+        }
 
-        eventVenue.setOnClickListener(new View.OnClickListener() {
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            // Dismiss the progress dialog
+            if (pDialog.isShowing())
+                pDialog.dismiss();
+
+            setEventData(eventType, eventDate, eventTime, eventVenue, eventAddress, eventNotes);
+        }
+    }
+
+    public void setEventData(String eventType, String eventDate, String eventTime, String eventVenue, String eventAddress, String eventNotes)   {
+        this.eventType = eventType;
+        this.eventDate = eventDate;
+        this.eventTime = eventTime;
+        this.eventVenue = eventVenue;
+        this.eventAddress = eventAddress;
+        this.eventNotes = eventNotes;
+
+        eventEditDate.setText(eventDate);
+        eventEditTime.setText(eventTime);
+        eventEditVenue.setText(eventVenue);
+        eventEditAddres.setText(eventAddress);
+        eventEditNotes.setText(eventNotes);
+
+
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(EventEditActivity.this, R.array.eventType, android.R.layout.simple_spinner_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        eventEditType.setAdapter(adapter1);
+        if (eventType != null) {
+            int spinnerPosition1 = adapter1.getPosition(eventType);
+            eventEditType.setSelection(spinnerPosition1);
+        }
+
+        eventEditVenue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openAutocompleteActivity();
@@ -133,29 +184,12 @@ public class CreateEventActivity extends AppCompatActivity {
     }
 
 
-    public void addEvent(View view) {
-        new CreateTeamPost().execute();
-    }
-
-
-    private void updateLabel() {
-        String myFormat = "MM-dd-yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CANADA);
-
-        eventDate.setText(sdf.format(myCalendar.getTime()));
-    }
-
-    private void updateTime(String time)    {
-        eventTime.setText(time);
-    }
-
-
-    public class CreateTeamPost extends AsyncTask<String, Void, String> {
+    public class UpdateEvent extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(CreateEventActivity.this,R.style.AppCompatAlertDialogStyle);
+            pDialog = new ProgressDialog(EventEditActivity.this,R.style.AppCompatAlertDialogStyle);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -177,21 +211,21 @@ public class CreateEventActivity extends AppCompatActivity {
                 JSONObject postDataParams = new JSONObject();
 
                 postDataParams.put("eName","");
-                postDataParams.put("eDate",eventDate.getText().toString());
-                postDataParams.put("eTime",eventTime.getText().toString());
-                postDataParams.put("eType",eventType.getSelectedItem().toString());
-                postDataParams.put("eAddress",eventAddress.getText().toString());
-                postDataParams.put("eVenue",eventVenue.getText().toString());
-                postDataParams.put("eNotes",eventNotes.getText().toString());
+                postDataParams.put("eDate",eventEditDate.getText().toString());
+                postDataParams.put("eTime",eventEditTime.getText().toString());
+                postDataParams.put("eType",eventEditType.getSelectedItem().toString());
+                postDataParams.put("eAddress",eventEditAddres.getText().toString());
+                postDataParams.put("eVenue",eventEditVenue.getText().toString());
+                postDataParams.put("eNotes",eventEditNotes.getText().toString());
                 postDataParams.put("tId",teamId.toString());
-                postDataParams.put("eCreator",id.toString());
+                postDataParams.put("eCreator",getIntent().getExtras().getString("captainId").toString());
 
                 Log.e("params",postDataParams.toString());
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(15000 /* milliseconds */);
                 conn.setConnectTimeout(15000 /* milliseconds */);
-                conn.setRequestMethod("POST");
+                conn.setRequestMethod("PUT");
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
 
@@ -253,7 +287,7 @@ public class CreateEventActivity extends AppCompatActivity {
             pDialog.dismiss();
 
             if(status.equals("Success") == true) {
-                Toast.makeText(getApplicationContext(),"Event Created successfully.",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Event updated successfully.",Toast.LENGTH_LONG).show();
 
                 //startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
             }
@@ -325,8 +359,8 @@ public class CreateEventActivity extends AppCompatActivity {
                 Log.i(TAG, "Place Selected: " + place.getName());
 
                 // Format the place's details and display them in the TextView.
-                eventVenue.setText(place.getName().toString().trim());
-                eventAddress.setText(place.getAddress().toString().trim());
+                eventEditVenue.setText(place.getName().toString().trim());
+                eventEditAddres.setText(place.getAddress().toString().trim());
 
                 // Display attributions if required.
                 CharSequence attributions = place.getAttributions();

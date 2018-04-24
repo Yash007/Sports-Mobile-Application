@@ -1,6 +1,7 @@
 package com.example.yash007.sportsapplication;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +25,13 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,6 +66,9 @@ public class EventFragment extends android.support.v4.app.Fragment {
 
     public String USER_ID;
     String captainId, teamId;
+
+    public String eventType, eventDate, eventTime,  eventVenue,  eventAddress,  eventNotes;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -118,7 +129,13 @@ public class EventFragment extends android.support.v4.app.Fragment {
 
                 return true;
             case R.id.eventOptionEdit:
-
+                    TextView eventIdEdit = info.targetView.findViewById(R.id.listEventId);
+                    Intent intent = new Intent(context, EventEditActivity.class);
+                    Log.d("TTTTT",teamId);
+                        intent.putExtra("teamId",teamId);
+                        intent.putExtra("captainId",captainId);
+                        intent.putExtra("eventId",eventIdEdit.getText().toString().trim());
+                    startActivity(intent);
                 return true;
             case R.id.eventOptionDelete:
                     TextView eventId = info.targetView.findViewById(R.id.listEventId);
@@ -184,6 +201,7 @@ public class EventFragment extends android.support.v4.app.Fragment {
                         // adding each child node to HashMap key => value
                         contact.put("eventId",eventId);
                         contact.put("eventType",eventType);
+                        //contact.put("eventDate",eventDate);
                         contact.put("eventTime",eventTime);
                         contact.put("eventVenue",eventVenue);
                         contact.put("eventAddress",eventAddress);
@@ -229,6 +247,12 @@ public class EventFragment extends android.support.v4.app.Fragment {
             /**
              * Updating parsed JSON data into ListView
              * */
+//            ListAdapter adapter = new SimpleAdapter(
+//                    context, contactList,
+//                    R.layout.list_events, new String[]{"eventId", "eventType","eventDate", "eventTime",
+//                    "eventVenue","eventAddress","eventNotes"}, new int[]{R.id.listEventId, R.id.listEventType, R.id.listEventDate,
+//                    R.id.listEventTime, R.id.listEventVenue,R.id.listEventAddress, R.id.listEventNotes});
+
             ListAdapter adapter = new SimpleAdapter(
                     context, contactList,
                     R.layout.list_events, new String[]{"eventId", "eventType", "eventTime",
