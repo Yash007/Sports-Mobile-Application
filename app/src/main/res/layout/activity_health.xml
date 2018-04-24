@@ -4,16 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@drawable/gradient"
     android:orientation="vertical"
+    android:gravity="center_vertical|center_horizontal"
     tools:context="com.example.yash007.sportsapplication.HealthActivity">
 
-    <TextView
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="35dp"
-        android:textColor="@color/colorText"
-        android:text="STEPS"
-        android:id="@+id/steps"
-        />
+        android:layout_margin="40dp"
+        android:elevation="3dp"
+        android:background="@drawable/list_design"
+        >
+        <TableRow
+            android:padding="10dp"
+            android:gravity="center_vertical|center_horizontal"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="35dp"
+                android:textColor="@color/colorText"
+                android:text="Step Counter"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center_vertical|center_horizontal"
+                />
+        </TableRow>
+        <TableRow
+            android:padding="10dp"
+            android:gravity="center_vertical|center_horizontal"
+            >
+            <ImageView
+                android:layout_width="256dp"
+                android:layout_height="256dp"
+                android:contentDescription="health Images"
+                android:src="@drawable/running"
+                android:padding="40dp"
+                />
+        </TableRow>
+        <TableRow
+            android:padding="10dp"
+            android:gravity="center_vertical|center_horizontal"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="35dp"
+                android:textColor="@color/colorText"
+                android:id="@+id/steps"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center_vertical|center_horizontal"
+                />
+        </TableRow>
+    </TableLayout>
 </LinearLayout>

@@ -54,7 +54,6 @@ public class HealthActivity extends AppCompatActivity {
         }
         catch (Exception e) {
             Log.d(APP_TAG,"onCreate: error:{}", e);
-            Toast.makeText(getApplicationContext(),"onCreate:Error " + e.getMessage(),Toast.LENGTH_SHORT).show();
         }
 
         mStore = new HealthDataStore(this, mConnectionLister);
@@ -71,7 +70,6 @@ public class HealthActivity extends AppCompatActivity {
         @Override
         public void onConnected() {
             Log.d(APP_TAG, "Health data service is connected.");
-            Toast.makeText(getApplicationContext(),"onConnected() ConnectionListener :" ,Toast.LENGTH_SHORT).show();
             mReporter = new StepCountReporter(mStore);
             if (isPermissionAcquired()) {
                 mReporter.start(mStepCountObserver);
@@ -83,7 +81,6 @@ public class HealthActivity extends AppCompatActivity {
         @Override
         public void onConnectionFailed(HealthConnectionErrorResult healthConnectionErrorResult) {
             Log.d(APP_TAG, "Health data service is not available.");
-            Toast.makeText(HealthActivity.this,"onConnectionFailed(): Error",Toast.LENGTH_SHORT).show();
             showConnectionFailureDialog(healthConnectionErrorResult);
         }
 

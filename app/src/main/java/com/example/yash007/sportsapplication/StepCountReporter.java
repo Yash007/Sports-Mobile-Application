@@ -12,10 +12,6 @@ import com.samsung.android.sdk.healthdata.HealthResultHolder;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-/**
- * Created by yash007 on 2018-03-09.
- */
-
 public class StepCountReporter {
     private final HealthDataStore mStore;
     private StepCountObserver mStepCountObserver;
@@ -40,6 +36,8 @@ public class StepCountReporter {
         long startTime = getStartTimeOfToday();
         long endTime = startTime + ONE_DAY_IN_MILLIS;
 
+        Log.d("STARTTIME", String.valueOf(startTime));
+        Log.d("END TIME",String.valueOf(endTime));
         HealthDataResolver.ReadRequest request = new HealthDataResolver.ReadRequest.Builder()
                 .setDataType(HealthConstants.StepCount.HEALTH_DATA_TYPE)
                 .setProperties(new String[] {HealthConstants.StepCount.COUNT})
@@ -56,12 +54,12 @@ public class StepCountReporter {
 
     private long getStartTimeOfToday() {
         Calendar today = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-
-        today.set(Calendar.HOUR_OF_DAY, 0);
+        Log.d("MMM",today.toString());
+        today.set(Calendar.HOUR_OF_DAY,0);
         today.set(Calendar.MINUTE, 0);
         today.set(Calendar.SECOND, 0);
         today.set(Calendar.MILLISECOND, 0);
-
+        Log.d("MMM",today.toString());
         return today.getTimeInMillis();
     }
 
