@@ -356,8 +356,6 @@ public class DashboardActivity extends AppCompatActivity {
             else    {
                 Toast.makeText(DashboardActivity.this,"Error in termination of team. Please try again",Toast.LENGTH_LONG).show();
             }
-
-
         }
     }
 

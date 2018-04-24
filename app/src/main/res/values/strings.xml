@@ -65,6 +65,8 @@
     <string name="eventOptionEdit">Edit event</string>
     <string name="eventOptionDelete">Delete event</string>
     <string name="teamOptionDelete">Terminate team</string>
+    <string name="changeAddress">Change Address</string>
+    <string name="changeBio">Change Bio</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
