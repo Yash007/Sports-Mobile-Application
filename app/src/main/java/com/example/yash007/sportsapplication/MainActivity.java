@@ -35,6 +35,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -192,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Log.d("--------",personPhoto.toString());
 
 
-                new GoogleLoginPost(personName,personFamilyName,personEmail).execute();
+                new GoogleLoginPost(personGivenName,personFamilyName,personEmail).execute();
 
             }
             // Signed in successfully, show authenticated UI.
@@ -432,7 +433,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //Google Login REST API with Our server
 
-    //login with Credentials
     public class GoogleLoginPost extends AsyncTask<String, Void, String> {
 
         String firstName, lastName, email;
@@ -457,7 +457,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             try {
                 //URL url = new URL("https://studytutorial.in/post.php");
                 URL url = new URL(Config.webUrl+"player/login/social");
-
+                Log.d("GGGG",url.toString());
                 JSONObject postDataParams = new JSONObject();
 
                 postDataParams.put("pFirstName", firstName);
@@ -475,7 +475,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 postDataParams.put("pWeight","");
                 postDataParams.put("pAdnroidId","");
 
-                Log.e("params",postDataParams.toString());
+                Log.d("GGGG",postDataParams.toString());
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(15000 /* milliseconds */);
@@ -529,14 +529,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 JSONObject jsonObject = new JSONObject(result);
                 status = jsonObject.getString("Status");
                 //JSONObject profile = jsonObject.
+                JSONArray temp  = jsonObject.getJSONArray("users");
+                Log.d("LOGIN_RESULT",temp.toString());
+
+                JSONObject profile = temp.getJSONObject(0);
+                firstName = profile.getString("pFirstName");
+                lastName = profile.getString("pLastName");
+                email = profile.getString("pEmail");
+                String id = profile.getString("_id");
+                String address = profile.getString("pAddress");
+                String bio = profile.getString("pBio");
+                String pHeight = profile.getString("pHeight");
+                String pWeight = profile.getString("pWeight");
+                Boolean pAccountStatus = profile.getBoolean("pAccountStatus");
+                Boolean pAuthenticated =profile.getBoolean("pAuthenticated");
+                String pLoginType = profile.getString("pLoginType");
+                String pBirthday = profile.getString("pBirthday");
+                String pPhone = profile.getString("pPhone");
+
+                SharedPreferences.Editor editor = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE).edit();
+                editor.putString("pFirstName",firstName);
+                editor.putString("pLastName",lastName);
+                editor.putString("pEmail",email);
+                editor.putString("id",id);
+                editor.putString("pAddress",address);
+                editor.putString("pBio",bio);
+                editor.putString("pHeight",pHeight);
+                editor.putString("pWeight",pWeight);
+                editor.putBoolean("pAccountStatus",pAccountStatus);
+                editor.putBoolean("pAuthenticated",pAuthenticated);
+                editor.putString("pLoginType",pLoginType);
+                editor.putString("pBirthday",pBirthday);
+                editor.putString("pPhone",pPhone);
+                editor.apply();
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
+                Log.d("CATCH",e.getMessage());
             }
             pDialog.dismiss();
 
             if(status.equals("Success") == true) {
-                Toast.makeText(getApplicationContext(),"Logged in",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_LONG).show();
+
+                //Shave data in preference here
 
                 startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
             }

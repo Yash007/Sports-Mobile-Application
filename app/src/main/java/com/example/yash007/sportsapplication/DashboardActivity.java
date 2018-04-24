@@ -62,7 +62,6 @@ public class DashboardActivity extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
         captainId = preferences.getString("id","");
-
         mGridView = (GridView) findViewById(R.id.teamGridListView);
 
         createTeam.setOnClickListener(new View.OnClickListener() {
@@ -173,8 +172,8 @@ public class DashboardActivity extends AppCompatActivity {
             HttpHandler sh = new HttpHandler();
 
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall(Config.webUrl + USER_ID + "/view/teams");
-
+            String jsonStr = sh.makeServiceCall(Config.webUrl + captainId + "/view/teams");
+            Log.d("TEAMS",Config.webUrl + captainId + "/view/teams");
             Log.e(TAG, "Response from url: " + jsonStr);
 
             if (jsonStr != null) {
