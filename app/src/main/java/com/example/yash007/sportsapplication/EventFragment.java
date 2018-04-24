@@ -121,8 +121,8 @@ public class EventFragment extends android.support.v4.app.Fragment {
 
                 return true;
             case R.id.eventOptionDelete:
-                    TextView id = info.targetView.findViewById(R.id.listEventId);
-                    Toast.makeText(context, id.getText().toString(), Toast.LENGTH_SHORT).show();
+                    TextView eventId = info.targetView.findViewById(R.id.listEventId);
+                    new DeleteEvent(teamId, captainId, eventId.getText().toString().trim()).execute();
                 return true;
             default:
                 return super.onContextItemSelected(item);
