@@ -111,6 +111,18 @@ public class ApiController {
                     postDataParams.put("pPassword", arguments1[1]);
                     postDataParams.put("newPassword",arguments1[2]);
                 }
+                else if(className1.equals("Address"))   {
+                    url = new URL(Config.webUrl+"player/"+id+"/address");
+                    Log.d("URL",url.toString());
+
+                    postDataParams.put("pAddress",arguments1[0]);
+                }
+                else if(className1.equals("Bio"))   {
+                    url = new URL(Config.webUrl+"player/"+id+"/bio");
+                    Log.d("URL",url.toString());
+
+                    postDataParams.put("pBio",arguments1[0]);
+                }
 
 
                 Log.e("params",postDataParams.toString());
@@ -211,6 +223,16 @@ public class ApiController {
                         Intent intent = new Intent(context1, MainActivity.class);
                         context1.startActivity(intent);
                         ((AppCompatActivity) context1).finish();
+                        break;
+                    case "Address":
+                        prefs.putString("pAddress", arguments1[0]);
+                        prefs.commit();
+                        Toast.makeText(context1, "Address has been changed successfully.", Toast.LENGTH_LONG).show();
+                        break;
+                    case "Bio":
+                        prefs.putString("pBio", arguments1[0]);
+                        prefs.commit();
+                        Toast.makeText(context1, "Bio has been changed successfully.", Toast.LENGTH_LONG).show();
                         break;
                 }
                 context1.updateValues();

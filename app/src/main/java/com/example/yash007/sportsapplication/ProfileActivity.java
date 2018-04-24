@@ -29,17 +29,17 @@ import java.sql.BatchUpdateException;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private TextView userProfileName, userProfileAddress, userCardEmail, userCardDob, userCardHeight, userCardWeight;
+    private TextView userProfileName, userProfileAddress, userCardEmail, userCardDob, userCardHeight, userCardWeight, userCardAddress, userCardBio;
     private TextView userCardPhone, userCardStatus;
     private ImageView userEmailImageButton;
     private ImageView userCallImageButton;
 
-    private ImageView openChangeEmail, openChangePhone, openChangeDob, openChangeHeight, openChangeWeight, openChangePassword;
+    private ImageView openChangeEmail, openChangePhone, openChangeDob, openChangeHeight, openChangeWeight, openChangePassword, openChangeAddress, openChangeBio;
 
     public SharedPreferences sharedPreferences;
 
     //shared prefs variable
-    public String firstName, lastName, email, phone, height, weight, dob;
+    public String firstName, lastName, email, phone, height, weight, dob, address, bio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,9 @@ public class ProfileActivity extends AppCompatActivity {
         userCardDob = (TextView) findViewById(R.id.userCardDob);
         userCardHeight = (TextView) findViewById(R.id.userCardHeight);
         userCardWeight = (TextView) findViewById(R.id.userCardWeight);
+        userCardAddress = (TextView) findViewById(R.id.userCardAddress);
+        userCardBio = (TextView) findViewById(R.id.userCardBio);
+
 
         userEmailImageButton = (ImageView) findViewById(R.id.userEmailImageButton);
         userCallImageButton = (ImageView) findViewById(R.id.userCallImageButton);
@@ -65,6 +68,9 @@ public class ProfileActivity extends AppCompatActivity {
         openChangeHeight = (ImageView) findViewById(R.id.openChangeHeight);
         openChangeWeight = (ImageView) findViewById(R.id.openChangeWeight);
         openChangePassword = (ImageView) findViewById(R.id.openChangePassword);
+        openChangeAddress = (ImageView) findViewById(R.id.openChangeAddress);
+        openChangeBio = (ImageView) findViewById(R.id.openChangeBio);
+
 
         sharedPreferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
 
@@ -75,7 +81,10 @@ public class ProfileActivity extends AppCompatActivity {
         height = sharedPreferences.getString("pHeight","");
         weight = sharedPreferences.getString("pWeight","");
         dob = sharedPreferences.getString("pDob","");
+        address = sharedPreferences.getString("pAddress","");
+        bio = sharedPreferences.getString("pBio","");
 
+        userProfileAddress.setText(address);
         userProfileName.setText(sharedPreferences.getString("pFirstName", "John") + " " + sharedPreferences.getString("pLastName", " Doe"));
         userCardEmail.setText(sharedPreferences.getString("pEmail","johndoe@gmail.com"));
         userCardPhone.setText(sharedPreferences.getString("pPhone","+1(647)920-7670"));
@@ -90,7 +99,8 @@ public class ProfileActivity extends AppCompatActivity {
         userCardDob.setText(sharedPreferences.getString("pDob","").toString().trim());
         userCardHeight.setText(sharedPreferences.getString("pHeight","").toString().trim());
         userCardWeight.setText(sharedPreferences.getString("pWeight","").toString().trim());
-
+        userCardAddress.setText(address);
+        userCardBio.setText(bio);
         userEmailImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -395,6 +405,82 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+
+
+        openChangeAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(ProfileActivity.this);
+                dialog.setContentView(R.layout.dialog_change_address);
+
+                EditText addressEdit = (EditText) dialog.findViewById(R.id.dialogAddress);
+                addressEdit.setText(address.toString().trim());
+
+                Button cancel = (Button) dialog.findViewById(R.id.dialogChangeAddressCancelButton);
+                Button okay = (Button) dialog.findViewById(R.id.dialogChangeAddressOkayButton);
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                okay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        //API Code will be here
+
+                        String[] arguments = new String[1];
+                        arguments[0] = addressEdit.getText().toString().trim();
+
+                        new ApiController(ProfileActivity.this, "Address", arguments);
+                    }
+                });
+
+                dialog.getWindow().getAttributes().width = LinearLayout.LayoutParams.MATCH_PARENT;
+                dialog.show();
+            }
+        });
+
+        openChangeBio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(ProfileActivity.this);
+                dialog.setContentView(R.layout.dialog_change_bio);
+
+                EditText bioText = (EditText) dialog.findViewById(R.id.dialogBio);
+                bioText.setText(bio.toString().trim());
+
+                Button cancel = (Button) dialog.findViewById(R.id.dialogChangeBioCancelButton);
+                Button okay = (Button) dialog.findViewById(R.id.dialogChangeBioOkayButton);
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                okay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        //API Code will be here
+
+                        String[] arguments = new String[1];
+                        arguments[0] = bioText.getText().toString().trim();
+
+                        new ApiController(ProfileActivity.this, "Bio", arguments);
+                    }
+                });
+
+                dialog.getWindow().getAttributes().width = LinearLayout.LayoutParams.MATCH_PARENT;
+                dialog.show();
+            }
+        });
+
     }
 
     public void openFingerPrint(View view)    {
@@ -417,7 +503,9 @@ public class ProfileActivity extends AppCompatActivity {
         userCardDob.setText(sharedPreferences.getString("pDob","").toString().trim());
         userCardHeight.setText(sharedPreferences.getString("pHeight","").toString().trim());
         userCardWeight.setText(sharedPreferences.getString("pWeight","").toString().trim());
-
+        userCardAddress.setText(sharedPreferences.getString("pAddress",""));
+        userCardBio.setText(sharedPreferences.getString("pBio",""));
+        userProfileAddress.setText(sharedPreferences.getString("pAddress",""));
         firstName = sharedPreferences.getString("pFirstName","John");
         lastName = sharedPreferences.getString("pLastName","Doe");
         email = sharedPreferences.getString("pEmail","johnDoe@gmail.com");
@@ -425,5 +513,7 @@ public class ProfileActivity extends AppCompatActivity {
         height = sharedPreferences.getString("pHeight","");
         weight = sharedPreferences.getString("pWeight","");
         dob = sharedPreferences.getString("pDob","");
+        address = sharedPreferences.getString("pAddress","");
+        bio = sharedPreferences.getString("pBio","");
     }
 }
