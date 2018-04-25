@@ -236,10 +236,13 @@ public class TeamEditActivity extends AppCompatActivity {
         protected String doInBackground(String... arg0) {
             try {
 
+                SharedPreferences preferences = getSharedPreferences(Config.PREF_NAME, MODE_PRIVATE);
+                String playerId = preferences.getString("id","");
 
                 //URL url = new URL("https://studytutorial.in/post.php");
-                URL url = new URL(Config.webUrl+"player/"+teamId);
+                URL url = new URL(Config.webUrl+playerId+"/teams/"+teamId);
 
+                Log.d("YASH",url.toString());
                 JSONObject postDataParams = new JSONObject();
 
                 postDataParams.put("tName", teamName.getText().toString().trim() );
@@ -309,7 +312,8 @@ public class TeamEditActivity extends AppCompatActivity {
             }
             pDialog.dismiss();
 
-            if(status.equals("Success") == true) {
+            String temp = "Success";
+            if(status.equals(temp)) {
                 Toast.makeText(getApplicationContext(),"Team details has been updated.",Toast.LENGTH_LONG).show();
 
             }

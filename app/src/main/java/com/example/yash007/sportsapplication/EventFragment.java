@@ -183,6 +183,7 @@ public class EventFragment extends android.support.v4.app.Fragment {
                     // Getting JSON Array node
                     JSONArray contacts = jsonObj.getJSONArray("Profile");
 
+                    contactList.clear();
                     // looping through All Contacts
                     for (int i = 0; i < contacts.length(); i++) {
                         JSONObject c = contacts.getJSONObject(i);
@@ -355,7 +356,6 @@ public class EventFragment extends android.support.v4.app.Fragment {
                 JSONObject profile = jsonObject.getJSONObject("user");
                 Log.d("LOGIN_RESULT",profile.toString());
 
-
             }
             catch (JSONException e) {
                 e.printStackTrace();
@@ -364,6 +364,7 @@ public class EventFragment extends android.support.v4.app.Fragment {
 
             if(status.equals("Success") == true) {
                 Toast.makeText(context,"Event removed successfully.",Toast.LENGTH_LONG).show();
+                new GetEvents(USER_ID).execute();
             }
             else    {
                 Toast.makeText(context,"Error in removing event. Please try again",Toast.LENGTH_LONG).show();

@@ -53,10 +53,10 @@ public class SignupActivity extends AppCompatActivity {
         awesomeValidation.addValidation(this, R.id.lastName, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.lastNameError);
         awesomeValidation.addValidation(this,R.id.email, Patterns.EMAIL_ADDRESS, R.string.emailError);
         awesomeValidation.addValidation(this, R.id.phoneNumber, "^[2-9]{2}[0-9]{8}$", R.string.phoneError);
-        String regexPassword = "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}";
-
-        awesomeValidation.addValidation(this,R.id.password, regexPassword, R.string.passwordError);
-        awesomeValidation.addValidation(this, R.id.confirmPassword, R.id.password, R.string.passwordConfirmError);
+//        String regexPassword = "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}";
+//
+//        awesomeValidation.addValidation(this,R.id.password, regexPassword, R.string.passwordError);
+//        awesomeValidation.addValidation(this, R.id.confirmPassword, R.id.password, R.string.passwordConfirmError);
     }
 
     public void doSignUp(View v)  {

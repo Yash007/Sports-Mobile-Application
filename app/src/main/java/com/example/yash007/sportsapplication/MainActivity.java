@@ -529,10 +529,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 JSONObject jsonObject = new JSONObject(result);
                 status = jsonObject.getString("Status");
                 //JSONObject profile = jsonObject.
-                JSONArray temp  = jsonObject.getJSONArray("users");
-                Log.d("LOGIN_RESULT",temp.toString());
 
-                JSONObject profile = temp.getJSONObject(0);
+                JSONObject profile = jsonObject.getJSONObject("sample");
+                Log.d("LOGIN_RESULT",profile.toString());
+
                 firstName = profile.getString("pFirstName");
                 lastName = profile.getString("pLastName");
                 email = profile.getString("pEmail");
